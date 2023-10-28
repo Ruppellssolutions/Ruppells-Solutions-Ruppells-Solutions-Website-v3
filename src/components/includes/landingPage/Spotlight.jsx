@@ -1,10 +1,14 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import React, { useRef } from 'react'
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import ServicePopup from '../spotlight/ServicePopup'
 
+import infinityAnimation from "../../../assets/GIF/infinity-animation.gif"
 
 const Spotlight = () => {
     const targetRef = useRef()
+
+    const [isActive, setActive] = useState(false)
 
     const { scrollYProgress } = useScroll({
         target: targetRef,
@@ -13,14 +17,33 @@ const Spotlight = () => {
     const scaleEndValue = 1
 
     const scale = useTransform(scrollYProgress, [0, 1], [3.6, scaleEndValue])
+    const smoothScale = useSpring(scale, { stiffness: 50, damping: 8 });
+
+    useEffect(() => {
+
+        const unSubscribe = scale.on("change", (currentScale) => {
+
+            if (currentScale === scaleEndValue) {
+                setActive(true)
+            } else {
+                setActive(false)
+            }
+        })
+
+        return () => unSubscribe()
+    }, [])
 
     return (
         <Container ref={targetRef}>
+            <ServicePopup isActive={isActive} />
             <LapFrame
-                style={{ scale }}
+                style={{ scale: smoothScale }}
             >
                 <LapScreen>
-
+                    <p className="welcome">
+                        <span>Welcome to</span>&nbsp; Ruppells Solutions
+                    </p>
+                    <h3>We Grow your <br /> Business <span>FASTER</span> </h3>
                 </LapScreen>
             </LapFrame>
         </Container>
@@ -36,9 +59,11 @@ const Container = styled.section`
     justify-content: center;
 `
 const LapFrame = styled(motion.div)`
+    z-index: 100;
     width: 800px;
     height: 500px;
     position: fixed;
+    pointer-events: none;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -50,8 +75,65 @@ const LapFrame = styled(motion.div)`
     justify-content: center;
 `
 const LapScreen = styled.div`
-    background-color: #111;
+    position: relative;
+    background: url(${infinityAnimation}) center center no-repeat;
+    background-size: cover;
+    background-color: #000;
     width: 454px;
     height: 288px;
     border-radius: 2px;
+    padding: 132px 45px 40px;
+    overflow: hidden;
+    /* box-sizing: border-box; */
+
+    /* &::before{
+        content: "";
+        position: absolute;
+        left: -80px;
+        top: 0px;
+        width: 200px;
+        height: 20px;
+        transform: rotate(45deg);
+        background-color: #2d2454;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(9.2px);
+        -webkit-backdrop-filter: blur(9.2px);
+    } */
+
+    p.welcome{
+        font-size: 8px;
+        color: #F3F3F3;
+        position: relative;
+        margin-bottom: 22px;
+
+        span{
+            font: inherit;
+            color: #BBBBBB;
+        }
+
+        &::before{
+            content:"";
+            position: absolute;
+            left: 0;
+            bottom: 0px;
+            width: 32px;
+            height: .4px;
+            background-color: #eee;
+            border-radius: 1px;
+        }
+    }
+    h3{
+        color: #F3F3F3;
+        font-size: 22px;
+        font-family: Satoshi-Medium;
+        text-transform: uppercase;
+
+        span{
+            font: inherit;
+            background:linear-gradient(106deg, #CE4FE3 0%, #36B2EA 101.89%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
 `

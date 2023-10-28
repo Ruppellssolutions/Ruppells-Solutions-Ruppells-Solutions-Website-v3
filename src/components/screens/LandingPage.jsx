@@ -7,10 +7,10 @@ import Spotlight from '../includes/landingPage/Spotlight'
 const LandingPage = () => {
     return (
         <Container>
-            <ScrollContainer>
-                <Header />
+            <Header />
+            <Left>
                 <Spotlight />
-            </ScrollContainer>
+            </Left>
         </Container>
     )
 }
@@ -18,10 +18,6 @@ const LandingPage = () => {
 export default LandingPage
 
 const Container = styled.div`
-    /* height: 100vh; */
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     background-color: #111;
     position: relative;
     
@@ -35,8 +31,8 @@ const Container = styled.div`
         background: url('/images/body-bg.png') 0 0 no-repeat;
         background-size: cover;
     }
-`
-const ScrollContainer = styled.div`
-    height: max-content;
-    overflow-y: scroll;
+`;
+
+const Left = styled.div`
+    
 `

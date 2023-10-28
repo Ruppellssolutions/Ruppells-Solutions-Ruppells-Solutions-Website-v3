@@ -178,3 +178,18 @@ input {
   position: absolute;
   display: flex;
 }
+
+.flex{
+    display: flex;
+}
+.align-center{
+    align-items: center;
+}
+.justity-center{
+    justify-content: center;
+}
+.center-align{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
