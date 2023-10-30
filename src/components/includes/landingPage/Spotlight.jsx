@@ -17,7 +17,7 @@ const Spotlight = () => {
     const scaleEndValue = 1
 
     const scale = useTransform(scrollYProgress, [0, 1], [3.6, scaleEndValue])
-    const smoothScale = useSpring(scale, { stiffness: 50, damping: 8 });
+    const smoothScale = useSpring(scale, { stiffness: 80, damping: 10 });
 
     useEffect(() => {
 
@@ -124,7 +124,7 @@ const LapScreen = styled.div`
     }
     h3{
         color: #F3F3F3;
-        font-size: 22px;
+        font-size: 17px;
         font-family: Satoshi-Medium;
         text-transform: uppercase;
 

@@ -2,15 +2,23 @@ import React from 'react'
 import Header from '../includes/landingPage/Header'
 import styled from 'styled-components'
 import Spotlight from '../includes/landingPage/Spotlight'
+import Services from '../includes/landingPage/Services'
+import useSections from '../context/useSections'
+import Projects from '../includes/landingPage/Projects'
 
 
 const LandingPage = () => {
+    const { isProjectSectionActive } = useSections()
     return (
         <Container>
             <Header />
-            <Left>
+            <LeftContainer className={isProjectSectionActive ? "disappear" : ""}>
                 <Spotlight />
-            </Left>
+                <Services />
+            </LeftContainer>
+            <RightContainer>
+                {/* <Projects /> */}
+            </RightContainer>
         </Container>
     )
 }
@@ -33,6 +41,13 @@ const Container = styled.div`
     }
 `;
 
-const Left = styled.div`
-    
+const LeftContainer = styled.div`
+    transition: transform 1s ease-in-out;
+
+    &.disappear{
+        transform: translateX(-100%);
+    }
+`
+const RightContainer = styled.div`
+
 `
