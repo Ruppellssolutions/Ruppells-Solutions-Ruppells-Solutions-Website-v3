@@ -333,9 +333,9 @@ const Services = () => {
                                 setActiveIndex={setIndex}
                             />
                         ))}
-                        {/* <NextSectionObsever
+                        <NextSectionObsever
                             setActiveIndex={setIndex}
-                        /> */}
+                        />
                     </IntersectionContainer>
                 </ScrollContainer>
             </Content>

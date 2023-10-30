@@ -9,6 +9,7 @@ import Projects from '../includes/landingPage/Projects'
 
 const LandingPage = () => {
     const { isProjectSectionActive } = useSections()
+    
     return (
         <Container>
             <Header />
@@ -17,7 +18,7 @@ const LandingPage = () => {
                 <Services />
             </LeftContainer>
             <RightContainer>
-                {/* <Projects /> */}
+                <Projects />
             </RightContainer>
         </Container>
     )

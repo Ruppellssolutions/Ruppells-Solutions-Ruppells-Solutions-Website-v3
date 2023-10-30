@@ -92,7 +92,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 2s ease-in-out;
+    transition: all 1s ease-in-out;
     opacity: .2;
     
     &.active{

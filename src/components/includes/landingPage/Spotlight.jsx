@@ -17,7 +17,7 @@ const Spotlight = () => {
     const scaleEndValue = 1
 
     const scale = useTransform(scrollYProgress, [0, 1], [3.6, scaleEndValue])
-    const smoothScale = useSpring(scale, { stiffness: 80, damping: 10 });
+    const smoothScale = useSpring(scale, { stiffness: 100, damping: 16 });
 
     useEffect(() => {
 
