@@ -4,7 +4,7 @@ import ServicePopupItem from './ServicePopupItem'
 import { motion } from 'framer-motion'
 
 
-const ServicePopup = ({ isActive = false }) => {
+const ServicePopup = ({ isActive = false, style = {} }) => {
     const servicesLeft = [
         {
             id: 1,
@@ -51,9 +51,17 @@ const ServicePopup = ({ isActive = false }) => {
             link: "",
         },
     ]
-    
+
     return (
-        <Container className={isActive ? "active" : ""}>
+        <Container
+            className={isActive ? "active" : ""}
+            style={{
+                ...style
+            }}
+            transition={{
+                duration: 0.1,
+            }}
+        >
             <LeftContainer
             >
                 {servicesLeft.map((service, i) => (
@@ -81,7 +89,7 @@ const ServicePopup = ({ isActive = false }) => {
 
 export default ServicePopup
 
-const Container = styled.div`
+const Container = styled(motion.div)`
     position: fixed;
     left: 50%;
     top: 50%;
@@ -92,7 +100,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     opacity: .2;
     
     &.active{

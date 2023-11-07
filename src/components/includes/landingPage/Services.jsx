@@ -1,81 +1,15 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import useSections from '../../context/useSections';
-
-
-const ServiceItem = ({ id = 0, isActive = false, activeIndex = [], serviceItem = {} }) => {
-    return (
-        <ServiceItemContainer
-            className={`${isActive && 'active'} ${Math.max(...activeIndex) > id && "small"}`}
-        >
-            <ServiceItemLeft>
-                <img src={serviceItem.image} alt="branding" />
-            </ServiceItemLeft>
-            <ServiceItemRight>
-                <ul>
-                    {serviceItem?.services?.map((item, i) => (
-                        <li key={i}>
-                            <span className="icon">
-                                <img src="/icons/services/tick.svg" alt="tick" />
-                            </span>
-                            <span className="service">{item.title}</span>
-                        </li>
-                    ))}
-                </ul>
-            </ServiceItemRight>
-        </ServiceItemContainer>
-    );
-}
-
-const IntersectorComp = ({ index = 0, activeIndexes = [], setActiveIndex = () => { } }) => {
-    const ref = useRef()
-    const isInView = useInView(ref)
-
-    useEffect(() => {
-        if (index !== 0) {
-            if (isInView) {
-                setActiveIndex([...new Set([...activeIndexes, index])])
-            } else {
-                setActiveIndex(activeIndexes.filter(item => item !== index))
-            }
-        }
-    }, [isInView])
-
-    return <IntersectionItem ref={ref} />
-}
-
-const NextSectionObsever = ({ setActiveIndex = () => { } }) => {
-    const ref = useRef()
-    const { toggleProjectActive } = useSections()
-
-    const isInView = useInView(ref)
-
-    useEffect(() => {
-        const scrollRef = document.getElementById("scrollRef")
-
-        if (isInView) {
-            toggleProjectActive()
-            scrollRef.scrollTop = "-500px"
-            setActiveIndex([0])
-        }
-    }, [isInView])
-
-    return (
-        <IntersectionItem
-            ref={ref}
-            style={{
-                marginTop: "200px",
-            }}
-        />
-    )
-}
-
+import ServiceItem from '../services/ServiceItem';
 
 
 const Services = () => {
     const services = [
         {
+            slug: 1,
+            startingPoint: 0.3,
             title: "Branding",
             category: "DIGITAL_MARKETING",
             image: "/images/services/branding.png",
@@ -101,6 +35,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 2,
+            startingPoint: 0.4,
             title: "Social Media Marketing",
             category: "DIGITAL_MARKETING",
             image: "/images/services/social-media-marketing.png",
@@ -126,6 +62,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 3,
+            startingPoint: 0.5,
             title: "Content Marketing",
             category: "DIGITAL_MARKETING",
             image: "/images/services/content-marketing.png",
@@ -151,6 +89,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 4,
+            startingPoint: 0.6,
             title: "Website Development",
             category: "IT_SERVICES",
             image: "/images/services/website-development.png",
@@ -176,6 +116,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 5,
+            startingPoint: 0.7,
             title: "Web App Development",
             category: "IT_SERVICES",
             image: "/images/services/web-app-dev.png",
@@ -201,6 +143,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 6,
+            startingPoint: 0.8,
             title: "Mobile App Development",
             category: "IT_SERVICES",
             image: "/images/services/mobile-app-dev.png",
@@ -226,6 +170,8 @@ const Services = () => {
             ]
         },
         {
+            slug: 7,
+            startingPoint: 0.9,
             title: "E-Commerce Platform",
             category: "IT_SERVICES",
             image: "/images/services/e-commerce.png",
@@ -252,41 +198,77 @@ const Services = () => {
         },
     ]
 
-    const [activeIndex, setIndex] = useState([0])
-    const [showBigTitle, setBigTitle] = useState(false)
-    const [activeService, setActiveService] = useState(services[1])
+    const { toggleProjectActive } = useSections()
+
+    const [activeIndex, setIndex] = useState([1])
+    const [activeService, setActiveService] = useState(services[0])
 
     const middleScrollbarHeight = 400
-
-    const serviceTitleAnimationTriggerRef = useRef()
-
-    const isServiceTitleAnimationTriggerRef = useInView(serviceTitleAnimationTriggerRef)
-
-    useEffect(() => {
-
-        if (isServiceTitleAnimationTriggerRef) {
-            setBigTitle(true)
-        } else {
-            setBigTitle(false)
-        }
-    }, [isServiceTitleAnimationTriggerRef])
 
     useEffect(() => {
         if (activeIndex) {
             const lastIndex = Math.max(...activeIndex)
-            setActiveService(services[lastIndex])
+            setActiveService(services[lastIndex - 1])
         }
     }, [activeIndex])
 
-    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndex) + 1) / 2)}%`
+    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndex)) / 2)}%`
+
+    const containerRef = useRef(null)
+    const nextSectionObserver = useRef(null)
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+    })
+    const y = useTransform(scrollYProgress, [0.05, 0.3], ["0", "-100vh"])
+    const u = useTransform(scrollYProgress, [0.9, 1], [100, 300])
+
+    useEffect(() => {
+        u.on("change", (e) => {
+            console.log(e);
+        })
+    }, [])
+
+    const nextSectionObserverInView = useInView(nextSectionObserver)
+
+    const addItem = item => {
+        const temp = [...new Set([...activeIndex, item])]
+        setIndex(temp)
+        removeItem(item)
+    }
+    const removeItem = item => {
+        if (activeIndex.includes(item + 1)) {
+            const filteredIndexes = activeIndex.filter(itm => itm !== item + 1)
+            setIndex(filteredIndexes)
+        }
+    }
+
+    useEffect(() => {
+        scrollYProgress.on("change", e => {
+            const scrollY = +(e.toFixed(2))
+            console.log(scrollY);
+
+            services.forEach((item, i) => {
+                if (scrollY > item.startingPoint && scrollY < (item.startingPoint + 0.1)) {
+                    addItem(item.slug)
+                }
+            })
+        })
+    }, [activeIndex])
+
+    useEffect(() => {
+
+        // if (nextSectionObserverInView) {
+        //     toggleProjectActive()
+        // }
+    }, [nextSectionObserverInView])
 
     return (
-        <Container id="services">
-            <Content
-                className='wrapper'
-                id="scrollRef"
-            >
-                <ScrollContainer>
+        <Container id="services" ref={containerRef}>
+            <Wrapper>
+                <Content
+                    // style={{ y }}
+                >
                     <Head>
                         <h4>WHAT <span>WE DO</span> <br /> FOR YOU</h4>
                         <div className="right">
@@ -315,30 +297,18 @@ const Services = () => {
                         <div className="right">
                             {services.map((ite, i) => (
                                 <ServiceItem
-                                    id={ite}
+                                    id={i + 1}
                                     key={i}
                                     serviceItem={ite}
                                     activeIndex={activeIndex}
-                                    isActive={activeIndex.includes(i)}
+                                    isActive={activeIndex.includes(i + 1)}
                                 />
                             ))}
                         </div>
                     </ServiceContent>
-                    <IntersectionContainer>
-                        {services.map((item, i) => (
-                            <IntersectorComp
-                                key={i}
-                                index={i}
-                                activeIndexes={activeIndex}
-                                setActiveIndex={setIndex}
-                            />
-                        ))}
-                        <NextSectionObsever
-                            setActiveIndex={setIndex}
-                        />
-                    </IntersectionContainer>
-                </ScrollContainer>
-            </Content>
+                </Content>
+            </Wrapper>
+            {/* <IntersectionItem ref={nextSectionObserver} /> */}
         </Container>
     )
 }
@@ -347,35 +317,35 @@ export default Services
 
 const Container = styled.section`
     min-height: 100vh;
-    padding-top: 80vh;
-    transform: translateX(0);
-    transition: transform 1s ease-in-out;
-    /* background-color: #f350e38b; */
+    padding-top: 100vh;
+    scroll-behavior: smooth;
+    /* transform: translateX(0); */
     z-index: 100;
     position: relative;
-    /* overflow-y: scroll; */
-
-    &.disappear{
-        transform: translateX(-100%);
-    }
 `
-
-const Content = styled.div`
+const Wrapper = styled.div`
+    width: 100%;
+    min-height: 500vh;
+`
+const Content = styled(motion.div)`
     background-color:#FBFBFC;
-    height: 85vh;
+    height: 90vh;
     border: 1px solid #808080cc;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     padding: 32px;
-    overflow-y: scroll;
-    width: 95%;
+    /* overflow-y: scroll; */
+    width: 85%;
+    margin: 0 7.5%;
+
+    /* position: fixed;
+    bottom: -100vh; */
+
+    position: sticky;
+    top: 15vh;
 `
 const ScrollContainer = styled.div`
     position: relative;
     height: 185vh;
-
-    .head{
-        
-    }
 `
 const Head = styled.div`
     z-index: 100;
@@ -383,9 +353,9 @@ const Head = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: sticky;
+    /* position: sticky;
     left: 0;
-    top: 0;
+    top: 0; */
     width: 100%;
     padding: 32px;
 
@@ -436,9 +406,9 @@ const ServiceContent = styled.div`
     align-items: center;
     gap: 20px;
     max-height: 400px;
-    position: sticky;
+    /* position: sticky;
     top: 166px;
-    left: 0;
+    left: 0; */
     width: 100%;
     padding: 32px;
 
@@ -526,7 +496,7 @@ const IntersectionContainer = styled.div`
 const IntersectionItem = styled.div`
     height: 20px;
     /* background-color: red; */
-    margin-bottom: 80px;
+    /* margin-bottom: 180px; */
 `
 const ServiceItemLeft = styled.div`
     width: calc(57% - 10px);

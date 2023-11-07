@@ -9,18 +9,23 @@ const Spotlight = () => {
     const targetRef = useRef()
 
     const [isActive, setActive] = useState(false)
+    const [show] = useState(false)
 
     const { scrollYProgress } = useScroll({
         target: targetRef,
     })
 
+    const { scrollYProgress: globalScrollY } = useScroll()
+
     const scaleEndValue = 1
 
     const scale = useTransform(scrollYProgress, [0, 1], [3.6, scaleEndValue])
-    const smoothScale = useSpring(scale, { stiffness: 100, damping: 16 });
+    const opacity = useTransform(globalScrollY, [.27, .275], [1, 0])
+    // const smoothScale = useSpring(scale, { stiffness: 100, damping: 16 });
+
+
 
     useEffect(() => {
-
         const unSubscribe = scale.on("change", (currentScale) => {
 
             if (currentScale === scaleEndValue) {
@@ -35,9 +40,12 @@ const Spotlight = () => {
 
     return (
         <Container ref={targetRef}>
-            <ServicePopup isActive={isActive} />
+            <ServicePopup
+                isActive={isActive}
+                style={{ opacity }}
+            />
             <LapFrame
-                style={{ scale: smoothScale }}
+                style={{ scale, opacity }}
             >
                 <LapScreen>
                     <p className="welcome">
@@ -76,7 +84,8 @@ const LapFrame = styled(motion.div)`
 `
 const LapScreen = styled.div`
     position: relative;
-    background: url(${infinityAnimation}) center center no-repeat;
+    z-index: 10;
+    /* background: url(${infinityAnimation}) center center no-repeat; */
     background-size: cover;
     background-color: #000;
     width: 454px;
