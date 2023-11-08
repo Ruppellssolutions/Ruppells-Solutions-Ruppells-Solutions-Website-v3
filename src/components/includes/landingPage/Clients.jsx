@@ -104,9 +104,7 @@ const Clients = () => {
                         <img src="/icons/main/right-arrow.svg" alt="right arrow" />
                     </Button>
                 </ButtonContainer>
-                <BottomContainer>
-
-                </BottomContainer>
+                <BottomContainer></BottomContainer>
             </Wrapper>
         </Container>
     )
@@ -118,7 +116,7 @@ const Container = styled.div`
     
 `
 const Wrapper = styled.div`
-    padding-bottom: 70px;
+    padding: 70px 0;
 `
 const Head = styled.div`
     margin-bottom: 68px;

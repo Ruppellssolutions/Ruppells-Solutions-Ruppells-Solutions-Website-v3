@@ -1,40 +1,58 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import SectionHead from '../general/SectionHead'
+import { useInView } from 'framer-motion'
+import useSections from '../../context/useSections'
 
 
 const Product = () => {
+    const nextSectionObserver = useRef(null)
+
+    const { toggleProjectActive } = useSections()
+
+    const nextSectionObserverInView = useInView(nextSectionObserver)
+
+    useEffect(()=>{
+
+        if(nextSectionObserverInView){
+            toggleProjectActive()
+        }
+    },[nextSectionObserverInView])
+
     return (
-        <Container>
-            <Wrapper className='wrapper'>
-                <Head>
-                    <SectionHead
-                        colorTitle='OUR'
-                        title='PRODUCT.'
-                    />
-                    <p>Lorem ipsum dolor sit amet consectetur. Malesuada quis cursus feugiat placerat aliquet. Vitae maecenas ut pharetra sit sem .</p>
-                </Head>
-                <ILMContainer>
-                    <ILMLeft>
-                        <img src="/GIF/ilm-mobile.png" alt="ilm mobile" />
-                    </ILMLeft>
-                    <ILMRight>
-                        <LogoContainer>
-                            <img src="/icons/logo/ilm.svg" alt="ilm" />
-                        </LogoContainer>
-                        <p>Unlock the Power of Digital Tools for Worship, Embrace Spiritual Enlightenment at Your Fingertips</p>
-                        <DownloadsContainer>
-                            <DownloadIcon>
-                                <img src="/icons/main/android.svg" alt="android icon" />
-                            </DownloadIcon>
-                            <DownloadIcon>
-                                <img src="/icons/main/ios.svg" alt="ios icon" />
-                            </DownloadIcon>
-                        </DownloadsContainer>
-                    </ILMRight>
-                </ILMContainer>
-            </Wrapper>
-        </Container>
+        <>
+            <Container>
+                <Wrapper className='wrapper'>
+                    <Head>
+                        <SectionHead
+                            colorTitle='OUR'
+                            title='PRODUCT.'
+                        />
+                        <p>Lorem ipsum dolor sit amet consectetur. Malesuada quis cursus feugiat placerat aliquet. Vitae maecenas ut pharetra sit sem .</p>
+                    </Head>
+                    <ILMContainer>
+                        <ILMLeft>
+                            <img src="/GIF/ilm-mobile.png" alt="ilm mobile" />
+                        </ILMLeft>
+                        <ILMRight>
+                            <LogoContainer>
+                                <img src="/icons/logo/ilm.svg" alt="ilm" />
+                            </LogoContainer>
+                            <p>Unlock the Power of Digital Tools for Worship, Embrace Spiritual Enlightenment at Your Fingertips</p>
+                            <DownloadsContainer>
+                                <DownloadIcon>
+                                    <img src="/icons/main/android.svg" alt="android icon" />
+                                </DownloadIcon>
+                                <DownloadIcon>
+                                    <img src="/icons/main/ios.svg" alt="ios icon" />
+                                </DownloadIcon>
+                            </DownloadsContainer>
+                        </ILMRight>
+                    </ILMContainer>
+                </Wrapper>
+            </Container>
+            <IntersectionItem ref={nextSectionObserver} />
+        </>
     )
 }
 
@@ -42,13 +60,15 @@ export default Product
 
 const Container = styled.section`
     width: 100%;
-    min-height: 100vh;
-    padding: 68px 0;
+    /* min-height: 100vh; */
+    padding: 74px 0 32px;
     z-index: 10;
     position: relative;
 `
 const Wrapper = styled.div`
-    
+    &.wrapper{
+        max-width: 80%;
+    }
 `
 const Head = styled.div`
     margin-bottom: 46px;
@@ -125,4 +145,8 @@ const DownloadIcon = styled.div`
         width: 100%;
         height: 100%;
     }
+`
+const IntersectionItem = styled.div`
+    height: 20px;
+    /* background-color: red; */
 `

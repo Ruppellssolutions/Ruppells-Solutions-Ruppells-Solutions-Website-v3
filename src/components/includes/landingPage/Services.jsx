@@ -215,21 +215,14 @@ const Services = () => {
     const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndex)) / 2)}%`
 
     const containerRef = useRef(null)
-    const nextSectionObserver = useRef(null)
+    // const nextSectionObserver = useRef(null)
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
     })
-    const y = useTransform(scrollYProgress, [0.05, 0.3], ["0", "-100vh"])
-    const u = useTransform(scrollYProgress, [0.9, 1], [100, 300])
+    // const y = useTransform(scrollYProgress, [0.05, 0.3], ["0", "-100vh"])
 
-    useEffect(() => {
-        u.on("change", (e) => {
-            console.log(e);
-        })
-    }, [])
-
-    const nextSectionObserverInView = useInView(nextSectionObserver)
+    // const nextSectionObserverInView = useInView(nextSectionObserver)
 
     const addItem = item => {
         const temp = [...new Set([...activeIndex, item])]
@@ -246,7 +239,6 @@ const Services = () => {
     useEffect(() => {
         scrollYProgress.on("change", e => {
             const scrollY = +(e.toFixed(2))
-            console.log(scrollY);
 
             services.forEach((item, i) => {
                 if (scrollY > item.startingPoint && scrollY < (item.startingPoint + 0.1)) {
@@ -256,12 +248,11 @@ const Services = () => {
         })
     }, [activeIndex])
 
-    useEffect(() => {
-
+    // useEffect(() => {
         // if (nextSectionObserverInView) {
         //     toggleProjectActive()
         // }
-    }, [nextSectionObserverInView])
+    // }, [nextSectionObserverInView])
 
     return (
         <Container id="services" ref={containerRef}>

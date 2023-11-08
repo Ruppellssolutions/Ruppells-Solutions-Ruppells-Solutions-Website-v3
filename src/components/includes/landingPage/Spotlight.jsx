@@ -9,7 +9,6 @@ const Spotlight = () => {
     const targetRef = useRef()
 
     const [isActive, setActive] = useState(false)
-    const [show] = useState(false)
 
     const { scrollYProgress } = useScroll({
         target: targetRef,
@@ -20,7 +19,7 @@ const Spotlight = () => {
     const scaleEndValue = 1
 
     const scale = useTransform(scrollYProgress, [0, 1], [3.6, scaleEndValue])
-    const opacity = useTransform(globalScrollY, [.27, .275], [1, 0])
+    const opacity = useTransform(globalScrollY, [.28, .3], [1, 0])
     // const smoothScale = useSpring(scale, { stiffness: 100, damping: 16 });
 
 
@@ -39,7 +38,7 @@ const Spotlight = () => {
     }, [])
 
     return (
-        <Container ref={targetRef}>
+        <Container ref={targetRef} className='Spotlight'>
             <ServicePopup
                 isActive={isActive}
                 style={{ opacity }}
@@ -62,6 +61,7 @@ export default Spotlight
 
 const Container = styled.section`
     height: 150vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

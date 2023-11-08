@@ -58,9 +58,9 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
             style={{
                 ...style
             }}
-            transition={{
-                duration: 0.1,
-            }}
+            // transition={{
+            //     duration: 1,
+            // }}
         >
             <LeftContainer
             >
@@ -100,7 +100,7 @@ const Container = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.5s ease-in-out;
     opacity: .2;
     
     &.active{

@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import useSections from '../../context/useSections'
 import ProjectItem from '../projects/ProjectItem'
 
 
-const Projects = () => {
+const Projects = ({ scrollYProgress  }) => {
     const { isProjectSectionActive, toggleProjectActive, isProductSectionActive, toggleProductActive } = useSections()
 
     const [isEnlarged, setEnlarged] = useState(false)
@@ -20,6 +20,33 @@ const Projects = () => {
             setEnlarged(false)
         }
     }, [isProjectSectionActive])
+
+    const left = useMemo(() => (
+        (pro = {}) => {
+
+            if (!isProductSectionActive) {
+
+                if (viewedCards.includes(pro.id)) {
+                    return 0
+                } else if (Math.max(...viewedCards) + 1 === pro.id) {
+                    return "80%"
+                } else {
+                    return "160%"
+                }
+            }
+
+        }
+    ), [viewedCards, isProductSectionActive])
+
+    // const containerRef = useRef()
+    // const { scrollYProgress } = useScroll({
+    //     container: containerRef,
+    // })
+
+    const headY = useTransform(scrollYProgress, [0.1, 0.3], ["0", "-100vh"])
+    const enlargeX = useTransform(scrollYProgress, [0.1, 0.3], ["7.5vw", "0vw"])
+    const enlargeY = useTransform(scrollYProgress, [0.1, 0.3], [370, 0])
+    const sliderX = useTransform(scrollYProgress, [0.3, 1], ["0vw", "-160vw"])
 
     const projects = [
         {
@@ -109,67 +136,56 @@ const Projects = () => {
         },
     ]
 
-    const left = useMemo(() => (
-        (pro = {}) => {
-
-            if (!isProductSectionActive) {
-
-                if (viewedCards.includes(pro.id)) {
-                    return 0
-                } else if (Math.max(...viewedCards) + 1 === pro.id) {
-                    return "80%"
-                } else {
-                    return "160%"
-                }
-            }
-
-        }
-    ), [viewedCards, isProductSectionActive])
-
-    const containerRef = useRef()
-    const { scrollYProgress } = useScroll({
-        container: containerRef,
-    })
-
-    const y = useTransform(scrollYProgress, [0, 1], [0, 100])
-
-    useEffect(() => {
-        scrollYProgress.on("change", e => {
-            console.log(e);
-        })
-    }, [])
-
     return (
-        <Container ref={containerRef}>
+        <Container
+        // ref={containerRef}
+        >
             <Wrapper>
-                <Head className='wrapper'>
-                    <h4><span>OUR</span> PROJECTS.</h4>
-                    <div className="details">
-                        <span className="container">100+ <span className="child">completed projects</span></span>
-                        <span className="container">80+ <span className="child">happy customers</span></span>
-                    </div>
-                </Head>
-                <ProjectsCountContainer className={isEnlarged ? "active" : ""}>
-                    <div className="count-container">
-                        <h5><span className="bold">+24</span> more projects</h5>
-                    </div>
-                </ProjectsCountContainer>
-                <ProjectsContainer className={isEnlarged ? "enlarged" : ""}>
-                    <div className="project-container">
-                        {projects.map((pro, i) => (
-                            <ProjectItemContainer
-                                key={pro.id}
-                                style={{
-                                    left: left(pro)
-                                }}
-                            >
-                                <ProjectItem
-                                    project={pro}
-                                />
-                            </ProjectItemContainer>
-                        ))}
-                    </div>
-                </ProjectsContainer>
+                <Content>
+                    <Head className='wrapper'
+                        style={{
+                            y: headY
+                        }}
+                    >
+                        <h4><span>OUR</span> PROJECTS.</h4>
+                        <div className="details">
+                            <span className="container">100+ <span className="child">completed projects</span></span>
+                            <span className="container">80+ <span className="child">happy customers</span></span>
+                        </div>
+                    </Head>
+                    <ProjectsCountContainer className={isEnlarged ? "active" : ""}>
+                        <div className="count-container">
+                            <h5><span className="bold">+24</span> more projects</h5>
+                        </div>
+                    </ProjectsCountContainer>
+                    <ProjectsContainer
+                        // className={isEnlarged ? "enlarged" : ""}
+                        style={{
+                            x: enlargeX,
+                            y: enlargeY,
+                        }}
+                    >
+                        <motion.div
+                            className="project-container"
+                            style={{
+                                x: sliderX
+                            }}
+                        >
+                            {projects.map((pro, i) => (
+                                <ProjectItemContainer
+                                    key={pro.id}
+                                    style={{
+                                        // left: left(pro)
+                                    }}
+                                >
+                                    <ProjectItem
+                                        project={pro}
+                                    />
+                                </ProjectItemContainer>
+                            ))}
+                        </motion.div>
+                    </ProjectsContainer>
+                </Content>
             </Wrapper>
         </Container>
     )
@@ -179,11 +195,13 @@ export default Projects
 
 const Container = styled.section`
     width: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    height: max-content;
     overflow-x: hidden;
-    min-height: 100vh;
+    /* max-height: 100vh; */
     /* background-color: #ff9595; */
-    position: relative;
+    position: sticky;
+    top: 100vh;
 
     /* &.product{
         transform: translateY(-200vh);
@@ -191,9 +209,15 @@ const Container = styled.section`
 `
 const Wrapper = styled.div`
     height: 400vh;
+    position: relative;
+`
+const Content = styled.div`
+    position: sticky;
+    top: 0;
+    /* height: max-content; */
 `
 
-const Head = styled.div`
+const Head = styled(motion.div)`
     padding: 160px 0;
     position: sticky;
     left: 7.5%;
@@ -257,17 +281,17 @@ const IntersectionItem = styled.div`
     margin-bottom: 120px;
 `
 
-const ProjectsContainer = styled.div`
+const ProjectsContainer = styled(motion.div)`
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     height: 100vh;
     z-index: 1;
     border-top-left-radius: 20px;
     overflow: hidden;
     transform: translate(7.5%,370px);
-    transition: all 1s ease-in-out;
+    /* transition: all 1s ease-in-out; */
+
 
     &.enlarged{
         transform: translate(0,0);
@@ -275,7 +299,9 @@ const ProjectsContainer = styled.div`
     }
 
     .project-container{
-        
+        display: flex;
+        flex-wrap: wrap;
+        width: max-content;
     }
 `
 // const ProjectItem = styled.div`
@@ -291,7 +317,7 @@ const ProjectsContainer = styled.div`
 const ProjectsCountContainer = styled.div`
     position: absolute;
     left: 0;
-    top: 300px;
+    top: 100px;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -328,10 +354,10 @@ const ProjectsCountContainer = styled.div`
     }
 `
 const ProjectItemContainer = styled.div`
-    width: 80%;
-    height: 100%;
-    position: absolute;
+    width: 80vw;
+    height: 100vh;
+    /* position: absolute;
     left: 160%;
-    top:0;
-    transition: all 1s ease-in-out;
+    top:0; */
+    /* transition: all 1s ease-in-out; */
 `
