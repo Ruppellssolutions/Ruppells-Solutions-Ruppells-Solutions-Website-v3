@@ -1,52 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import useSections from '../../context/useSections'
 import ProjectItem from '../projects/ProjectItem'
 
 
-const Projects = ({ scrollYProgress  }) => {
-    const { isProjectSectionActive, toggleProjectActive, isProductSectionActive, toggleProductActive } = useSections()
+const Projects = ({ scrollYProgress}) => {
+    const containerRef = useRef()
 
-    const [isEnlarged, setEnlarged] = useState(false)
-    const [isScrollTopSet, setScrollTop] = useState(false)
-    const [viewedCards, setViewedCards] = useState([1])
-
-    useEffect(() => {
-
-        if (isProjectSectionActive) {
-            // scrollRef.current.scrollTop = 100
-            setScrollTop(true)
-            setEnlarged(false)
-        }
-    }, [isProjectSectionActive])
-
-    const left = useMemo(() => (
-        (pro = {}) => {
-
-            if (!isProductSectionActive) {
-
-                if (viewedCards.includes(pro.id)) {
-                    return 0
-                } else if (Math.max(...viewedCards) + 1 === pro.id) {
-                    return "80%"
-                } else {
-                    return "160%"
-                }
-            }
-
-        }
-    ), [viewedCards, isProductSectionActive])
-
-    // const containerRef = useRef()
-    // const { scrollYProgress } = useScroll({
-    //     container: containerRef,
-    // })
-
-    const headY = useTransform(scrollYProgress, [0.1, 0.3], ["0", "-100vh"])
-    const enlargeX = useTransform(scrollYProgress, [0.1, 0.3], ["7.5vw", "0vw"])
-    const enlargeY = useTransform(scrollYProgress, [0.1, 0.3], [370, 0])
-    const sliderX = useTransform(scrollYProgress, [0.3, 1], ["0vw", "-160vw"])
+    const headY = useTransform(scrollYProgress, [0.3, 0.4], ["0", "-100vh"])
+    const enlargeX = useTransform(scrollYProgress, [0.3, 0.4], ["7.5vw", "0vw"])
+    const enlargeY = useTransform(scrollYProgress, [0.3, 0.4], [370, 0])
+    const sliderX = useTransform(scrollYProgress, [0.4, 1], ["0vw", "-160vw"])
 
     const projects = [
         {
@@ -138,7 +102,7 @@ const Projects = ({ scrollYProgress  }) => {
 
     return (
         <Container
-        // ref={containerRef}
+            ref={containerRef}
         >
             <Wrapper>
                 <Content>
@@ -153,7 +117,9 @@ const Projects = ({ scrollYProgress  }) => {
                             <span className="container">80+ <span className="child">happy customers</span></span>
                         </div>
                     </Head>
-                    <ProjectsCountContainer className={isEnlarged ? "active" : ""}>
+                    <ProjectsCountContainer
+                        // className={isEnlarged ? "active" : ""}
+                    >
                         <div className="count-container">
                             <h5><span className="bold">+24</span> more projects</h5>
                         </div>
@@ -195,33 +161,35 @@ export default Projects
 
 const Container = styled.section`
     width: 100%;
-    /* overflow-y: scroll; */
-    height: max-content;
+    position: relative;
+    z-index: 112;
+    max-height: 100vh;
     overflow-x: hidden;
-    /* max-height: 100vh; */
+    overflow-y: scroll;
     /* background-color: #ff9595; */
-    position: sticky;
-    top: 100vh;
+    /* position: sticky; */
+    /* top: 100vh; */
 
     /* &.product{
         transform: translateY(-200vh);
     } */
 `
 const Wrapper = styled.div`
-    height: 400vh;
+    /* height: 400vh; */
     position: relative;
 `
 const Content = styled.div`
     position: sticky;
     top: 0;
+    height: 100vh;
     /* height: max-content; */
 `
 
 const Head = styled(motion.div)`
     padding: 160px 0;
-    position: sticky;
+    /* position: sticky;
     left: 7.5%;
-    top: 0;
+    top: 0; */
 
     h4{
         margin-bottom: 26px;

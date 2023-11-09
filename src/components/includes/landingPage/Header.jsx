@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link } from 'react-scroll'
 import styled from 'styled-components'
 
 
 const Header = () => {
+
     return (
         <Container>
             <Wrapper className='wrapper'>
@@ -13,9 +15,15 @@ const Header = () => {
                 </h1>
                 <nav>
                     <ul>
-                        <li className='active'>Home</li>
-                        <li>Services</li>
-                        <li>Our Clients</li>
+                        <li>
+                            <Link spy smooth duration={3000} to='home' activeClass='active'>Home</Link>
+                        </li>
+                        <li>
+                            <Link spy smooth duration={3000} to='service' activeClass='active'>Services</Link>
+                        </li>
+                        <li>
+                            <Link spy smooth duration={3000} to='clients' activeClass='active'>Our Clients</Link>
+                        </li>
                     </ul>
                 </nav>
             </Wrapper>
@@ -50,26 +58,28 @@ const Wrapper = styled.div`
         gap: 18px;
 
         li{
-            color: #fff;
-            cursor: pointer;
-            font-size: 14px;
-            position: relative;
+            a{
+                color: #fff;
+                cursor: pointer;
+                font-size: 14px;
+                position: relative;
 
-            &::before{
-                position: absolute;
-                left: 0;
-                bottom: -6px;
-                content: "";
-                width: 0%;
-                background-color: #fff;
-                height: 2px;
-                border-radius: .5px;
-                transition: width 0.3s ease-in-out;
-            }
-
-            &.active{
                 &::before{
-                    width: 50%;
+                    position: absolute;
+                    left: 0;
+                    bottom: -6px;
+                    content: "";
+                    width: 0%;
+                    background-color: #fff;
+                    height: 2px;
+                    border-radius: .5px;
+                    transition: width 0.3s ease-in-out;
+                }
+
+                &.active{
+                    &::before{
+                        width: 50%;
+                    }
                 }
             }
         }

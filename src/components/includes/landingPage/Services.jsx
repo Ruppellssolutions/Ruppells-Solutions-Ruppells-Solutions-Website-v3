@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import useSections from '../../context/useSections';
 import ServiceItem from '../services/ServiceItem';
+import { Element } from 'react-scroll';
 
 
 const Services = () => {
@@ -198,8 +199,6 @@ const Services = () => {
         },
     ]
 
-    const { toggleProjectActive } = useSections()
-
     const [activeIndex, setIndex] = useState([1])
     const [activeService, setActiveService] = useState(services[0])
 
@@ -215,14 +214,10 @@ const Services = () => {
     const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndex)) / 2)}%`
 
     const containerRef = useRef(null)
-    // const nextSectionObserver = useRef(null)
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
     })
-    // const y = useTransform(scrollYProgress, [0.05, 0.3], ["0", "-100vh"])
-
-    // const nextSectionObserverInView = useInView(nextSectionObserver)
 
     const addItem = item => {
         const temp = [...new Set([...activeIndex, item])]
@@ -248,58 +243,53 @@ const Services = () => {
         })
     }, [activeIndex])
 
-    // useEffect(() => {
-        // if (nextSectionObserverInView) {
-        //     toggleProjectActive()
-        // }
-    // }, [nextSectionObserverInView])
-
     return (
         <Container id="services" ref={containerRef}>
-            <Wrapper>
-                <Content
+            <Element name="service">
+                <Wrapper>
+                    <Content
                     // style={{ y }}
-                >
-                    <Head>
-                        <h4>WHAT <span>WE DO</span> <br /> FOR YOU</h4>
-                        <div className="right">
-                            <p className={activeService?.category === "DIGITAL_MARKETING" ? "active" : ""}>#01 Digital <span>Marketing Services</span></p>
-                            <p className={activeService?.category === "IT_SERVICES" ? "active" : ""}>#02 IT <span>Services</span></p>
-                        </div>
-                    </Head>
-                    <ServiceContent>
-                        <div className="left">
-                            <h5>{activeService.title}</h5>
-                        </div>
-                        <MiddleScrollBar
-                            style={{
-                                height: `${middleScrollbarHeight}px`
-                            }}
-                        >
-                            <div
-                                className="scroll-container"
+                    >
+                        <Head>
+                            <h4>WHAT <span>WE DO</span> <br /> FOR YOU</h4>
+                            <div className="right">
+                                <p className={activeService?.category === "DIGITAL_MARKETING" ? "active" : ""}>#01 Digital <span>Marketing Services</span></p>
+                                <p className={activeService?.category === "IT_SERVICES" ? "active" : ""}>#02 IT <span>Services</span></p>
+                            </div>
+                        </Head>
+                        <ServiceContent>
+                            <div className="left">
+                                <h5>{activeService.title}</h5>
+                            </div>
+                            <MiddleScrollBar
                                 style={{
-                                    height: currentScrollbarHeight,
+                                    height: `${middleScrollbarHeight}px`
                                 }}
                             >
-                                <div className="round"></div>
+                                <div
+                                    className="scroll-container"
+                                    style={{
+                                        height: currentScrollbarHeight,
+                                    }}
+                                >
+                                    <div className="round"></div>
+                                </div>
+                            </MiddleScrollBar>
+                            <div className="right">
+                                {services.map((ite, i) => (
+                                    <ServiceItem
+                                        id={i + 1}
+                                        key={i}
+                                        serviceItem={ite}
+                                        activeIndex={activeIndex}
+                                        isActive={activeIndex.includes(i + 1)}
+                                    />
+                                ))}
                             </div>
-                        </MiddleScrollBar>
-                        <div className="right">
-                            {services.map((ite, i) => (
-                                <ServiceItem
-                                    id={i + 1}
-                                    key={i}
-                                    serviceItem={ite}
-                                    activeIndex={activeIndex}
-                                    isActive={activeIndex.includes(i + 1)}
-                                />
-                            ))}
-                        </div>
-                    </ServiceContent>
-                </Content>
-            </Wrapper>
-            {/* <IntersectionItem ref={nextSectionObserver} /> */}
+                        </ServiceContent>
+                    </Content>
+                </Wrapper>
+            </Element>
         </Container>
     )
 }

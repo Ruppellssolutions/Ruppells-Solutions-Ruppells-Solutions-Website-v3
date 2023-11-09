@@ -124,6 +124,7 @@ const BottomContent = styled.div`
         letter-spacing: 0.8px;
     }
     span.icon{
+        cursor: pointer;
         display: block;
         width: 36px;
         aspect-ratio: 1;

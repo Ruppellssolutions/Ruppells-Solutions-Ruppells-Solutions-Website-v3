@@ -131,7 +131,7 @@ html.modal-enabled {
 }
 
 *::-webkit-scrollbar {
-    /* display: none; */
+    display: none;
 }
 
 .bold {
