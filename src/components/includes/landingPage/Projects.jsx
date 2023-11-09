@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import ProjectItem from '../projects/ProjectItem'
 
 
-const Projects = ({ scrollYProgress}) => {
+const Projects = ({ scrollYProgress }) => {
     const containerRef = useRef()
 
     const headY = useTransform(scrollYProgress, [0.3, 0.4], ["0", "-100vh"])
@@ -16,6 +16,7 @@ const Projects = ({ scrollYProgress}) => {
         {
             id: 1,
             title: "Trinity Funds",
+            bg: "/images/projects/project-01.png",
             description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
             logo: "/icons/logo/trinity-funds.svg",
             tags: [
@@ -39,6 +40,7 @@ const Projects = ({ scrollYProgress}) => {
         {
             id: 2,
             title: "Ruppells Overseas",
+            bg: "/images/projects/project-02.png",
             description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
             logo: "/icons/logo/ruppells-overseas.svg",
             tags: [
@@ -70,6 +72,7 @@ const Projects = ({ scrollYProgress}) => {
         {
             id: 3,
             title: "Reverse Gear",
+            bg: "/images/projects/project-03.png",
             description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
             logo: "/icons/logo/reverse-gear.svg",
             tags: [
@@ -117,15 +120,12 @@ const Projects = ({ scrollYProgress}) => {
                             <span className="container">80+ <span className="child">happy customers</span></span>
                         </div>
                     </Head>
-                    <ProjectsCountContainer
-                        // className={isEnlarged ? "active" : ""}
-                    >
+                    <ProjectsCountContainer>
                         <div className="count-container">
                             <h5><span className="bold">+24</span> more projects</h5>
                         </div>
                     </ProjectsCountContainer>
                     <ProjectsContainer
-                        // className={isEnlarged ? "enlarged" : ""}
                         style={{
                             x: enlargeX,
                             y: enlargeY,
@@ -140,9 +140,6 @@ const Projects = ({ scrollYProgress}) => {
                             {projects.map((pro, i) => (
                                 <ProjectItemContainer
                                     key={pro.id}
-                                    style={{
-                                        // left: left(pro)
-                                    }}
                                 >
                                     <ProjectItem
                                         project={pro}

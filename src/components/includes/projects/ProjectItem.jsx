@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 const ProjectItem = ({ project = {} }) => {
 
     return (
-        <Container id={project.id}>
+        <Container id={project.id} bg={project.bg}>
             <Top>
                 <div className="logo-container">
                     <img src={project.logo} alt={project.title} />
@@ -40,7 +40,7 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     /* background-color: #3178b5; */
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) -18.02%, rgba(0, 0, 0, 0.60) 87.68%),url('/images/services/web-app-dev.png') center center no-repeat;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) -18.02%, rgba(0, 0, 0, 0.60) 87.68%),url(${({bg}) => bg}) center center no-repeat;
     background-size: cover;
     padding: 100px;
     

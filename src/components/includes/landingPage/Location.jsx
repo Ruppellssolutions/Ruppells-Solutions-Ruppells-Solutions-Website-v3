@@ -1,3 +1,4 @@
+import { motion, useTime, useTransform } from 'framer-motion'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -17,8 +18,24 @@ const Location = () => {
                 <Pin>
                     <img
                         onClick={redirectHandler}
-                        src="/images/location-pin.png"
+                        src="/icons/main/map-pin.svg"
                         alt="pin"
+                    />
+                    <motion.img
+                        initial={{
+                            scale: 1
+                        }}
+                        animate={{
+                            scale: [1,1.5, 1]
+                        }}
+                        transition={{
+                            duration:1,
+                            repeat: Infinity,
+                            repeatDelay: 1,
+                        }}
+                        className='pin'
+                        src="/icons/main/map-pin-bottom.svg"
+                        alt="pin bottom"
                     />
                 </Pin>
             </Wrapper>
@@ -36,14 +53,25 @@ const Wrapper = styled.div`
     max-width: 90%;
 `
 const Pin = styled.div`
+    rotate: 10deg;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
     img{
-        width: 78px;
+        width: 38px;
         cursor: pointer;
+
+        &.pin{
+            width: 20px;
+            margin-top: -10px;
+            z-index: -1;
+        }
     }
 `
 const BottomContainer = styled.div`

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-scroll'
 import styled from 'styled-components'
 
 
@@ -47,7 +48,9 @@ const Footer = () => {
                         <img src="/icons/logo/colored-infinity.png" alt="infinty logo" />
                     </MiddleTop>
                     <MiddleBottom>
-                        <img src="/icons/logo/solutions-dark.svg" alt="Ruppells Solutions" />
+                        <Link spy smooth duration={4000} to='home'>
+                            <img src="/icons/logo/solutions-dark.svg" alt="Ruppells Solutions" />
+                        </Link>
                         <span>Powered By</span>
                         <a href="https://ruppellsgroup.com" target="_blank">
                             <img src="/icons/logo/ruppells-group-dark.svg" alt="Ruppells Group " />

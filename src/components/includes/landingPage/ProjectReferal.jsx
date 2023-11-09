@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
+import Location from './Location'
+import Footer from './Footer'
 
 const ProjectReferal = () => {
     const containerRef = useRef()
@@ -9,7 +11,8 @@ const ProjectReferal = () => {
         target: containerRef
     })
 
-    const scale = useTransform(scrollYProgress, [0.3, 1], [0, 15])
+    const scale = useTransform(scrollYProgress, [0.3, .5], [0, 1])
+    const y = useTransform(scrollYProgress, [0.6, 1], ["0", "-100vh"])
 
     return (
         <Container ref={containerRef}>
@@ -19,9 +22,22 @@ const ProjectReferal = () => {
                 }}
             >
                 <div className="first-child">
-                    <div className="first-child blue">
-                        <div className="first-child yellow">
-
+                    <div className="first-child second">
+                        <div className="first-child third">
+                            <InnerContent>
+                                <motion.div
+                                    className="container"
+                                    style={{
+                                        y
+                                    }}
+                                >
+                                    <DummyScreen>
+                                        <img src="/images/laptop-screen.png" alt="" />
+                                    </DummyScreen>
+                                    <Location />
+                                    <Footer />
+                                </motion.div>
+                            </InnerContent>
                         </div>
                     </div>
                 </div>
@@ -43,8 +59,8 @@ export default ProjectReferal
 
 const Container = styled.section`
     position: relative;
-    height: 300vh;
-    `
+    height: 350vh;
+`
 const Wrapper = styled.div`
     padding: 60px 0;
     position: sticky;
@@ -124,23 +140,55 @@ const PopupContainer = styled(motion.div)`
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    width: 100%;
     z-index: 200;
-    aspect-ratio: 1;
-    border: 100px solid red;
+    /* width: 100%;
+    aspect-ratio: 1; */
+    border: 400px solid #E7C6FF;
     border-radius: 50%;
+    /* user-select: none;
+    pointer-events: none; */
 
     .first-child{
-        width: 100%;
-        aspect-ratio: 1;
-        border: 200px solid green;
+        /* width: 100%;
+        aspect-ratio: 1; */
+        border: 300px solid #8443B1;
         border-radius: 50%;
 
-        &.blue{
-            border-color: blue;
+        &.second{
+            border:225px solid #4F3CC2;
         }
-        &.yellow{
-            border-color: yellow;
+        &.third{
+            border: 200px solid #9ACFFF;
+            width: 150vw;
+            aspect-ratio: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FBFBFC;
         }
+    }
+`
+const InnerContent = styled(motion.div)`
+    width: 100vw;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: scroll;
+    background-color: #FBFBFC;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+`
+const DummyScreen = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 50%;
+        margin: 0 auto;
     }
 `

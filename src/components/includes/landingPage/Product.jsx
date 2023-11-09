@@ -1,24 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import SectionHead from '../general/SectionHead'
-import { useInView } from 'framer-motion'
-import useSections from '../../context/useSections'
 
 
 const Product = () => {
-    const nextSectionObserver = useRef(null)
-
-    const { toggleProjectActive } = useSections()
-
-    const nextSectionObserverInView = useInView(nextSectionObserver)
-
-    useEffect(()=>{
-
-        if(nextSectionObserverInView){
-            toggleProjectActive()
-        }
-    },[nextSectionObserverInView])
-
     return (
         <>
             <Container>
@@ -32,7 +17,7 @@ const Product = () => {
                     </Head>
                     <ILMContainer>
                         <ILMLeft>
-                            <img src="/GIF/ilm-mobile.png" alt="ilm mobile" />
+                            <img src="/GIF/i-phone-14.gif" alt="ilm mobile" />
                         </ILMLeft>
                         <ILMRight>
                             <LogoContainer>
@@ -51,7 +36,6 @@ const Product = () => {
                     </ILMContainer>
                 </Wrapper>
             </Container>
-            <IntersectionItem ref={nextSectionObserver} />
         </>
     )
 }
@@ -99,9 +83,10 @@ const ILMLeft = styled.div`
     /* align-items: center; */
     justify-content: center;
     overflow: hidden;
-
-    img{
-        width: 100%;
+    
+    img,video{
+        width: 250%;
+        height: auto;
     }
 `
 const GIFContainer = styled.div`

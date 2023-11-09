@@ -9,9 +9,9 @@ const Header = () => {
         <Container>
             <Wrapper className='wrapper'>
                 <h1>
-                    <a href="#" onClick={e => e.preventDefault()}>
+                    <Link spy smooth duration={6000} to='home'>
                         <img src="/icons/logo/infinity.svg" alt="infinity" />
-                    </a>
+                    </Link>
                 </h1>
                 <nav>
                     <ul>
@@ -50,6 +50,10 @@ const Wrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        a{
+            cursor: pointer;
+        }
     }
 
     nav>ul{

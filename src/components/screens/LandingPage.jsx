@@ -60,10 +60,6 @@ const LandingPage = () => {
                         <Clients />
                     </Element>
                     <ProjectReferal />
-                    <BottomContainer>
-                        <Location />
-                        <Footer />
-                    </BottomContainer>
                 </ZIndexContainer>
             </Wrapper>
         </Container>
