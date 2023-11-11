@@ -70,11 +70,18 @@ export default ProjectReferal
 const Container = styled.section`
     position: relative;
     height: 300vh;
+    
 `
 const Wrapper = styled.div`
     padding: 60px 0;
     position: sticky;
     top: 0;
+    @media all and (max-width:480px){
+        padding: 100px 0;
+        top:21%;
+
+    }
+
 
     &>span{
         display: block;
@@ -91,6 +98,13 @@ const Main = styled.div`
     flex-direction: column;
     gap: 32px;
     padding: 40px 0;
+    @media all and (max-width:480px){
+        justify-content: unset;
+        padding: 0px 0;
+        height: 42vh;
+
+
+    }
 
     h5{
         font-size: 52px;
@@ -98,7 +112,11 @@ const Main = styled.div`
         text-align: center;
         max-width: 40%;
         font-family: Satoshi-Medium;
-        
+        @media all and (max-width:480px){
+            font-size: 29px;
+
+
+        }
         span{
             font: inherit;
             background: linear-gradient(106deg, #CE4FE3 0%, #36B2EA 101.89%);
@@ -176,6 +194,12 @@ const PopupContainer = styled(motion.div)`
             align-items: center;
             justify-content: center;
             background-color: #FBFBFC;
+            @media all and (max-width:480px){
+                border:0px solid #9ACFFF;
+                // overflow: hidden;
+
+
+            }
         }
     }
 `
@@ -197,7 +221,9 @@ const DummyScreen = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    @media all and (max-width:480px){
+        height: 43vh;
+    }
     img{
         width: 50%;
         margin: 0 auto;

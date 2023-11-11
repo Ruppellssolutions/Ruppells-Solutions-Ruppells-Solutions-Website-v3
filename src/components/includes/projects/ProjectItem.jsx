@@ -43,26 +43,39 @@ const Container = styled.div`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) -18.02%, rgba(0, 0, 0, 0.60) 87.68%),url(${({bg}) => bg}) center center no-repeat;
     background-size: cover;
     padding: 100px;
-    
-
     display: flex;
     align-items: start;
     justify-content: flex-end;
     flex-direction: column;
+    @media all and (max-width:480px){
+        padding: 30px;
+        justify-content: flex-start;
+    }
 `
 
 const Top = styled.div`
     margin-bottom: 42px;
+    @media all and (max-width:480px){
+        margin-bottom: 20px;
 
+    }
     .logo-container{
         width: max-content;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.10);
         padding: 24px;
+        
+        @media all and (max-width:480px){
+            border-radius: 15px;
+            width: 130px;
+            padding: 20px;
 
-        img{
-            width: 120px;
         }
+        img{
+            width: 100%;
+            display:block;
+        }
+       
     }
 `
 const Bottom = styled.div`
@@ -76,6 +89,10 @@ const BottomHead = styled.div`
     justify-content: space-between;
     gap: 58px;
     flex-wrap: wrap;
+    @media all and(max-width:480px){
+        gap: 20px;
+
+    }
 
     h5{
         color: #f3f3f3;
@@ -83,6 +100,10 @@ const BottomHead = styled.div`
         font-weight: 400;
         letter-spacing: 1px;
         width: max-content;
+        @media all and (max-width:480px){
+            font-size: 31px;
+
+        }
         
         span.bold{
             color: inherit;
@@ -99,6 +120,10 @@ const BottomHead = styled.div`
         flex-direction: row-reverse;
         gap: 20px;
         flex-wrap: wrap;
+        @media all and (max-width:480px){
+            justify-content: flex-end;
+
+        }
 
         li{
             width: max-content;
@@ -116,12 +141,16 @@ const BottomContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    display:none;
 
     p{
         max-width: 70%;
         color: #fff;
         font-size: 17px;
         letter-spacing: 0.8px;
+        @media all and(max-width:480px){
+            display:none;
+        }
     }
     span.icon{
         cursor: pointer;
