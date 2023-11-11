@@ -17,7 +17,7 @@ const Product = () => {
                     </Head>
                     <ILMContainer>
                         <ILMLeft>
-                            <img src="/GIF/i-phone-14.gif" alt="ilm mobile" />
+                            <img src="/GIF/Ilm Phone.gif" alt="ilm mobile" />p
                         </ILMLeft>
                         <ILMRight>
                             <LogoContainer>
