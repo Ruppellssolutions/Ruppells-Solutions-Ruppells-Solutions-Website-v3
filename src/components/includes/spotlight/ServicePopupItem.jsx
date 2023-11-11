@@ -6,18 +6,26 @@ import styled from 'styled-components'
 const ServicePopupItem = ({
     title = "",
     icon = "",
-    link = "",
-    isActive = false,
     type = "LEFT"
 }) => {
-    const springConfig = { stiffness: 100, damping: 100, mass: 1 };
+    // const springConfig = { stiffness: 100, damping: 100, mass: 1 };
+
+    const onClick = () => {
+        const serviceContainer = document.querySelector("#services")
+        // const serviceChild = document.querySelector("#services-child")
+
+        serviceContainer.scrollIntoView({
+            behavior: "smooth"
+        })
+    }
 
     return (
         <Container
             className={type}
+            onClick={onClick}
         >
             <Left className='center-align'>
-                <img src={icon} alt="icon" />
+                <img src="/icons/services/web-app-dev.svg" alt="icon" />
             </Left>
             <Right>
                 <span className="head">{title}</span>
@@ -41,6 +49,15 @@ const Container = styled(motion.div)`
     padding: 10px 20px;
     transition: all 1s ease-in-out;
 
+    @media all and (max-width: 950px){
+        width: calc(50% - 10px) !important;
+        margin: 0 !important;
+    }
+    @media all and (max-width: 460px){
+        width: 100% !important;
+        padding: 6px 14px;
+    }
+
     &:nth-child(2){
         margin-right: 24px;
 
@@ -50,7 +67,9 @@ const Container = styled(motion.div)`
         }
     }
     &:nth-child(3){
-        margin-right: 24px;
+        &.LEFT{
+            margin-right: 24px;
+        }
     }
 `
 const Left = styled.div`
@@ -62,8 +81,18 @@ const Left = styled.div`
     img{
         width: 16px;
     }
+
+    @media all and (max-width: 460px){
+        width: 24px;
+        height: 24px;
+
+        img{
+            width: 12px;
+        }
+    }
 `
 const Right = styled.div`
+
     span{
         display: block;
         
@@ -71,11 +100,29 @@ const Right = styled.div`
             color: #F2F2F2;
             font-size: 14px;
             margin-bottom: 6px;
+
+            @media all and (max-width: 1080px){
+                font-size: 12px;
+            }
         }
         &.explore{
             cursor: pointer;
             color: #ABABAB;
             font-size: 12px;
+
+            @media all and (max-width: 1080px){
+                font-size: 10px;
+            }
+        }
+    }
+    @media all and (max-width: 460px){
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span.head{
+            margin: 0;
         }
     }
 `

@@ -6,9 +6,7 @@ const ServiceItem = ({ id = 0, isActive = false, activeIndex = [], serviceItem =
         <ServiceItemContainer
             className={`${isActive && 'active'} ${Math.max(...activeIndex) > id && "small"}`}
         >
-            <ServiceItemLeft>
-                <img src={serviceItem.image} alt="branding" />
-            </ServiceItemLeft>
+            <ServiceItemLeft bg={serviceItem.image} />
             <ServiceItemRight>
                 <ul>
                     {serviceItem?.services?.map((item, i) => (
@@ -51,14 +49,25 @@ const ServiceItemContainer = styled.div`
     &.small{
         /* opacity: 0; */
     }
+
+    @media all and (max-width: 520px){
+        flex-direction: column;
+    }
 `
 const ServiceItemLeft = styled.div`
     width: calc(57% - 10px);
-
+    /* width: auto; */
+    /* max-width: auto; */
+    height: 100%;
+    background: url(${({ bg }) => bg}) center center no-repeat;
+    border-radius: 18px;
+    
     img{
-        width: auto;
-        /* max-width: auto; */
-        max-height: 100%;
+    }
+
+    @media all and (max-width: 520px){
+        width: 100%;
+        height: 200px;
     }
 `
 const ServiceItemRight = styled.div`
@@ -66,12 +75,24 @@ const ServiceItemRight = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 8px;
+
+    @media all and (max-width: 520px){
+        width: 100%;
+    }
 
     ul{
         width: 100%;
+
+        @media all and (max-width: 520px){
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
         li{
             display: flex;
-            align-items: center;
+            align-items: start;
             gap: 14px;
             margin-bottom: 16px;
 
@@ -80,13 +101,30 @@ const ServiceItemRight = styled.div`
             }
 
             span.icon{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
                 img{
                     width: 20px;
+
+                    @media all and (max-width: 460px){
+                        width: 16px;
+                    }
                 }
             }
             span.service{
                 color: #5E5E5E;
-                font-size: 17px;
+                font-size: 14px;
+
+                @media all and (max-width: 520px){
+                    font-size: 12px;
+                }
+            }
+
+            @media all and (max-width: 520px){
+                width: calc(50% - 10px);
+                margin: 0;
             }
         }
     }

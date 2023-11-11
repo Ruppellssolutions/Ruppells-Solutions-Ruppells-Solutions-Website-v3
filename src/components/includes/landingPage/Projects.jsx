@@ -11,13 +11,14 @@ const Projects = ({ scrollYProgress }) => {
     const enlargeX = useTransform(scrollYProgress, [0.3, 0.4], ["7.5vw", "0vw"])
     const enlargeY = useTransform(scrollYProgress, [0.3, 0.4], [370, 0])
     const sliderX = useTransform(scrollYProgress, [0.4, 1], ["0vw", "-160vw"])
+    const y = useTransform(scrollYProgress, [0.3, 0.4], [100, 0])
 
     const projects = [
         {
             id: 1,
             title: "Trinity Funds",
             bg: "/images/projects/project-01.png",
-            description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
+            description: "Trinity Group, a trailblazer in global business, envisions a world of possibilities with our digital prowess. From financial services to hotels and real estate, we digitally shape the excellence and trustworthiness of their prosperous journey into the future.",
             logo: "/icons/logo/trinity-funds.svg",
             tags: [
                 {
@@ -41,7 +42,7 @@ const Projects = ({ scrollYProgress }) => {
             id: 2,
             title: "Ruppells Overseas",
             bg: "/images/projects/project-02.png",
-            description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
+            description: "Proudly partnered with Ruppells Overseas, a beacon of excellence in study abroad consultancy based in Kochi, Kerala. Our digital strategies amplify success stories, guiding clients to academic triumphs in this tech-driven era.",
             logo: "/icons/logo/ruppells-overseas.svg",
             tags: [
                 {
@@ -73,7 +74,7 @@ const Projects = ({ scrollYProgress }) => {
             id: 3,
             title: "Reverse Gear",
             bg: "/images/projects/project-03.png",
-            description: "Lorem ipsum dolor sit amet consectetur. Scelerisque bibendum vel nulla id sit. Tincidunt ullamcorper lobortis fermentum adipiscing urna et vitae duis eu.",
+            description: "At Reverse Gear's Kollam car station, delighted clients reflect the unwavering commitment to service excellence and customer satisfaction, ensuring their journeys thrive with seamless digital experiences.",
             logo: "/icons/logo/reverse-gear.svg",
             tags: [
                 {
@@ -120,7 +121,9 @@ const Projects = ({ scrollYProgress }) => {
                             <span className="container">80+ <span className="child">happy customers</span></span>
                         </div>
                     </Head>
-                    <ProjectsCountContainer>
+                    <ProjectsCountContainer
+                        style={{ y }}
+                    >
                         <div className="count-container">
                             <h5><span className="bold">+24</span> more projects</h5>
                         </div>
@@ -184,15 +187,24 @@ const Content = styled.div`
 
 const Head = styled(motion.div)`
     padding: 160px 0;
-    /* position: sticky;
-    left: 7.5%;
-    top: 0; */
+
+    @media all and (max-width: 460px){
+        padding: 70px 0;
+    }
 
     h4{
         margin-bottom: 26px;
         color: #fff;
         font-family: Satoshi-Medium;
         font-size: 48px;
+
+        @media all and (max-width: 1080px){
+            font-size: 32px;
+        }
+        @media all and (max-width: 640px){
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
 
         span{
             font: inherit;
@@ -210,9 +222,23 @@ const Head = styled(motion.div)`
         display: inline-block;
         margin-right: 26px;
 
+        @media all and (max-width: 1080px){
+            font-size: 20px;
+        }
+        @media all and (max-width: 640px){
+            font-size: 16px;
+        }
+
         span.child{
             color: rgba(205, 205, 205, 0.90);
             font-size: 18px;
+
+            @media all and (max-width: 1080px){
+                font-size: 14px;
+            }
+            @media all and (max-width: 640px){
+                font-size: 12px;
+            }
         }
     }
 `
@@ -279,10 +305,10 @@ const ProjectsContainer = styled(motion.div)`
 //     top:0;
 //     transition: all 1s ease-in-out;
 // `
-const ProjectsCountContainer = styled.div`
+const ProjectsCountContainer = styled(motion.div)`
     position: absolute;
     left: 0;
-    top: 100px;
+    top: 0;
     width: 100%;
     height: 100vh;
     display: flex;

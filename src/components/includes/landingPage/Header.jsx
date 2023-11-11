@@ -25,6 +25,9 @@ const Header = () => {
                             <Link spy smooth duration={3000} to='clients' activeClass='active'>Our Clients</Link>
                         </li>
                     </ul>
+                    <Hamburger>
+                        <img src="/icons/main/hamburger.svg" alt="hamburger" />
+                    </Hamburger>
                 </nav>
             </Wrapper>
         </Container>
@@ -53,6 +56,14 @@ const Wrapper = styled.div`
 
         a{
             cursor: pointer;
+
+            img{
+                width: 80px;
+
+                @media all and (max-width: 768px){
+                    width: 56px;
+                }
+            }
         }
     }
 
@@ -60,6 +71,10 @@ const Wrapper = styled.div`
         display: flex;
         align-items: center;
         gap: 18px;
+
+        @media all and (max-width: 768px){
+            display: none;
+        }
 
         li{
             a{
@@ -87,5 +102,19 @@ const Wrapper = styled.div`
                 }
             }
         }
+    }
+`
+const Hamburger = styled.div`
+    display: none;
+    
+    img{
+        width: 32px;
+    }
+
+    @media all and (max-width: 768px){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 `

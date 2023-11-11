@@ -1,5 +1,4 @@
 import React, { Suspense, lazy, useEffect } from 'react'
-// import LandingPage from './components/screens/LandingPage'
 const LandingPage = lazy(() => import("./components/screens/LandingPage"))
 import ScreenLoader from './components/includes/loaders/ScreenLoader'
 import Lenis from '@studio-freight/lenis'
@@ -21,7 +20,6 @@ const App = () => {
 		<>
 			<Suspense fallback={<ScreenLoader />}>
 				<LandingPage />
-				{/* <Scene /> */}
 			</Suspense>
 		</>
 	)

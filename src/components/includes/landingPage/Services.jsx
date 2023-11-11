@@ -1,217 +1,30 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import useSections from '../../context/useSections';
 import ServiceItem from '../services/ServiceItem';
 import { Element } from 'react-scroll';
+import services from '../../utils/services';
+// import AnimatedSectionTitle from '../general/AnimatedSectionTitle';
 
 
 const Services = () => {
-    const services = [
-        {
-            slug: 1,
-            startingPoint: 0.3,
-            title: "Branding",
-            category: "DIGITAL_MARKETING",
-            image: "/images/services/branding.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 2,
-            startingPoint: 0.4,
-            title: "Social Media Marketing",
-            category: "DIGITAL_MARKETING",
-            image: "/images/services/social-media-marketing.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 3,
-            startingPoint: 0.5,
-            title: "Content Marketing",
-            category: "DIGITAL_MARKETING",
-            image: "/images/services/content-marketing.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 4,
-            startingPoint: 0.6,
-            title: "Website Development",
-            category: "IT_SERVICES",
-            image: "/images/services/website-development.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 5,
-            startingPoint: 0.7,
-            title: "Web App Development",
-            category: "IT_SERVICES",
-            image: "/images/services/web-app-dev.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 6,
-            startingPoint: 0.8,
-            title: "Mobile App Development",
-            category: "IT_SERVICES",
-            image: "/images/services/mobile-app-dev.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-        {
-            slug: 7,
-            startingPoint: 0.9,
-            title: "E-Commerce Platform",
-            category: "IT_SERVICES",
-            image: "/images/services/e-commerce.png",
-            services: [
-                {
-                    title: "Logo",
-                },
-                {
-                    title: "Brand Taglines",
-                },
-                {
-                    title: "Brand Colour",
-                },
-                {
-                    title: "Brand Vision",
-                },
-                {
-                    title: "Brand Mission",
-                },
-                {
-                    title: "Brand Book",
-                },
-            ]
-        },
-    ]
-
-    const [activeIndex, setIndex] = useState([1])
+    const [activeIndexes, setIndexes] = useState([1])
+    const [activeIndex, setIndex] = useState(0)
     const [activeService, setActiveService] = useState(services[0])
 
-    const middleScrollbarHeight = 400
+    const middleScrollbarHeight = 340
+
+    console.log(activeIndex);
 
     useEffect(() => {
-        if (activeIndex) {
-            const lastIndex = Math.max(...activeIndex)
+        if (activeIndexes) {
+            const lastIndex = Math.max(...activeIndexes)
             setActiveService(services[lastIndex - 1])
+            setIndex(lastIndex - 1)
         }
-    }, [activeIndex])
+    }, [activeIndexes, activeIndex])
 
-    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndex)) / 2)}%`
+    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndexes)) /1.8)}%`
 
     const containerRef = useRef(null)
 
@@ -220,14 +33,14 @@ const Services = () => {
     })
 
     const addItem = item => {
-        const temp = [...new Set([...activeIndex, item])]
-        setIndex(temp)
+        const temp = [...new Set([...activeIndexes, item])]
+        setIndexes(temp)
         removeItem(item)
     }
     const removeItem = item => {
-        if (activeIndex.includes(item + 1)) {
-            const filteredIndexes = activeIndex.filter(itm => itm !== item + 1)
-            setIndex(filteredIndexes)
+        if (activeIndexes.includes(item + 1)) {
+            const filteredIndexes = activeIndexes.filter(itm => itm !== item + 1)
+            setIndexes(filteredIndexes)
         }
     }
 
@@ -241,25 +54,31 @@ const Services = () => {
                 }
             })
         })
-    }, [activeIndex])
+    }, [activeIndexes])
 
     return (
         <Container id="services" ref={containerRef}>
             <Element name="service">
-                <Wrapper>
-                    <Content
-                    // style={{ y }}
-                    >
+                <Wrapper id="services-child">
+                    <Content>
                         <Head>
-                            <h4>WHAT <span>WE DO</span> <br /> FOR YOU</h4>
+                            <h4>
+                                WHAT <span>WE DO</span> <br /> FOR YOU
+                            </h4>
                             <div className="right">
-                                <p className={activeService?.category === "DIGITAL_MARKETING" ? "active" : ""}>#01 Digital <span>Marketing Services</span></p>
-                                <p className={activeService?.category === "IT_SERVICES" ? "active" : ""}>#02 IT <span>Services</span></p>
+                                <p className={activeService?.category === "IT_SERVICES" ? "active" : ""}>#01 IT <span>Services</span></p>
+                                <p className={activeService?.category === "DIGITAL_MARKETING" ? "active" : ""}>#02 Digital <span>Marketing Services</span></p>
                             </div>
                         </Head>
                         <ServiceContent>
                             <div className="left">
-                                <h5>{activeService.title}</h5>
+                                <h5>
+                                    {activeService.title}
+                                    {/* <AnimatedSectionTitle
+                                        titles={services}
+                                        activeIndex={activeIndex}
+                                    /> */}
+                                </h5>
                             </div>
                             <MiddleScrollBar
                                 style={{
@@ -281,8 +100,8 @@ const Services = () => {
                                         id={i + 1}
                                         key={i}
                                         serviceItem={ite}
-                                        activeIndex={activeIndex}
-                                        isActive={activeIndex.includes(i + 1)}
+                                        activeIndex={activeIndexes}
+                                        isActive={activeIndexes.includes(i + 1)}
                                     />
                                 ))}
                             </div>
@@ -298,7 +117,7 @@ export default Services
 
 const Container = styled.section`
     min-height: 100vh;
-    padding-top: 100vh;
+    /* padding-top: 100vh; */
     scroll-behavior: smooth;
     /* transform: translateX(0); */
     z-index: 100;
@@ -307,6 +126,7 @@ const Container = styled.section`
 const Wrapper = styled.div`
     width: 100%;
     min-height: 500vh;
+    margin-top: 100vh;
 `
 const Content = styled(motion.div)`
     background-color:#FBFBFC;
@@ -314,37 +134,51 @@ const Content = styled(motion.div)`
     border: 1px solid #808080cc;
     border-radius: 20px;
     padding: 32px;
-    /* overflow-y: scroll; */
-    width: 85%;
-    margin: 0 7.5%;
-
-    /* position: fixed;
-    bottom: -100vh; */
-
+    width: 90%;
+    margin: 0 5%;
     position: sticky;
     top: 15vh;
-`
-const ScrollContainer = styled.div`
-    position: relative;
-    height: 185vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media all and (max-width: 980px){
+        width: 100%;
+        margin: 0;
+        padding: 32px 12px;
+    }
+    @media all and (max-width: 720px){
+        padding: 12px 6px;
+    }
 `
 const Head = styled.div`
     z-index: 100;
-    /* background-color: #fff; */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* position: sticky;
-    left: 0;
-    top: 0; */
     width: 100%;
     padding: 32px;
+
+    @media all and (max-width: 720px){
+        padding: 32px 32px 0 32px ;
+    }
+    @media all and (max-width: 469px){
+        padding: 20px 20px 0 20px;
+    }
 
     h4{
         color: #111;
         font-size: 26px;
         font-family: Satoshi-Medium;
         text-transform: uppercase;
+
+        @media all and (max-width: 1080px){
+            font-size: 22px;
+        }
+        @media all and (max-width: 720px){
+            font-size: 17px;
+        }
 
         span{
             font: inherit;
@@ -359,8 +193,14 @@ const Head = styled.div`
             font-size: 20px;
             font-family: Satoshi-Regular;
             color: #A0A0A0;
-            /* color: #2C2C2C; */
             text-align: right;
+
+            @media all and (max-width: 1080px){
+                font-size: 17px;
+            }
+            @media all and (max-width: 720px){
+                font-size: 14px;
+            }
 
             &,span{
                 transition: all 0.3s ease-in-out;
@@ -386,34 +226,73 @@ const ServiceContent = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    max-height: 400px;
-    /* position: sticky;
-    top: 166px;
-    left: 0; */
+    max-height: 380px;
     width: 100%;
     padding: 32px;
 
+    @media all and (max-width: 720px){
+        flex-direction: column;
+        padding: 26px;
+        max-height: 70vh;
+    }
+    @media all and (max-width: 460px){
+        padding: 16px;
+    }
+
     .left,.right{
-        height: 380px;
-        width: calc(45% - 10px);
+        height: 320px;
+        width: calc(50% - 20px - 14px);
         /* background-color: #666; */
     }
+
     .right{
         background: none;
         position: relative;
         overflow: hidden;
         border-radius: 18px;
+
+        @media all and (max-width:1180px ){
+            width: calc(100% - 38% - 34px);
+        }
+        @media all and (max-width:920px ){
+            width: calc(68% - 20px);
+        }
+        @media all and (max-width: 720px){
+            width: 100%;
+            height: 70vh;
+        }
     }
     .left{
         display: flex;
         align-items: center;
         justify-content: center;
 
-        h5{
-            max-width: 70%;
+        @media all and (max-width:1180px ){
+            width: 38%;
+        }
+        @media all and (max-width:1180px ){
+            width: 32%;
+        }
+        @media all and (max-width: 720px){
+            width: 100%;
+            height: max-content;
+        }
+
+        h5,span{
+            /* max-width: 70%; */
             color: #202020;
             font-size: 38px;
             font-family: Satoshi-Medium;
+
+            @media all and (max-width: 1080px){
+                font-size: 29px;
+            }
+            @media all and (max-width:920px ){
+                font-size: 24px;
+            }
+            @media all and (max-width: 720px){
+                font-size: 19px;
+            }
         }
     }
 `
@@ -421,6 +300,13 @@ const MiddleScrollBar = styled.div`
     width: 28px;
     background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, rgba(238, 238, 238, 0.89) 62.5%, rgba(226, 226, 226, 0.00) 100%);
     /* height: 400px; */
+
+    @media all and (max-width: 980px){
+        width: 20px;
+    }
+    @media all and (max-width: 920px){
+        display: none;
+    }
     
     .scroll-container{
         display: flex;
@@ -439,81 +325,10 @@ const MiddleScrollBar = styled.div`
             height: 20px;
             background-color: #fff;
             border-radius: 50%;
-        }
-    }
-`
-const ServiceItemContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 4px;
-    position: absolute;
-    border-radius: 18px;
-    border: 1px solid #d3d3d3;
-    /* top: 0; */
-    background-color: #fff;
-    top: 80vh;
-    left: 0;
-    transition: top 0.6s ease-in-out;
-    /* bottom: 0; */
 
-    display: flex;
-    gap: 20px;
-
-    &.active{
-        top: 0;
-    }
-    &.small{
-        opacity: 0;
-    }
-`
-
-const IntersectionContainer = styled.div`
-    position: absolute;
-    width: 100%;
-    top: 80vh;
-    left: 0;
-    z-index: 100;
-`
-const IntersectionItem = styled.div`
-    height: 20px;
-    /* background-color: red; */
-    /* margin-bottom: 180px; */
-`
-const ServiceItemLeft = styled.div`
-    width: calc(57% - 10px);
-
-    img{
-        width: auto;
-        /* max-width: auto; */
-        max-height: 100%;
-    }
-`
-const ServiceItemRight = styled.div`
-    width: calc(43% - 10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    ul{
-        width: 100%;
-        li{
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-
-            &:last-child{
-                margin: 0;
-            }
-
-            span.icon{
-                img{
-                    width: 20px;
-                }
-            }
-            span.service{
-                color: #5E5E5E;
-                font-size: 17px;
+            @media all and (max-width: 980px){
+                width: 16px;
+                height: 16px;
             }
         }
     }

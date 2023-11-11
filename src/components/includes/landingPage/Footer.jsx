@@ -14,7 +14,7 @@ const Footer = () => {
             link: "",
         },
         {
-            icon: "/icons/social/twitter.svg",
+            icon: "/icons/social/threads.svg",
             link: "",
         },
         {

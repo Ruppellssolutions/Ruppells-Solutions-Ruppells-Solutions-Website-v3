@@ -14,30 +14,33 @@ const Location = () => {
     return (
         <Container>
             <Wrapper className="wrapper">
-                <img src="/images/location-map.png" alt="map" />
-                <Pin>
-                    <img
-                        onClick={redirectHandler}
-                        src="/icons/main/map-pin.svg"
-                        alt="pin"
-                    />
-                    <motion.img
-                        initial={{
-                            scale: 1
-                        }}
-                        animate={{
-                            scale: [1,1.5, 1]
-                        }}
-                        transition={{
-                            duration:1,
-                            repeat: Infinity,
-                            repeatDelay: 1,
-                        }}
-                        className='pin'
-                        src="/icons/main/map-pin-bottom.svg"
-                        alt="pin bottom"
-                    />
-                </Pin>
+                <div className="content">
+                    <img src="/images/location-map.png" alt="map" />
+                    <Pin>
+                        <img
+                            onClick={redirectHandler}
+                            src="/icons/main/map-pin.svg"
+                            alt="pin"
+                        />
+                        <motion.img
+                            initial={{
+                                scale: 1
+                            }}
+                            animate={{
+                                scale: [1, 1.5, 1]
+                            }}
+                            transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                repeatDelay: 1,
+                            }}
+                            className='pin'
+                            src="/icons/main/map-pin-bottom.svg"
+                            alt="pin bottom"
+                        />
+                    </Pin>
+                </div>
+                <BottomContainer />
             </Wrapper>
         </Container>
     )
@@ -51,6 +54,10 @@ const Container = styled.section`
 `
 const Wrapper = styled.div`
     max-width: 90%;
+
+    .content{
+        position: relative;
+    }
 `
 const Pin = styled.div`
     rotate: 10deg;
@@ -79,7 +86,7 @@ const BottomContainer = styled.div`
     width: 100%;
     height: 24px;
     border-radius: 58px 58px 0 0;
-    border: 1px solid #FFFFFF3D;
+    border: 1px solid  #8E8E8E3D;
     border-left-width: .5px;
     border-bottom: none;
 `

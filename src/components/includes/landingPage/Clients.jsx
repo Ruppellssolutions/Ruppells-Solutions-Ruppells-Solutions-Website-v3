@@ -87,7 +87,7 @@ const Clients = () => {
                         colorTitle='OUR'
                         title='CLIENTS.'
                     />
-                    <p>Lorem ipsum dolor sit amet consectetur. Malesuada quis cursus feugiat placerat aliquet. Vitae maecenas ut pharetra sit sem .</p>
+                    <p>Meet the esteemed partners who've entrusted their success with us. Our diverse clientele is a testament to the trusted relationships we've built. Join our community of satisfied clients and embark on a journey of digital brilliance.</p>
                 </Head>
                 <ClientsList>
                     {clients.map((client, i) => (
@@ -104,7 +104,7 @@ const Clients = () => {
                         <img src="/icons/main/right-arrow.svg" alt="right arrow" />
                     </Button>
                 </ButtonContainer>
-                <BottomContainer></BottomContainer>
+                <BottomContainer />
             </Wrapper>
         </Container>
     )

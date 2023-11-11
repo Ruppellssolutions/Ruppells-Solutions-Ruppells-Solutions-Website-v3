@@ -7,8 +7,6 @@ import Projects from '../includes/landingPage/Projects'
 import Product from '../includes/landingPage/Product'
 import Clients from '../includes/landingPage/Clients'
 import ProjectReferal from '../includes/landingPage/ProjectReferal'
-import Location from '../includes/landingPage/Location'
-import Footer from '../includes/landingPage/Footer'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Element } from 'react-scroll'
 

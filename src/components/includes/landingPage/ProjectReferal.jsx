@@ -11,11 +11,14 @@ const ProjectReferal = () => {
         target: containerRef
     })
 
-    const scale = useTransform(scrollYProgress, [0.3, .5], [0, 1])
-    const y = useTransform(scrollYProgress, [0.6, 1], ["0", "-100vh"])
+    const scale = useTransform(scrollYProgress, [0.25, .5], [0, 1])
+    const opacity = useTransform(scrollYProgress, [0.3, .6], [0, 1])
+    const y = useTransform(scrollYProgress, [0.6, 1], ["0", "-120vh"])
 
     return (
-        <Container ref={containerRef}>
+        <Container
+            ref={containerRef}
+        >
             <PopupContainer
                 style={{
                     scale
@@ -24,7 +27,11 @@ const ProjectReferal = () => {
                 <div className="first-child">
                     <div className="first-child second">
                         <div className="first-child third">
-                            <InnerContent>
+                            <InnerContent
+                                style={{
+                                    opacity
+                                }}
+                            >
                                 <motion.div
                                     className="container"
                                     style={{
@@ -32,7 +39,10 @@ const ProjectReferal = () => {
                                     }}
                                 >
                                     <DummyScreen>
-                                        <img src="/images/laptop-screen.png" alt="" />
+                                        <img
+                                            src="/images/laptop-screen.png"
+                                            alt=""
+                                        />
                                     </DummyScreen>
                                     <Location />
                                     <Footer />
@@ -59,7 +69,7 @@ export default ProjectReferal
 
 const Container = styled.section`
     position: relative;
-    height: 350vh;
+    height: 300vh;
 `
 const Wrapper = styled.div`
     padding: 60px 0;
@@ -174,7 +184,8 @@ const InnerContent = styled(motion.div)`
     height: 100vh;
     position: sticky;
     top: 0;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
     background-color: #FBFBFC;
     /* display: flex;
     align-items: center;

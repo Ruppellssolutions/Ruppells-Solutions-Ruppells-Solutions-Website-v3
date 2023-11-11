@@ -13,7 +13,7 @@ const Product = () => {
                             colorTitle='OUR'
                             title='PRODUCT.'
                         />
-                        <p>Lorem ipsum dolor sit amet consectetur. Malesuada quis cursus feugiat placerat aliquet. Vitae maecenas ut pharetra sit sem .</p>
+                        <p>Explore the forefront of innovation with Ruppells Solutions guiding the way. Discover iLM, the ultimate digital companion crafted for followers of the Muslim faith. Unlock a seamless blend of technology and spirituality.</p>
                     </Head>
                     <ILMContainer>
                         <ILMLeft>
@@ -48,22 +48,50 @@ const Container = styled.section`
     padding: 74px 0 32px;
     z-index: 10;
     position: relative;
+
+    @media all and (max-width: 768px){
+        padding: 72px 0 24px;
+    }
 `
 const Wrapper = styled.div`
     &.wrapper{
         max-width: 80%;
+
+        @media all and (max-width: 680px){
+            max-width: 90%;
+        }
     }
 `
 const Head = styled.div`
     margin-bottom: 46px;
     display: flex;
+    gap: 18px;
     align-items: center;
     justify-content: space-between;
 
+    @media all and (max-width: 1080px){
+        flex-direction: column;
+        align-items: start;
+    }
+    @media all and (max-width: 720px){
+        gap: 14px;
+        margin-bottom: 32px;
+    }
+
     p{
         color: #9E9E9E;
-        font-size: 18px;
+        font-size: 15px;
         max-width: 60%;
+
+        @media all and (max-width: 1080px){
+            max-width: 100%;
+        }
+        @media all and (max-width: 768px){
+            font-size: 14px;
+        }
+        @media all and (max-width: 720px){
+            font-size: 12px;
+        }
     }
 `
 const ILMContainer = styled.div`
@@ -75,18 +103,36 @@ const ILMContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5%;
+
+    @media all and (max-width: 768px){
+        padding: 20px;
+    }
+    @media all and (max-width: 680px){
+        flex-direction: column;
+        gap: 12px;
+    }
 `
 const ILMLeft = styled.div`
-    width: 50%;
-    height: 450px;
+    width: 35%;
+    min-width: 250px;
+    aspect-ratio: 1;
+    /* height: 400px; */
+    /* background-color: red; */
     display: flex;
     /* align-items: center; */
     justify-content: center;
     overflow: hidden;
     
     img,video{
-        width: 250%;
-        height: auto;
+        width: 350%;
+        /* max-width: 350%; */
+        /* height: auto; */
+        object-fit: fill;
+    }
+
+    @media all and (max-width: 680px){
+        min-width: 220px;
     }
 `
 const GIFContainer = styled.div`
@@ -104,19 +150,39 @@ const GIFContainer = styled.div`
 const ILMRight = styled.div`
     width: 40%;
 
+    @media all and (max-width: 680px){
+        width: 100%;
+    }
+
     p{
         color: #D8D8D8;
         font-size: 17px;
         margin: 24px 0;
+
+        @media all and (max-width: 980px){
+            font-size: 14px;
+        }
+        @media all and (max-width: 680px){
+            margin: 12px 0;
+            font-size: 12px;
+        }
     }
 `
 const LogoContainer = styled.div`
     width: 70px;
+
+    @media all and (max-width: 720px){
+        width: 38px;
+    }
 `
 const DownloadsContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media all and (max-width: 720px){
+        gap: 10px;
+    }
 `
 const DownloadIcon = styled.div`
     border: 1px solid #BFBFBF;
@@ -125,6 +191,10 @@ const DownloadIcon = styled.div`
     padding: 7px;
     border-radius: 5px;
     cursor: pointer;
+
+    @media all and (max-width: 720px){
+        width: 32px;
+    }
 
     img{
         width: 100%;
