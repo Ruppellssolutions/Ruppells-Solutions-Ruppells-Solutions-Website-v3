@@ -1,29 +1,35 @@
-import React, { useRef } from 'react'
-import Header from '../includes/landingPage/Header'
-import styled from 'styled-components'
-import Spotlight from '../includes/landingPage/Spotlight'
-import Services from '../includes/landingPage/Services'
-import Projects from '../includes/landingPage/Projects'
-import Product from '../includes/landingPage/Product'
-import Clients from '../includes/landingPage/Clients'
-import ProjectReferal from '../includes/landingPage/ProjectReferal'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Element } from 'react-scroll'
-
+import React, { useRef } from "react";
+import Header from "../includes/landingPage/Header";
+import styled from "styled-components";
+import Spotlight from "../includes/landingPage/Spotlight";
+import Services from "../includes/landingPage/Services";
+import Projects from "../includes/landingPage/Projects";
+import Product from "../includes/landingPage/Product";
+import Clients from "../includes/landingPage/Clients";
+import ProjectReferal from "../includes/landingPage/ProjectReferal";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Element } from "react-scroll";
+import useResponsive from "../hooks/useResponsive";
 
 const LandingPage = () => {
-    const proContainerRef = useRef()
+    const { sm } = useResponsive();
+    const proContainerRef = useRef();
     const { scrollYProgress } = useScroll({
-        target: proContainerRef
-    })
+        target: proContainerRef,
+    });
 
-    const productX = useTransform(scrollYProgress, [0.1, 0.25], ["0vw", "-100vw"])
+    const productX = useTransform(scrollYProgress, [0.1, 0.25], ["0vw", "-100vw"]);
 
-    // project component 
-    const containerRef = useRef()
+    console.log(sm);
+
+    // project component
+    const containerRef = useRef();
     const { scrollYProgress: projectScrollY } = useScroll({
         target: containerRef,
-    })
+    });
+
+    // for small screen animations
+    const smProductY = useTransform(scrollYProgress, [0.1, 0.25], ["0vw", "-100vw"]);
 
     return (
         <Container>
@@ -35,44 +41,36 @@ const LandingPage = () => {
                 <ZIndexContainer>
                     <Services />
                     <ProContainer ref={proContainerRef}>
-                        <ProWrapper
-                            ref={containerRef}
-                        >
+                        <ProWrapper ref={containerRef}>
                             <ProScrollWrapper>
-                                <ProductWrapper
-                                    style={{ x: productX }}
-                                >
+                                <ProductWrapper style={{ x: !sm && productX }}>
                                     <Product />
                                 </ProductWrapper>
-                                <ProjectWrapper
-                                    style={{ x: productX }}
-                                >
-                                    <Projects
-                                        scrollYProgress={projectScrollY}
-                                    />
+                                <ProjectWrapper style={{ x: !sm && productX }}>
+                                    <Projects scrollYProgress={projectScrollY} />
                                 </ProjectWrapper>
                             </ProScrollWrapper>
                         </ProWrapper>
                     </ProContainer>
-                    <Element name='clients'>
+                    <Element name="clients">
                         <Clients />
                     </Element>
                     <ProjectReferal />
                 </ZIndexContainer>
             </Wrapper>
         </Container>
-    )
-}
+    );
+};
 
-export default LandingPage
+export default LandingPage;
 
 const Container = styled.div`
     background-color: #111;
     position: relative;
     /* height: auto; */
     /* height: 100vh; */
-    
-    &::before{
+
+    &::before {
         position: fixed;
         left: 0;
         z-index: 1;
@@ -80,7 +78,7 @@ const Container = styled.div`
         content: "";
         width: 100%;
         height: 100vh;
-        background: url('/images/body-bg.png') 0 0 no-repeat;
+        background: url("/images/body-bg.png") 0 0 no-repeat;
         background-size: cover;
         background-color: #111;
     }
@@ -90,23 +88,27 @@ const ProScrollWrapper = styled.div`
     top: 0;
     display: flex;
     width: max-content;
-`
+    @media all and (max-width: 640px) {
+        position: static;
+        display: block;
+    }
+`;
 const Wrapper = styled.div`
     z-index: 2;
     position: relative;
     /* height: 100vh;
     overflow-y: scroll; */
-`
+`;
 const LeftContainer = styled.div`
     /* height: 100vh; */
     /* width: 100%; */
     /* overflow-y: scroll; */
     transition: transform 1s ease-in-out;
 
-    &.disappear{
+    &.disappear {
         transform: translateX(-100%);
     }
-`
+`;
 const RightContainer = styled.div`
     width: 100%;
     height: 100vh;
@@ -121,31 +123,32 @@ const RightContainer = styled.div`
     transform: translateX(100vw);
     transition: transform 1s ease-in-out;
 
-    &.active{
+    &.active {
         top: 0;
         bottom: unset;
         transform: translateX(0);
     }
-`
+`;
 const ZIndexContainer = styled.div`
     position: relative;
     z-index: 110;
-`
+`;
 const BottomContainer = styled.div`
-    background-color:#FBFBFC;
-`
-const ProContainer = styled.div`        // Projects and Product container
+    background-color: #fbfbfc;
+`;
+const ProContainer = styled.div`
+    // Projects and Product container
     /* height: 200vh; */
     position: relative;
 
     /* overflow-y: hidden; */
     /* height: max-content; */
-`
+`;
 const ProductWrapper = styled(motion.div)`
     /* position: sticky;
     top: 0; */
     width: 100vw;
-`
+`;
 const ProjectWrapper = styled(motion.div)`
     width: 100vw;
     /* width: 100%;
@@ -153,11 +156,11 @@ const ProjectWrapper = styled(motion.div)`
     top: 0; */
     /* height: 400vh; */
     /* overflow-y: scroll; */
-    
-    &>div{
+
+    & > div {
         /* position: relative; */
     }
-`
+`;
 const ProWrapper = styled.div`
     /* position: sticky;
     top: 0; */
@@ -165,4 +168,4 @@ const ProWrapper = styled.div`
     /* display: flex;
     width: max-content; */
     height: 600vh;
-`
+`;

@@ -1,60 +1,62 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
-import ServiceItem from '../services/ServiceItem';
-import { Element } from 'react-scroll';
-import services from '../../utils/services';
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import ServiceItem from "../services/ServiceItem";
+import { Element } from "react-scroll";
+import services from "../../utils/services";
 // import AnimatedSectionTitle from '../general/AnimatedSectionTitle';
 
-
 const Services = () => {
-    const [activeIndexes, setIndexes] = useState([1])
-    const [activeIndex, setIndex] = useState(0)
-    const [activeService, setActiveService] = useState(services[0])
+    const [activeIndexes, setIndexes] = useState([1]);
+    const [activeIndex, setIndex] = useState(0);
+    const [activeService, setActiveService] = useState(services[0]);
 
-    const middleScrollbarHeight = 340
+    const middleScrollbarHeight = 340;
 
     console.log(activeIndex);
 
     useEffect(() => {
         if (activeIndexes) {
-            const lastIndex = Math.max(...activeIndexes)
-            setActiveService(services[lastIndex - 1])
-            setIndex(lastIndex - 1)
+            const lastIndex = Math.max(...activeIndexes);
+            setActiveService(services[lastIndex - 1]);
+            setIndex(lastIndex - 1);
         }
-    }, [activeIndexes, activeIndex])
+    }, [activeIndexes, activeIndex]);
 
-    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * (Math.max(...activeIndexes)) /1.8)}%`
+    const currentScrollbarHeight = `${
+        (((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
+        1.8
+    }%`;
 
-    const containerRef = useRef(null)
+    const containerRef = useRef(null);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-    })
+    });
 
-    const addItem = item => {
-        const temp = [...new Set([...activeIndexes, item])]
-        setIndexes(temp)
-        removeItem(item)
-    }
-    const removeItem = item => {
+    const addItem = (item) => {
+        const temp = [...new Set([...activeIndexes, item])];
+        setIndexes(temp);
+        removeItem(item);
+    };
+    const removeItem = (item) => {
         if (activeIndexes.includes(item + 1)) {
-            const filteredIndexes = activeIndexes.filter(itm => itm !== item + 1)
-            setIndexes(filteredIndexes)
+            const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
+            setIndexes(filteredIndexes);
         }
-    }
+    };
 
     useEffect(() => {
-        scrollYProgress.on("change", e => {
-            const scrollY = +(e.toFixed(2))
+        scrollYProgress.on("change", (e) => {
+            const scrollY = +e.toFixed(2);
 
             services.forEach((item, i) => {
-                if (scrollY > item.startingPoint && scrollY < (item.startingPoint + 0.1)) {
-                    addItem(item.slug)
+                if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
+                    addItem(item.slug);
                 }
-            })
-        })
-    }, [activeIndexes])
+            });
+        });
+    }, [activeIndexes]);
 
     return (
         <Container id="services" ref={containerRef}>
@@ -66,8 +68,24 @@ const Services = () => {
                                 WHAT <span>WE DO</span> <br /> FOR YOU
                             </h4>
                             <div className="right">
-                                <p className={activeService?.category === "IT_SERVICES" ? "active" : ""}>#01 IT <span>Services</span></p>
-                                <p className={activeService?.category === "DIGITAL_MARKETING" ? "active" : ""}>#02 Digital <span>Marketing Services</span></p>
+                                <p
+                                    className={
+                                        activeService?.category === "IT_SERVICES"
+                                            ? "active"
+                                            : ""
+                                    }
+                                >
+                                    #01 IT <span>Services</span>
+                                </p>
+                                <p
+                                    className={
+                                        activeService?.category === "DIGITAL_MARKETING"
+                                            ? "active"
+                                            : ""
+                                    }
+                                >
+                                    #02 Digital <span>Marketing Services</span>
+                                </p>
                             </div>
                         </Head>
                         <ServiceContent>
@@ -82,7 +100,7 @@ const Services = () => {
                             </div>
                             <MiddleScrollBar
                                 style={{
-                                    height: `${middleScrollbarHeight}px`
+                                    height: `${middleScrollbarHeight}px`,
                                 }}
                             >
                                 <div
@@ -110,10 +128,10 @@ const Services = () => {
                 </Wrapper>
             </Element>
         </Container>
-    )
-}
+    );
+};
 
-export default Services
+export default Services;
 
 const Container = styled.section`
     min-height: 100vh;
@@ -122,14 +140,14 @@ const Container = styled.section`
     /* transform: translateX(0); */
     z-index: 100;
     position: relative;
-`
+`;
 const Wrapper = styled.div`
     width: 100%;
     min-height: 500vh;
     margin-top: 100vh;
-`
+`;
 const Content = styled(motion.div)`
-    background-color:#FBFBFC;
+    background-color: #fbfbfc;
     height: 90vh;
     border: 1px solid #808080cc;
     border-radius: 20px;
@@ -143,15 +161,19 @@ const Content = styled(motion.div)`
     flex-direction: column;
     justify-content: space-between;
 
-    @media all and (max-width: 980px){
+    @media all and (max-width: 980px) {
         width: 100%;
         margin: 0;
         padding: 32px 12px;
     }
-    @media all and (max-width: 720px){
+    @media all and (max-width: 720px) {
         padding: 12px 6px;
     }
-`
+    @media all and (max-width: 640px) {
+        top: 12vh;
+        height: 85vh;
+    }
+`;
 const Head = styled.div`
     z-index: 100;
     display: flex;
@@ -160,68 +182,69 @@ const Head = styled.div`
     width: 100%;
     padding: 32px;
 
-    @media all and (max-width: 720px){
-        padding: 32px 32px 0 32px ;
+    @media all and (max-width: 720px) {
+        padding: 32px 32px 0 32px;
     }
-    @media all and (max-width: 469px){
+    @media all and (max-width: 469px) {
         padding: 20px 20px 0 20px;
     }
 
-    h4{
+    h4 {
         color: #111;
         font-size: 26px;
         font-family: Satoshi-Medium;
         text-transform: uppercase;
 
-        @media all and (max-width: 1080px){
+        @media all and (max-width: 1080px) {
             font-size: 22px;
         }
-        @media all and (max-width: 720px){
+        @media all and (max-width: 720px) {
             font-size: 17px;
         }
 
-        span{
+        span {
             font: inherit;
-            background:linear-gradient(106deg, #CE4FE3 0%, #36B2EA 101.89%);
+            background: linear-gradient(106deg, #ce4fe3 0%, #36b2ea 101.89%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     }
-    .right{
-        p{
+    .right {
+        p {
             font-size: 20px;
             font-family: Satoshi-Regular;
-            color: #A0A0A0;
+            color: #a0a0a0;
             text-align: right;
 
-            @media all and (max-width: 1080px){
+            @media all and (max-width: 1080px) {
                 font-size: 17px;
             }
-            @media all and (max-width: 720px){
+            @media all and (max-width: 720px) {
                 font-size: 14px;
             }
 
-            &,span{
+            &,
+            span {
                 transition: all 0.3s ease-in-out;
             }
 
-            span{
+            span {
                 font-size: inherit;
                 font-family: Satoshi-Medium;
-                color: #A0A0A0;
+                color: #a0a0a0;
             }
 
-            &.active{
+            &.active {
                 color: #111;
 
-                span{
+                span {
                     color: #111;
                 }
             }
         }
     }
-`
+`;
 const ServiceContent = styled.div`
     display: flex;
     align-items: center;
@@ -230,85 +253,92 @@ const ServiceContent = styled.div`
     width: 100%;
     padding: 32px;
 
-    @media all and (max-width: 720px){
+    @media all and (max-width: 720px) {
         flex-direction: column;
         padding: 26px;
         max-height: 70vh;
     }
-    @media all and (max-width: 460px){
+    @media all and (max-width: 460px) {
         padding: 16px;
     }
 
-    .left,.right{
+    .left,
+    .right {
         height: 320px;
         width: calc(50% - 20px - 14px);
         /* background-color: #666; */
     }
 
-    .right{
+    .right {
         background: none;
         position: relative;
         overflow: hidden;
         border-radius: 18px;
 
-        @media all and (max-width:1180px ){
+        @media all and (max-width: 1180px) {
             width: calc(100% - 38% - 34px);
         }
-        @media all and (max-width:920px ){
+        @media all and (max-width: 920px) {
             width: calc(68% - 20px);
         }
-        @media all and (max-width: 720px){
+        @media all and (max-width: 720px) {
             width: 100%;
             height: 70vh;
         }
     }
-    .left{
+    .left {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        @media all and (max-width:1180px ){
+        @media all and (max-width: 1180px) {
             width: 38%;
         }
-        @media all and (max-width:1180px ){
+        @media all and (max-width: 1180px) {
             width: 32%;
         }
-        @media all and (max-width: 720px){
+        @media all and (max-width: 720px) {
             width: 100%;
             height: max-content;
         }
 
-        h5,span{
+        h5,
+        span {
             /* max-width: 70%; */
             color: #202020;
             font-size: 38px;
             font-family: Satoshi-Medium;
 
-            @media all and (max-width: 1080px){
+            @media all and (max-width: 1080px) {
                 font-size: 29px;
             }
-            @media all and (max-width:920px ){
+            @media all and (max-width: 920px) {
                 font-size: 24px;
             }
-            @media all and (max-width: 720px){
+            @media all and (max-width: 720px) {
                 font-size: 19px;
             }
         }
     }
-`
+`;
 const MiddleScrollBar = styled.div`
     width: 28px;
-    background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, rgba(238, 238, 238, 0.89) 62.5%, rgba(226, 226, 226, 0.00) 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(217, 217, 217, 0) 0%,
+        rgba(238, 238, 238, 0.89) 62.5%,
+        rgba(226, 226, 226, 0) 100%
+    );
     /* height: 400px; */
 
-    @media all and (max-width: 980px){
+    @media all and (max-width: 980px) {
         width: 20px;
     }
-    @media all and (max-width: 920px){
+    @media all and (max-width: 920px) {
         display: none;
     }
-    
-    .scroll-container{
+
+    .scroll-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -318,18 +348,18 @@ const MiddleScrollBar = styled.div`
         transition: all 0.3s ease-in-out;
         padding: 4px;
         border-radius: 25px;
-        background: linear-gradient(180deg, rgba(180, 146, 225, 0.00) 0%, #B492E1 100%);
+        background: linear-gradient(180deg, rgba(180, 146, 225, 0) 0%, #b492e1 100%);
 
-        .round{
+        .round {
             width: 20px;
             height: 20px;
             background-color: #fff;
             border-radius: 50%;
 
-            @media all and (max-width: 980px){
+            @media all and (max-width: 980px) {
                 width: 16px;
                 height: 16px;
             }
         }
     }
-`
+`;
