@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import ProjectItem from '../projects/ProjectItem'
+import useDimension from '../../hooks/useDimension'
 
 
 const Projects = ({ scrollYProgress }) => {
@@ -16,22 +17,22 @@ const Projects = ({ scrollYProgress }) => {
     const projects = [
         {
             id: 1,
-            title: "Trinity Funds",
+            title: "Arab Dreams",
             bg: "/images/projects/project-01.png",
-            description: "Trinity Group, a trailblazer in global business, envisions a world of possibilities with our digital prowess. From financial services to hotels and real estate, we digitally shape the excellence and trustworthiness of their prosperous journey into the future.",
-            logo: "/icons/logo/trinity-funds.svg",
+            description: "Elevating digital dreams with Arab Dreams, where their CRM software seamlessly aligns with our commitment to service excellence. Together, we navigate the digital landscape, shaping a future where innovation meets unparalleled customer satisfaction.",
+            logo: "/icons/logo/arab-dreams.svg",
             tags: [
                 {
                     id: 1,
-                    title: "Web Development",
+                    title: "CRM Software",
                 },
                 {
                     id: 2,
-                    title: "Digital Marketing",
+                    title: "Mobile Application",
                 },
                 {
                     id: 3,
-                    title: "Branding",
+                    title: "Logo Creation",
                 },
             ],
             siteLink: "",
@@ -104,6 +105,10 @@ const Projects = ({ scrollYProgress }) => {
         },
     ]
 
+    const { width } = useDimension()
+
+    console.log(width);
+
     return (
         <Container
             ref={containerRef}
@@ -137,7 +142,7 @@ const Projects = ({ scrollYProgress }) => {
                         <motion.div
                             className="project-container"
                             style={{
-                                x: sliderX
+                                x: width > 860 && sliderX
                             }}
                         >
                             {projects.map((pro, i) => (
@@ -173,6 +178,11 @@ const Container = styled.section`
     /* &.product{
         transform: translateY(-200vh);
     } */
+
+    /* @media all and (max-width: 860px) {
+        height: max-content;
+        overflow: scroll;
+    } */
 `
 const Wrapper = styled.div`
     /* height: 400vh; */
@@ -183,6 +193,11 @@ const Content = styled.div`
     top: 0;
     height: 100vh;
     /* height: max-content; */
+
+    @media all and (max-width: 860px) {
+        /* height: max-content;
+        overflow: scroll; */
+    }
 `
 
 const Head = styled(motion.div)`
@@ -216,7 +231,7 @@ const Head = styled(motion.div)`
     }
     div.details{
         display:flex;
-        flex-direction: column;
+        /* flex-direction: column; */
     }
     span.container {
         color: #F9F9F9;
@@ -284,8 +299,17 @@ const ProjectsContainer = styled(motion.div)`
     border-top-left-radius: 20px;
     overflow: hidden;
     transform: translate(7.5%,370px);
+
+    @media all and (max-width: 860px){
+        height: max-content;
+    }
     /* transition: all 1s ease-in-out; */
 
+    /* @media all and (max-width: 860px){
+        height: max-content;
+        overflow: scroll;
+        position: relative;
+    } */
 
     &.enlarged{
         transform: translate(0,0);
@@ -296,6 +320,10 @@ const ProjectsContainer = styled(motion.div)`
         display: flex;
         flex-wrap: wrap;
         width: max-content;
+
+        @media all and (max-width: 860px){
+            width: 100vw;
+        }
     }
 `
 // const ProjectItem = styled.div`
@@ -352,8 +380,11 @@ const ProjectItemContainer = styled.div`
     height: 100vh;
     @media all and (max-width:480px){
         width: 91vw;
-
     } 
+
+    @media all and (max-width: 860px) {
+        width: 100vw;
+    }
        /* position: absolute;
     left: 160%;
     top:0; */

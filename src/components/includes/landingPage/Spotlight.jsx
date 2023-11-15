@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ServicePopup from '../spotlight/ServicePopup'
 
-import infinityAnimation from "../../../assets/GIF/infinity-animation.gif"
+// import infinityAnimation from "../../../assets/GIF/infinity-animation.gif"
+import infinityAnimation from "../../../assets/videos/infinity.mp4"
 import AnimatedSectionTitle from '../general/AnimatedSectionTitle'
 import useDimension from '../../hooks/useDimension'
 
@@ -149,6 +150,10 @@ const Spotlight = () => {
                 style={{ ...lapframeStyles("parent"), opacity }}
             >
                 <LapScreen>
+                    <video autoPlay loop muted>
+                        <source src={infinityAnimation} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
                 </LapScreen>
             </LapFrame>
             <LapScreenContent
@@ -282,7 +287,8 @@ const LapScreen = styled.div`
     /* top: 18vh; */
     z-index: 10;
     pointer-events: all;
-    background: url(${infinityAnimation}) center center no-repeat;
+    /* background: url("../../../assets/videos/infinity.mp4") center center no-repeat; */
+    /* background: url(${infinityAnimation}) center center no-repeat; */
     background-size: cover;
     background-color: #000;
     /* width: 454px;
@@ -291,6 +297,12 @@ const LapScreen = styled.div`
     height: 70vw;
     /* height: 100vh; */
     border-radius: 10px;
-    padding: 132px 45px 40px;
+    /* padding: 132px 45px 40px; */
     overflow: hidden;
+
+    video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `

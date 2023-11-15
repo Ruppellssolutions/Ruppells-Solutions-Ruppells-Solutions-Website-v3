@@ -4,78 +4,97 @@ import SectionHead from '../general/SectionHead'
 
 
 const Clients = () => {
+    // const clients = [
+    //     {
+    //         id: 1,
+    //         icon: "client-01.svg",
+    //     },
+    //     {
+    //         id: 2,
+    //         icon: "client-02.svg",
+    //     },
+    //     {
+    //         id: 3,
+    //         icon: "client-03.svg",
+    //     },
+    //     {
+    //         id: 4,
+    //         icon: "client-04.svg",
+    //     },
+    //     {
+    //         id: 5,
+    //         icon: "client-05.svg",
+    //     },
+    //     {
+    //         id: 6,
+    //         icon: "client-06.svg",
+    //     },
+    //     {
+    //         id: 1,
+    //         icon: "client-04.svg",
+    //     },
+    //     {
+    //         id: 2,
+    //         icon: "client-03.svg",
+    //     },
+    //     {
+    //         id: 3,
+    //         icon: "client-02.svg",
+    //     },
+    //     {
+    //         id: 4,
+    //         icon: "client-01.svg",
+    //     },
+    //     {
+    //         id: 5,
+    //         icon: "client-06.svg",
+    //     },
+    //     {
+    //         id: 6,
+    //         icon: "client-05.svg",
+    //     },
+    //     {
+    //         id: 1,
+    //         icon: "client-01.svg",
+    //     },
+    //     {
+    //         id: 2,
+    //         icon: "client-02.svg",
+    //     },
+    //     {
+    //         id: 3,
+    //         icon: "client-03.svg",
+    //     },
+    //     {
+    //         id: 4,
+    //         icon: "client-04.svg",
+    //     },
+    //     {
+    //         id: 5,
+    //         icon: "client-05.svg",
+    //     },
+    //     {
+    //         id: 6,
+    //         icon: "client-06.svg",
+    //     },
+    // ]
+
     const clients = [
         {
             id: 1,
-            icon: "client-01.svg",
+            icon: "reverse-gear.svg",
         },
         {
             id: 2,
-            icon: "client-02.svg",
+            icon: "ruppells-overseas.svg",
         },
         {
             id: 3,
-            icon: "client-03.svg",
+            icon: "arab-dreams.svg",
         },
         {
             id: 4,
-            icon: "client-04.svg",
-        },
-        {
-            id: 5,
-            icon: "client-05.svg",
-        },
-        {
-            id: 6,
-            icon: "client-06.svg",
-        },
-        {
-            id: 1,
-            icon: "client-04.svg",
-        },
-        {
-            id: 2,
-            icon: "client-03.svg",
-        },
-        {
-            id: 3,
-            icon: "client-02.svg",
-        },
-        {
-            id: 4,
-            icon: "client-01.svg",
-        },
-        {
-            id: 5,
-            icon: "client-06.svg",
-        },
-        {
-            id: 6,
-            icon: "client-05.svg",
-        },
-        {
-            id: 1,
-            icon: "client-01.svg",
-        },
-        {
-            id: 2,
-            icon: "client-02.svg",
-        },
-        {
-            id: 3,
-            icon: "client-03.svg",
-        },
-        {
-            id: 4,
-            icon: "client-04.svg",
-        },
-        {
-            id: 5,
-            icon: "client-05.svg",
-        },
-        {
-            id: 6,
-            icon: "client-06.svg",
+            icon: "middlesex-uni.svg",
         },
     ]
 
@@ -94,7 +113,7 @@ const Clients = () => {
                         <ClientItem
                             key={i}
                         >
-                            <img src={`/icons/clients/${client.icon}`} alt={client.icon} />
+                            <img src={`/icons/logo/${client.icon}`} alt={client.icon} />
                         </ClientItem>
                     ))}
                 </ClientsList>
@@ -142,15 +161,15 @@ const Head = styled.div`
 const ClientsList = styled.ul`
     display: flex;
     align-items: center;
+    /* justify-content: center; */
     flex-wrap: wrap;
     gap: calc(10% / 6);
     margin-bottom: 38px;
 `
 const ClientItem = styled.li`
-    width: 15%;
+    width: 10%;
     @media all and (max-width:480px){
         width: 32%;
-
     }
     img{
         width: 80%;

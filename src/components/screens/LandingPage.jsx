@@ -20,8 +20,6 @@ const LandingPage = () => {
 
     const productX = useTransform(scrollYProgress, [0.1, 0.25], ["0vw", "-100vw"]);
 
-    console.log(sm);
-
     // project component
     const containerRef = useRef();
     const { scrollYProgress: projectScrollY } = useScroll({

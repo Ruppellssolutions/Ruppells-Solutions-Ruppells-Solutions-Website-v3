@@ -50,7 +50,8 @@ const Container = styled(motion.div)`
         padding: 6px 14px;
         flex-direction: column;
         align-items: flex-start;
-    }
+        gap: 8px;
+    } */
 
     &:nth-child(2) {
         margin-right: 24px;
@@ -75,8 +76,8 @@ const Left = styled.div`
     img {
         width: 16px;
         @media all and (max-width: 640px) {
-            width: 100%;
-            height: 100%;
+            /* width: 14px; */
+            /* height: 100%; */
             border-radius: 0;
         }
     }

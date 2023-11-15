@@ -6,14 +6,13 @@ import { Element } from "react-scroll";
 import services from "../../utils/services";
 // import AnimatedSectionTitle from '../general/AnimatedSectionTitle';
 
+
 const Services = () => {
     const [activeIndexes, setIndexes] = useState([1]);
     const [activeIndex, setIndex] = useState(0);
     const [activeService, setActiveService] = useState(services[0]);
 
     const middleScrollbarHeight = 340;
-
-    console.log(activeIndex);
 
     useEffect(() => {
         if (activeIndexes) {
@@ -23,10 +22,9 @@ const Services = () => {
         }
     }, [activeIndexes, activeIndex]);
 
-    const currentScrollbarHeight = `${
-        (((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
+    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
         1.8
-    }%`;
+        }%`;
 
     const containerRef = useRef(null);
 
@@ -34,29 +32,52 @@ const Services = () => {
         target: containerRef,
     });
 
-    const addItem = (item) => {
-        const temp = [...new Set([...activeIndexes, item])];
-        setIndexes(temp);
-        removeItem(item);
-    };
-    const removeItem = (item) => {
-        if (activeIndexes.includes(item + 1)) {
-            const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
-            setIndexes(filteredIndexes);
-        }
-    };
+    // const addItem = (item) => {
+    //     const temp = [...new Set([...activeIndexes, item])];
+    //     setIndexes(temp);
+    //     removeItem(item);
+    // };
+    // const removeItem = (item) => {
+    //     if (activeIndexes.includes(item + 1)) {
+    //         const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
+    //         setIndexes(filteredIndexes);
+    //     }
+    // };
 
-    useEffect(() => {
-        scrollYProgress.on("change", (e) => {
-            const scrollY = +e.toFixed(2);
+    // useEffect(() => {
+    //     scrollYProgress.on("change", (e) => {
+    //         const scrollY = +e.toFixed(2);
 
-            services.forEach((item, i) => {
-                if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
-                    addItem(item.slug);
-                }
-            });
-        });
-    }, [activeIndexes]);
+    //         services.forEach((item, i) => {
+    //             if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
+    //                 addItem(item.slug);
+    //             }
+    //         });
+    //     });
+    // }, [activeIndexes]);
+
+    // .15, .28, .38, .49, .65, .76, .9
+
+    const top1 = useTransform(scrollYProgress, [0.00, 0.15], ["-100%", "-100%"])
+    const top2 = useTransform(scrollYProgress, [0.15, 0.30], ["0", "-100%"])
+    const top3 = useTransform(scrollYProgress, [0.30, 0.45], ["0", "-100%"])
+    const top4 = useTransform(scrollYProgress, [0.45, 0.60], ["0", "-100%"])
+    const top5 = useTransform(scrollYProgress, [0.60, 0.75], ["0", "-100%"])
+    const top6 = useTransform(scrollYProgress, [0.75, 0.90], ["0", "-100%"])
+    const top7 = useTransform(scrollYProgress, [0.90, 1], ["0", "-100%"])
+    // const top7 = useTransform(scrollYProgress, [0.90, 1.00], ["0", "-100%"])
+
+    const tops = {
+        1: top1,
+        2: top2,
+        3: top3,
+        4: top4,
+        5: top5,
+        6: top6,
+        7: top7,
+    }
+
+    const height = useTransform(scrollYProgress,[0,1],["10%","100%"])
 
     return (
         <Container id="services" ref={containerRef}>
@@ -103,23 +124,26 @@ const Services = () => {
                                     height: `${middleScrollbarHeight}px`,
                                 }}
                             >
-                                <div
+                                <motion.div
                                     className="scroll-container"
                                     style={{
-                                        height: currentScrollbarHeight,
+                                        height,
+                                        // height: currentScrollbarHeight,
                                     }}
                                 >
                                     <div className="round"></div>
-                                </div>
+                                </motion.div>
                             </MiddleScrollBar>
                             <div className="right">
                                 {services.map((ite, i) => (
                                     <ServiceItem
                                         id={i + 1}
                                         key={i}
+                                        top={tops[ite.slug]}
                                         serviceItem={ite}
-                                        activeIndex={activeIndexes}
-                                        isActive={activeIndexes.includes(i + 1)}
+                                        scrollY={scrollYProgress}
+                                    // activeIndex={activeIndexes}
+                                    // isActive={activeIndexes.includes(i + 1)}
                                     />
                                 ))}
                             </div>
@@ -143,7 +167,7 @@ const Container = styled.section`
 `;
 const Wrapper = styled.div`
     width: 100%;
-    min-height: 500vh;
+    min-height: 550vh;
     margin-top: 100vh;
 `;
 const Content = styled(motion.div)`
@@ -171,7 +195,7 @@ const Content = styled(motion.div)`
     }
     @media all and (max-width: 640px) {
         top: 12vh;
-        height: 85vh;
+        height: 89vh;
     }
 `;
 const Head = styled.div`
@@ -249,7 +273,7 @@ const ServiceContent = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    max-height: 380px;
+    max-height: 480px;
     width: 100%;
     padding: 32px;
 
@@ -345,7 +369,7 @@ const MiddleScrollBar = styled.div`
         flex-direction: column;
         height: 100%;
         max-height: max-content;
-        transition: all 0.3s ease-in-out;
+        /* transition: all 0.3s ease-in-out; */
         padding: 4px;
         border-radius: 25px;
         background: linear-gradient(180deg, rgba(180, 146, 225, 0) 0%, #b492e1 100%);

@@ -1,10 +1,23 @@
+import { motion, useTransform } from "framer-motion";
 import styled from "styled-components";
 
 
-const ServiceItem = ({ id = 0, isActive = false, activeIndex = [], serviceItem = {} }) => {
+const ServiceItem = ({
+    id = 0,
+    isActive = false,
+    activeIndex = [],
+    serviceItem = {},
+    top,
+    scrollY
+}) => {
+    const y = useTransform(scrollY, [serviceItem.startingPoint, serviceItem.startingPoint + 0.1], ["0", "-100%"])
+
     return (
         <ServiceItemContainer
-            className={`${isActive && 'active'} ${Math.max(...activeIndex) > id && "small"}`}
+            // className={`${isActive && 'active'} ${Math.max(...activeIndex) > id && "small"}`}
+            style={{
+                y:top,
+            }}
         >
             <ServiceItemLeft bg={serviceItem.image} />
             <ServiceItemRight>
@@ -26,16 +39,16 @@ const ServiceItem = ({ id = 0, isActive = false, activeIndex = [], serviceItem =
 export default ServiceItem;
 
 
-const ServiceItemContainer = styled.div`
+const ServiceItemContainer = styled(motion.div)`
     width: 100%;
     height: 100%;
     padding: 4px;
     position: absolute;
     border-radius: 18px;
     border: 1px solid #d3d3d3;
-    /* top: 0; */
+    top: 0;
     background-color: #fff;
-    top: 80vh;
+    top: 100%;
     left: 0;
     transition: top 0.6s ease-in-out;
     /* bottom: 0; */

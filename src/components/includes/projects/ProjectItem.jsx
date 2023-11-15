@@ -47,6 +47,11 @@ const Container = styled.div`
     align-items: start;
     justify-content: flex-end;
     flex-direction: column;
+    
+    @media all and (max-width: 1080px){
+        padding: 62px;
+    }
+
     @media all and (max-width:480px){
         padding: 30px;
         justify-content: flex-start;
@@ -113,7 +118,8 @@ const BottomHead = styled.div`
         }
     }
     ul.tags{
-        max-width: 60%;
+        /* max-width: 60%; */
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -141,15 +147,15 @@ const BottomContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    display:none;
+    /* display:none; */
 
     p{
         max-width: 70%;
         color: #fff;
-        font-size: 17px;
+        font-size: 15px;
         letter-spacing: 0.8px;
         @media all and(max-width:480px){
-            display:none;
+            /* display:none; */
         }
     }
     span.icon{
@@ -162,6 +168,11 @@ const BottomContent = styled.div`
         justify-content: center;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.20);
+        transition: rotate 0.2s ease-in-out;
+
+        &:hover{
+            rotate: -45deg;
+        }
 
         img{
             width: 24px;

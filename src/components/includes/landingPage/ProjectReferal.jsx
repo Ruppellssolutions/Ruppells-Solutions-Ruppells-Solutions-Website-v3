@@ -34,7 +34,7 @@ const ProjectReferal = () => {
                                     className="container"
                                     style={
                                         {
-                                            // y,
+                                            y,
                                         }
                                     }
                                 >

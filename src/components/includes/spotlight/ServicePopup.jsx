@@ -5,52 +5,6 @@ import { motion } from "framer-motion";
 import services from "../../utils/services";
 
 const ServicePopup = ({ isActive = false, style = {} }) => {
-    // const servicesLeft = [
-    //     {
-    //         id: 1,
-    //         title: "Mobile App Development",
-    //         icon: "/icons/services/mobile-app-dev.svg",
-    //         link: "",
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Web App Development",
-    //         icon: "/icons/services/web-app-dev.svg",
-    //         link: "",
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Content Marketing",
-    //         icon: "/icons/services/content-marketing.svg",
-    //         link: "",
-    //     },
-    //     {
-    //         id: 4,
-    //         title: "Branding",
-    //         icon: "/icons/services/branding.svg",
-    //         link: "",
-    //     },
-    // ]
-    // const servicesRight = [
-    //     {
-    //         id: 1,
-    //         title: "E-Commerce Platform",
-    //         icon: "/icons/services/e-commerce.svg",
-    //         link: "",
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Website Development",
-    //         icon: "/icons/services/website-dev.svg",
-    //         link: "",
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Social Media Marketing",
-    //         icon: "/icons/services/social-media-marketing.svg",
-    //         link: "",
-    //     },
-    // ]
 
     return (
         <Container
