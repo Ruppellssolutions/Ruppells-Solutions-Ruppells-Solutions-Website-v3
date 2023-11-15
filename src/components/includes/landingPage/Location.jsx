@@ -49,10 +49,10 @@ const Location = () => {
 export default Location
 
 const Container = styled.section`
-    padding: 28px 0;
+    padding: 32px 0;
     position: relative;
     @media all and(max-width:480){
-        padding: 0px 0;
+        padding: 12px 0;
 
     }
 `
@@ -63,7 +63,7 @@ const Wrapper = styled.div`
     }
 `
 const Pin = styled.div`
-cursor: pointer;
+    cursor: pointer;
     rotate: 10deg;
     position: absolute;
     left: 50%;
@@ -78,10 +78,18 @@ cursor: pointer;
         width: 38px;
         cursor: pointer;
 
+        @media all and (max-width: 460px){
+            width: 24px;
+        }
+
         &.pin{
             width: 20px;
             margin-top: -10px;
             z-index: -1;
+
+            @media all and (max-width: 460px){
+                width: 16px;
+            }
         }
     }
 `
@@ -93,8 +101,9 @@ const BottomContainer = styled.div`
     border: 1px solid  #8E8E8E3D;
     border-left-width: .5px;
     border-bottom: none;
+
     @media all and (max-width:480px){
         margin-top: 0px;
-
+        height: 12px;
     }
 `

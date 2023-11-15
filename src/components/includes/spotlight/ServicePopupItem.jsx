@@ -42,16 +42,22 @@ const Container = styled(motion.div)`
     transition: all 1s ease-in-out;
 
     @media all and (max-width: 950px) {
-        width: calc(50% - 10px) !important;
+        width: calc(50% - 4px) !important;
         margin: 0 !important;
     }
     @media all and (max-width: 640px) {
-        width: 47% !important;
+        width: calc(50% - 5px) !important;
         padding: 6px 14px;
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-    } */
+
+        &.RIGHT{
+            &:nth-child(3){
+                display: none;
+            }
+        }
+    } 
 
     &:nth-child(2) {
         margin-right: 24px;

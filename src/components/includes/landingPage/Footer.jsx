@@ -32,6 +32,20 @@ const Footer = () => {
     return (
         <Container>
             <Wrapper className='wrapper'>
+                <Middle className='small'>
+                    <MiddleTop>
+                        <img src="/icons/logo/colored-infinity.png" alt="infinty logo" />
+                    </MiddleTop>
+                    <MiddleBottom>
+                        <Link spy smooth duration={4000} to='home'>
+                            <img src="/icons/logo/solutions-dark.svg" alt="Ruppells Solutions" />
+                        </Link>
+                        <span>Powered By</span>
+                        <a href="https://maps.app.goo.gl/cervkKhr8t2o2Q5e9" target="_blank">
+                            <img src="/icons/logo/ruppells-group-dark.svg" alt="Ruppells Group " />
+                        </a>
+                    </MiddleBottom>
+                </Middle>
                 <Left>
                     <Socials>
                         {socialIcons.map((social, i) => (
@@ -77,14 +91,25 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 42px 0;
-    @media all and (max-width:480px){
-        padding:0 0;
-        flex-direction: column;
 
+    @media all and (max-width: 1080px){
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    @media all and (max-width:480px){
+        /* padding:0 0; */
+        flex-direction: column;
     }
 `
 const Left = styled.div`
-
+    @media all and (max-width: 1080px){
+        /* width: calc(50% - 10px); */
+        width: max-content;
+    }
+    @media all and (max-width: 640px){
+        width: 100%;
+    }
 `
 const Middle = styled.div`
     display: flex;
@@ -92,14 +117,38 @@ const Middle = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 32px;
+
+    @media all and (max-width: 1080px) {
+        display: none;
+    }
+    &.small{
+        display: none;
+
+        @media all and (max-width: 1080px){
+            display: flex;
+            width: 100%;
+        }
+    }
 `
 const Right = styled.div`
-@media all and (max-width:480px){
-    margin-top: 20px;
-}
+
+    @media all and (max-width: 1080px){
+        width:  calc(60% - 10px);
+    }
+    @media all and (max-width: 640px){
+        width: 100%;
+    }
+    @media all and (max-width:480px){
+        margin-top: 20px;
+    }
     p{
+        text-align: right;
         font-size: 14px;
         color: #747474;
+
+        @media all and (max-width: 640px){
+            text-align: center;
+        }
     }
 `
 const Socials = styled.ul`
@@ -107,6 +156,10 @@ const Socials = styled.ul`
     align-items: center;
     gap: 18px;
     padding: 24px 0;
+
+    @media all and (max-width: 640px){
+        justify-content: center;
+    }
 `
 const SocialIcon = styled.li`
     display: flex;
@@ -123,6 +176,10 @@ const SocialIcon = styled.li`
 const MiddleTop = styled.div`
     img{
         width: 100px;
+
+        @media all and (max-width: 768px){
+            width: 70px;
+        }
     }
 `
 const MiddleBottom = styled.div`
@@ -140,5 +197,9 @@ const MiddleBottom = styled.div`
     img{
         width: 100px;
         cursor: pointer;
+
+        @media all and (max-width: 768px){
+            width: 60px;
+        }
     }
 `

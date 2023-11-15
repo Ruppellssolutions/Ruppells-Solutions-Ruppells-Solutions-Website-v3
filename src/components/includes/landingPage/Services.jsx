@@ -32,29 +32,29 @@ const Services = () => {
         target: containerRef,
     });
 
-    // const addItem = (item) => {
-    //     const temp = [...new Set([...activeIndexes, item])];
-    //     setIndexes(temp);
-    //     removeItem(item);
-    // };
-    // const removeItem = (item) => {
-    //     if (activeIndexes.includes(item + 1)) {
-    //         const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
-    //         setIndexes(filteredIndexes);
-    //     }
-    // };
+    const addItem = (item) => {
+        const temp = [...new Set([...activeIndexes, item])];
+        setIndexes(temp);
+        removeItem(item);
+    };
+    const removeItem = (item) => {
+        if (activeIndexes.includes(item + 1)) {
+            const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
+            setIndexes(filteredIndexes);
+        }
+    };
 
-    // useEffect(() => {
-    //     scrollYProgress.on("change", (e) => {
-    //         const scrollY = +e.toFixed(2);
+    useEffect(() => {
+        scrollYProgress.on("change", (e) => {
+            const scrollY = +e.toFixed(2);
 
-    //         services.forEach((item, i) => {
-    //             if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
-    //                 addItem(item.slug);
-    //             }
-    //         });
-    //     });
-    // }, [activeIndexes]);
+            services.forEach((item, i) => {
+                if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
+                    addItem(item.slug);
+                }
+            });
+        });
+    }, [activeIndexes]);
 
     // .15, .28, .38, .49, .65, .76, .9
 
@@ -64,7 +64,7 @@ const Services = () => {
     const top4 = useTransform(scrollYProgress, [0.45, 0.60], ["0", "-100%"])
     const top5 = useTransform(scrollYProgress, [0.60, 0.75], ["0", "-100%"])
     const top6 = useTransform(scrollYProgress, [0.75, 0.90], ["0", "-100%"])
-    const top7 = useTransform(scrollYProgress, [0.90, 1], ["0", "-100%"])
+    const top7 = useTransform(scrollYProgress, [0.90, 1.00], ["0", "-100%"])
     // const top7 = useTransform(scrollYProgress, [0.90, 1.00], ["0", "-100%"])
 
     const tops = {

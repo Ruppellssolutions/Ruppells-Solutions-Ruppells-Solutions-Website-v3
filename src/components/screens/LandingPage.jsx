@@ -10,9 +10,15 @@ import ProjectReferal from "../includes/landingPage/ProjectReferal";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Element } from "react-scroll";
 import useResponsive from "../hooks/useResponsive";
+import NavigateFuture from "../includes/landingPage/NavigateFuture";
+import Location from "../includes/landingPage/Location";
+import Footer from "../includes/landingPage/Footer";
+import useDimension from "../hooks/useDimension";
 
 const LandingPage = () => {
     const { sm } = useResponsive();
+
+    // product to project transition container
     const proContainerRef = useRef();
     const { scrollYProgress } = useScroll({
         target: proContainerRef,
@@ -26,8 +32,18 @@ const LandingPage = () => {
         target: containerRef,
     });
 
-    // for small screen animations
-    const smProductY = useTransform(scrollYProgress, [0.1, 0.25], ["0vw", "-100vw"]);
+    // bottom bubble transition container
+    const bottomRef = useRef();
+    const { scrollYProgress: bottomYProgress } = useScroll({
+        target: bottomRef,
+    })
+
+    const scale = useTransform(bottomYProgress, [0.2, 0.4], [0, 3])
+    const scale460 = useTransform(bottomYProgress, [0.2, 0.4], [0, 10])
+    const opacity = useTransform(bottomYProgress, [0.5, 0.55], [1, 0]);
+
+    const { width } = useDimension()
+
 
     return (
         <Container>
@@ -53,7 +69,32 @@ const LandingPage = () => {
                     <Element name="clients">
                         <Clients />
                     </Element>
-                    <ProjectReferal />
+                    <BottomWrapper ref={bottomRef}>
+                        <ProjectReferal />
+                        <BottomContainer>
+                            <NavigateFuture />
+                            <Location />
+                            <Footer />
+                        </BottomContainer>
+                        {/* Bubbles transition */}
+                        <PopupContainer
+                            style={{
+                                scale: width <= 460 ? scale460 : scale,
+                            }}
+                        >
+                            <div className="first-child">
+                                <div className="first-child second">
+                                    <motion.div
+                                        className="first-child third"
+                                        style={{
+                                            opacity
+                                        }}
+                                    >
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </PopupContainer>
+                    </BottomWrapper>
                 </ZIndexContainer>
             </Wrapper>
         </Container>
@@ -65,8 +106,6 @@ export default LandingPage;
 const Container = styled.div`
     background-color: #111;
     position: relative;
-    /* height: auto; */
-    /* height: 100vh; */
 
     &::before {
         position: fixed;
@@ -86,7 +125,7 @@ const ProScrollWrapper = styled.div`
     top: 0;
     display: flex;
     width: max-content;
-    @media all and (max-width: 640px) {
+    @media all and (max-width: 860px) {
         position: static;
         display: block;
     }
@@ -94,76 +133,98 @@ const ProScrollWrapper = styled.div`
 const Wrapper = styled.div`
     z-index: 2;
     position: relative;
-    /* height: 100vh;
-    overflow-y: scroll; */
 `;
-const LeftContainer = styled.div`
-    /* height: 100vh; */
-    /* width: 100%; */
-    /* overflow-y: scroll; */
-    transition: transform 1s ease-in-out;
+// const LeftContainer = styled.div`
+//     transition: transform 1s ease-in-out;
 
-    &.disappear {
-        transform: translateX(-100%);
-    }
-`;
-const RightContainer = styled.div`
-    width: 100%;
-    height: 100vh;
-    /* max-height: 100vh; */
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    /* background-color: #ff9595; */
-    position: fixed;
-    z-index: 100;
-    bottom: 0;
-    left: 0;
-    transform: translateX(100vw);
-    transition: transform 1s ease-in-out;
+//     &.disappear {
+//         transform: translateX(-100%);
+//     }
+// `;
+// const RightContainer = styled.div`
+//     width: 100%;
+//     height: 100vh;
+//     /* max-height: 100vh; */
+//     overflow-y: scroll;
+//     -webkit-overflow-scrolling: touch;
+//     /* background-color: #ff9595; */
+//     position: fixed;
+//     z-index: 100;
+//     bottom: 0;
+//     left: 0;
+//     transform: translateX(100vw);
+//     transition: transform 1s ease-in-out;
 
-    &.active {
-        top: 0;
-        bottom: unset;
-        transform: translateX(0);
-    }
-`;
+//     &.active {
+//         top: 0;
+//         bottom: unset;
+//         transform: translateX(0);
+//     }
+// `;
 const ZIndexContainer = styled.div`
     position: relative;
     z-index: 110;
 `;
+const BottomWrapper = styled.div`
+    
+`
 const BottomContainer = styled.div`
     background-color: #fbfbfc;
 `;
 const ProContainer = styled.div`
-    // Projects and Product container
-    /* height: 200vh; */
     position: relative;
 
-    /* overflow-y: hidden; */
-    /* height: max-content; */
 `;
 const ProductWrapper = styled(motion.div)`
-    /* position: sticky;
-    top: 0; */
     width: 100vw;
 `;
 const ProjectWrapper = styled(motion.div)`
     width: 100vw;
-    /* width: 100%;
-    position: sticky;
-    top: 0; */
-    /* height: 400vh; */
-    /* overflow-y: scroll; */
-
-    & > div {
-        /* position: relative; */
-    }
 `;
 const ProWrapper = styled.div`
-    /* position: sticky;
-    top: 0; */
-    /* height: max-content; */
-    /* display: flex;
-    width: max-content; */
     height: 600vh;
+
+    @media all and (max-width: 860px){
+        height: min-content;
+    }
+`;
+
+const PopupContainer = styled(motion.div)`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 200;
+    /* width: 100vw;
+    aspect-ratio: 1; */
+    border: 400px solid #e7c6ff;
+    border-radius: 50%;
+    user-select: none;
+    pointer-events: none;
+
+    .first-child {
+        /* width: 100%;
+        aspect-ratio: 1; */
+        border: 300px solid #8443b1;
+        border-radius: 50%;
+
+        &.second {
+            border: 225px solid #4f3cc2;
+        }
+        &.third {
+            border: 200px solid #9acfff;
+            width: 150vw;
+            height: 150vw;
+            /* aspect-ratio: 1; */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fbfbfc;
+            @media all and (max-width: 480px) {
+                /* border: 0px solid #9acfff; */
+                // overflow: hidden;
+            }
+        }
+    }
 `;

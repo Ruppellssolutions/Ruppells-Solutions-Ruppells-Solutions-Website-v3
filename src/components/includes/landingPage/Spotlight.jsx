@@ -25,6 +25,7 @@ const Spotlight = () => {
     const y950 = useTransform(scrollYProgress, [0, 1], ["0", "-20vh"])
     const y560 = useTransform(scrollYProgress, [0, 1], ["0", "-15vh"])
     const scale950 = useTransform(scrollYProgress, [0, 1], [1.1, .3])
+    const scale860 = useTransform(scrollYProgress, [0, 1], [1.6, .3])
     const scale560 = useTransform(scrollYProgress, [0, 1], [2.5, .4])
     const scale380 = useTransform(scrollYProgress, [0, 1], [2.8, .4])
     const contentScale = useTransform(scrollYProgress, [0, 1], [1, .23])
@@ -33,7 +34,12 @@ const Spotlight = () => {
     const contentY560 = useTransform(scrollYProgress, [0, 1], ["0", "-15vh"])
     const contentX560 = useTransform(scrollYProgress, [0, 1], ["0", "-7vw"])
 
+    const scrollMoreOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
     const opacity = useTransform(globalScrollY, [.28, .3], [1, 0])
+
+    const serviceWidth = useTransform(scrollYProgress, [0, 1], ["30%", "95%"])
+    const serviceOpacity = useTransform(scrollYProgress, [0, 1], [0.2, 1])
+    const serviceScale = useTransform(scrollYProgress, [0, 1], [0.3, 1])
 
     useEffect(() => {
         const unSubscribe = scale.on("change", (currentScale) => {
@@ -81,7 +87,14 @@ const Spotlight = () => {
                         }
                     },
                     {
-                        resolution: 950,
+                        resolution: 860,
+                        props: {
+                            y: y950,
+                            scale: scale860,
+                        }
+                    },
+                    {
+                        resolution: 980,
                         props: {
                             y: y950,
                             scale: scale950,
@@ -129,8 +142,10 @@ const Spotlight = () => {
 
             for (let i = 0; i < currentOption.res.length; i++) {
                 const res = currentOption.res[i]
+
                 if (res?.resolution > width) {
                     props = res.props
+                    console.log(res, type);
                     break
                 }
             }
@@ -143,8 +158,12 @@ const Spotlight = () => {
     return (
         <Container ref={targetRef} className='Spotlight'>
             <ServicePopup
-                isActive={isActive}
-                style={{ opacity }}
+                isActive={width < 950 && isActive}
+                style={{
+                    opacity,
+                    width: width > 950 && serviceWidth,
+                    scale: width > 950 && serviceScale,
+                }}
             />
             <LapFrame
                 style={{ ...lapframeStyles("parent"), opacity }}
@@ -169,6 +188,17 @@ const Spotlight = () => {
                         infinity
                     />
                 </h3>
+                <motion.p
+                    style={{
+                        opacity: scrollMoreOpacity,
+                    }}
+                    className="scroll-for-more"
+                >
+                    <span>Scroll for more</span>
+                    <span className="icon">
+                        <img src="/icons/main/right-arrow.svg" alt="right arrow" />
+                    </span>
+                </motion.p>
             </LapScreenContent>
         </Container>
     )
@@ -279,6 +309,30 @@ const LapScreenContent = styled(motion.div)`
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+    }
+    p.scroll-for-more{
+        display: none;
+        margin-top: 40px;
+        /* position: fixed; */
+
+        span{
+            font-size: 14px;
+        }
+        span.icon{
+            img{
+                width: 15px;
+                rotate: 90deg;
+            }
+        }
+
+        @media all and (max-width: 560px){
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+
         }
     }
 `

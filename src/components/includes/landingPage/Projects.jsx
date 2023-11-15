@@ -107,8 +107,6 @@ const Projects = ({ scrollYProgress }) => {
 
     const { width } = useDimension()
 
-    console.log(width);
-
     return (
         <Container
             ref={containerRef}
@@ -117,7 +115,7 @@ const Projects = ({ scrollYProgress }) => {
                 <Content>
                     <Head className='wrapper'
                         style={{
-                            y: headY
+                            y: width > 860 && headY
                         }}
                     >
                         <h4><span>OUR</span> PROJECTS.</h4>
@@ -126,17 +124,10 @@ const Projects = ({ scrollYProgress }) => {
                             <span className="container">80+ <span className="child">happy customers</span></span>
                         </div>
                     </Head>
-                    <ProjectsCountContainer
-                        style={{ y }}
-                    >
-                        <div className="count-container">
-                            <h5><span className="bold">+24</span> more projects</h5>
-                        </div>
-                    </ProjectsCountContainer>
                     <ProjectsContainer
                         style={{
-                            x: enlargeX,
-                            y: enlargeY,
+                            x: width > 860 && enlargeX,
+                            y: width > 860 && enlargeY,
                         }}
                     >
                         <motion.div
@@ -156,6 +147,13 @@ const Projects = ({ scrollYProgress }) => {
                             ))}
                         </motion.div>
                     </ProjectsContainer>
+                    <ProjectsCountContainer
+                        style={{ y: width > 860 && y }}
+                    >
+                        <div className="count-container">
+                            <h5><span className="bold">+24</span> more projects</h5>
+                        </div>
+                    </ProjectsCountContainer>
                 </Content>
             </Wrapper>
         </Container>
@@ -171,18 +169,16 @@ const Container = styled.section`
     max-height: 100vh;
     overflow-x: hidden;
     overflow-y: scroll;
-    /* background-color: #ff9595; */
-    /* position: sticky; */
-    /* top: 100vh; */
 
-    /* &.product{
-        transform: translateY(-200vh);
-    } */
+    @media all and (max-width: 860px) {
+        max-height: calc(300vh + 320px);
+        height: calc(300vh + 320px);
+    }
 
-    /* @media all and (max-width: 860px) {
-        height: max-content;
-        overflow: scroll;
-    } */
+    @media all and (max-width: 460px){
+        max-height: calc(300vh + 280px);
+        height: calc(300vh + 280px);
+    }
 `
 const Wrapper = styled.div`
     /* height: 400vh; */
@@ -195,13 +191,17 @@ const Content = styled.div`
     /* height: max-content; */
 
     @media all and (max-width: 860px) {
-        /* height: max-content;
-        overflow: scroll; */
+        /* height: max-content; */
+        /* overflow: scroll; */
     }
 `
 
 const Head = styled(motion.div)`
     padding: 160px 0;
+
+    @media all and (max-width: 860px){
+        padding: 80px 0 60px 0;
+    }
 
     @media all and (max-width: 460px){
         padding: 70px 0 40px 0;
@@ -301,7 +301,11 @@ const ProjectsContainer = styled(motion.div)`
     transform: translate(7.5%,370px);
 
     @media all and (max-width: 860px){
-        height: max-content;
+        height: 300vh;
+        transform: translate(0,0) !important;
+        border-radius: 0;
+        position: relative;
+        z-index: 100;
     }
     /* transition: all 1s ease-in-out; */
 
@@ -323,6 +327,7 @@ const ProjectsContainer = styled(motion.div)`
 
         @media all and (max-width: 860px){
             width: 100vw;
+            height: max-content;
         }
     }
 `
@@ -347,6 +352,16 @@ const ProjectsCountContainer = styled(motion.div)`
     justify-content: flex-end;
     padding: 32px;
     transition: top 0.3s ease-in-out;
+    user-select: none;
+    pointer-events: none;
+
+    @media all and (max-width: 860px){
+        position: relative;
+        height: max-content;
+        justify-content: center;
+        user-select: all;
+        pointer-events: all;
+    }
 
     &.active{
         top: 0;
@@ -358,6 +373,10 @@ const ProjectsCountContainer = styled(motion.div)`
         align-items: center;
         justify-content: center;
         height: 100%;
+
+        @media all and (max-width: 860px){
+            width: 100%;
+        }
     }
 
     h5{
@@ -367,6 +386,11 @@ const ProjectsCountContainer = styled(motion.div)`
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        @media all and (max-width: 860px){
+            flex-direction:row;
+            gap: 12px;    
+        }
 
         span.bold{
             font-family: Satoshi-Medium;
@@ -384,6 +408,8 @@ const ProjectItemContainer = styled.div`
 
     @media all and (max-width: 860px) {
         width: 100vw;
+        max-height: max-content;
+        min-height: 100vh;
     }
        /* position: absolute;
     left: 160%;

@@ -8,7 +8,7 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
 
     return (
         <Container
-            className={isActive ? "active test" : " test"}
+            className={isActive ? "active" : ""}
             style={{
                 ...style,
             }}
@@ -46,6 +46,7 @@ const Container = styled(motion.div)`
     position: fixed !important;
     left: 50%;
     top: 50%;
+    translate: -50% -50%;
     transform: translate(-50%, -50%) scale(0.3);
     z-index: 2;
     width: 30%;
@@ -54,15 +55,16 @@ const Container = styled(motion.div)`
     gap: 8px;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s ease-in-out;
     opacity: 0.2;
-
+    
     @media all and (max-width: 950px) {
+        transition: all 0.3s ease-in-out;
         bottom: -100vh;
         top: unset;
         left: 2.5%;
         transform: unset;
         width: 95%;
+        translate: unset;
     }
 
     &.active {
@@ -88,7 +90,7 @@ const Container = styled(motion.div)`
             flex-direction: column;
         }
         @media all and (max-width: 640px) {
-            top: 50%;
+            /* top: 50%; */
         }
     }
 `;
@@ -122,6 +124,7 @@ const LeftContainer = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        gap: 10px;
     }
 `;
 const RightContainer = styled(LeftContainer)`

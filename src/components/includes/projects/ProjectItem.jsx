@@ -52,27 +52,35 @@ const Container = styled.div`
         padding: 62px;
     }
 
+    @media all and (max-width:560px){
+        padding: 28px;
+    }
     @media all and (max-width:480px){
-        padding: 30px;
-        justify-content: flex-start;
+        padding: 20px;
+        justify-content: center;
     }
 `
 
 const Top = styled.div`
     margin-bottom: 42px;
+
     @media all and (max-width:480px){
         margin-bottom: 20px;
 
     }
     .logo-container{
-        width: max-content;
+        width: 140px;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.10);
         padding: 24px;
+
+        @media all and (max-width:560px){
+            width: 120px;
+        }
         
         @media all and (max-width:480px){
             border-radius: 15px;
-            width: 130px;
+            width: 100px;
             padding: 20px;
 
         }
@@ -94,9 +102,8 @@ const BottomHead = styled.div`
     justify-content: space-between;
     gap: 58px;
     flex-wrap: wrap;
-    @media all and(max-width:480px){
-        gap: 20px;
-
+    @media all and (max-width:480px){
+        gap: 26px;
     }
 
     h5{
@@ -124,11 +131,11 @@ const BottomHead = styled.div`
         align-items: center;
         justify-content: flex-start;
         flex-direction: row-reverse;
-        gap: 20px;
+        gap: 18px;
         flex-wrap: wrap;
         @media all and (max-width:480px){
             justify-content: flex-end;
-
+            gap: 10px;
         }
 
         li{
@@ -149,13 +156,20 @@ const BottomContent = styled.div`
     justify-content: space-between;
     /* display:none; */
 
+    @media all and (max-width:560px){
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 24px;
+    }
+
     p{
         max-width: 70%;
         color: #fff;
         font-size: 15px;
         letter-spacing: 0.8px;
-        @media all and(max-width:480px){
-            /* display:none; */
+
+        @media all and (max-width:560px){
+            max-width: 100%;
         }
     }
     span.icon{

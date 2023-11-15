@@ -78,7 +78,7 @@ const Wrapper = styled.div`
 
         li{
             a{
-                color: #fff;
+                color: #f3f3f3;
                 cursor: pointer;
                 font-size: 14px;
                 position: relative;

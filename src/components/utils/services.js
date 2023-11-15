@@ -1,7 +1,7 @@
 const services = [
     {
         slug: 1,
-        startingPoint: 0.15,
+        startingPoint:0.15,
         title: "Web & App Development",
         category: "IT_SERVICES",
         image: "/images/services/website-development.png",
@@ -22,7 +22,7 @@ const services = [
     },
     {
         slug: 2,
-        startingPoint: 0.28,
+        startingPoint:0.30,
         title: "Web Hosting",
         category: "IT_SERVICES",
         image: "/images/services/web-app-dev.png",
@@ -40,7 +40,7 @@ const services = [
     },
     {
         slug: 3,
-        startingPoint: 0.38,
+        startingPoint:0.45,
         title: "UI/UX Design",
         category: "IT_SERVICES",
         image: "/images/services/mobile-app-dev.png",
@@ -61,7 +61,7 @@ const services = [
     },
     {
         slug: 4,
-        startingPoint: 0.49,
+        startingPoint:0.60,
         title: "Enterprise Solutions",
         category: "IT_SERVICES",
         image: "/images/services/e-commerce.png",
@@ -79,7 +79,7 @@ const services = [
     },
     {
         slug: 5,
-        startingPoint: 0.65,
+        startingPoint:0.75,
         title: "Branding",
         category: "DIGITAL_MARKETING",
         image: "/images/services/branding.png",
@@ -106,7 +106,7 @@ const services = [
     },
     {
         slug: 6,
-        startingPoint: 0.76,
+        startingPoint:0.90,
         title: "Digital Marketing",
         category: "DIGITAL_MARKETING",
         image: "/images/services/social-media-marketing.png",
@@ -136,7 +136,7 @@ const services = [
     },
     {
         slug: 7,
-        startingPoint: 0.9,
+        startingPoint:1.00,
         title: "Media & Advertisements",
         category: "DIGITAL_MARKETING",
         image: "/images/services/content-marketing.png",

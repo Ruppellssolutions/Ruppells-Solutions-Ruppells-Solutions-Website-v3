@@ -11,7 +11,7 @@ const useResponsive = () => {
 
     useEffect(() => {
         const mediaQueries = {
-            sm: window.matchMedia("(max-width: 640px)"),
+            sm: window.matchMedia("(max-width: 860px)"),
         };
 
         const handleMediaQueryChange = (breakpoint) => (event) => {

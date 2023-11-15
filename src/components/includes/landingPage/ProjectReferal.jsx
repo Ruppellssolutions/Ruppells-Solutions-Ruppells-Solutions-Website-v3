@@ -1,56 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import Location from "./Location";
-import Footer from "./Footer";
+
 
 const ProjectReferal = () => {
-    const containerRef = useRef();
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-    });
-
-    const scale = useTransform(scrollYProgress, [0.25, 0.5], [0, 1]);
-    const opacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]);
-    const y = useTransform(scrollYProgress, [0.6, 1], ["0", "-120vh"]);
-
     return (
-        <Container ref={containerRef}>
-            <PopupContainer
-                style={{
-                    scale,
-                }}
-            >
-                <div className="first-child">
-                    <div className="first-child second">
-                        <div className="first-child third">
-                            <InnerContent
-                                style={{
-                                    opacity,
-                                }}
-                            >
-                                <motion.div
-                                    className="container"
-                                    style={
-                                        {
-                                            y,
-                                        }
-                                    }
-                                >
-                                    <DummyScreen>
-                                        <img src="/images/laptop-screen.png" alt="" />
-                                    </DummyScreen>
-                                    <Location />
-                                    <div>
-                                        <Footer />
-                                    </div>
-                                </motion.div>
-                            </InnerContent>
-                        </div>
-                    </div>
-                </div>
-            </PopupContainer>
+        <Container>
             <Wrapper className="wrapper">
                 <Main>
                     <h5>
@@ -70,7 +25,7 @@ export default ProjectReferal;
 
 const Container = styled.section`
     position: relative;
-    height: 300vh;
+    height: 180vh;
 `;
 const Wrapper = styled.div`
     padding: 60px 0;
@@ -96,6 +51,7 @@ const Main = styled.div`
     flex-direction: column;
     gap: 32px;
     padding: 40px 0;
+
     @media all and (max-width: 480px) {
         justify-content: unset;
         padding: 0px 0;
@@ -106,10 +62,21 @@ const Main = styled.div`
         font-size: 52px;
         color: #fff;
         text-align: center;
-        max-width: 40%;
+        max-width: 50%;
         font-family: Satoshi-Medium;
-        @media all and (max-width: 480px) {
-            font-size: 29px;
+
+        @media all and (max-width: 768px) {
+            font-size: 46px;
+        }
+        @media all and (max-width: 640px) {
+            font-size: 38px;
+            max-width: 100%;
+        }
+        @media all and (max-width: 460px) {
+            font-size: 32px;
+        }
+        @media all and (max-width: 360px) {
+            font-size: 26px;
         }
         span {
             font: inherit;
@@ -128,12 +95,20 @@ const Button = styled.button`
     position: relative;
     overflow: hidden;
 
+    @media all and (max-width: 640px){
+        padding: 8px 16px;
+    }
+
     span {
         font-size: 14px;
         color: #fff;
         z-index: 3;
         position: relative;
         transition: all 0.4s ease-in-out;
+
+        @media all and (max-width: 640px){
+            font-size: 13px;
+        }
     }
 
     &::before {
@@ -155,72 +130,5 @@ const Button = styled.button`
         &::before {
             left: 0;
         }
-    }
-`;
-const PopupContainer = styled(motion.div)`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: 200;
-    /* width: 100%;
-    aspect-ratio: 1; */
-    border: 400px solid #e7c6ff;
-    border-radius: 50%;
-    /* user-select: none;
-    pointer-events: none; */
-
-    .first-child {
-        /* width: 100%;
-        aspect-ratio: 1; */
-        border: 300px solid #8443b1;
-        border-radius: 50%;
-
-        &.second {
-            border: 225px solid #4f3cc2;
-        }
-        &.third {
-            border: 200px solid #9acfff;
-            width: 150vw;
-            aspect-ratio: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fbfbfc;
-            @media all and (max-width: 480px) {
-                border: 0px solid #9acfff;
-                // overflow: hidden;
-            }
-        }
-    }
-`;
-const InnerContent = styled(motion.div)`
-    width: 100vw;
-    max-height: 100vh;
-    position: sticky;
-    top: 50vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    background-color: #fbfbfc;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    .container {
-        max-height: 100vh;
-    }
-`;
-const DummyScreen = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @media all and (max-width: 640px) {
-        height: 30vh;
-    }
-    img {
-        width: 50%;
-        margin: 0 auto;
     }
 `;

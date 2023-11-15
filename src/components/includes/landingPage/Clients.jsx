@@ -4,81 +4,6 @@ import SectionHead from '../general/SectionHead'
 
 
 const Clients = () => {
-    // const clients = [
-    //     {
-    //         id: 1,
-    //         icon: "client-01.svg",
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: "client-02.svg",
-    //     },
-    //     {
-    //         id: 3,
-    //         icon: "client-03.svg",
-    //     },
-    //     {
-    //         id: 4,
-    //         icon: "client-04.svg",
-    //     },
-    //     {
-    //         id: 5,
-    //         icon: "client-05.svg",
-    //     },
-    //     {
-    //         id: 6,
-    //         icon: "client-06.svg",
-    //     },
-    //     {
-    //         id: 1,
-    //         icon: "client-04.svg",
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: "client-03.svg",
-    //     },
-    //     {
-    //         id: 3,
-    //         icon: "client-02.svg",
-    //     },
-    //     {
-    //         id: 4,
-    //         icon: "client-01.svg",
-    //     },
-    //     {
-    //         id: 5,
-    //         icon: "client-06.svg",
-    //     },
-    //     {
-    //         id: 6,
-    //         icon: "client-05.svg",
-    //     },
-    //     {
-    //         id: 1,
-    //         icon: "client-01.svg",
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: "client-02.svg",
-    //     },
-    //     {
-    //         id: 3,
-    //         icon: "client-03.svg",
-    //     },
-    //     {
-    //         id: 4,
-    //         icon: "client-04.svg",
-    //     },
-    //     {
-    //         id: 5,
-    //         icon: "client-05.svg",
-    //     },
-    //     {
-    //         id: 6,
-    //         icon: "client-06.svg",
-    //     },
-    // ]
-
     const clients = [
         {
             id: 1,
@@ -152,9 +77,13 @@ const Head = styled.div`
         color: #9E9E9E;
         font-size: 18px;
         max-width: 60%;
-        @media all and (max-width:480px){
-            max-width: fit-content;
 
+        @media all and (max-width:640px){
+            max-width: fit-content;
+            font-size: 16px;
+        }
+        @media all and (max-width:460px){
+            font-size: 14px;
         }
     }
 `
@@ -163,11 +92,18 @@ const ClientsList = styled.ul`
     align-items: center;
     /* justify-content: center; */
     flex-wrap: wrap;
-    gap: calc(10% / 6);
+    /* gap: calc(20px / 6px); */
     margin-bottom: 38px;
 `
 const ClientItem = styled.li`
-    width: 10%;
+    width: 12%;
+
+    @media all and (max-width:860px){
+        width: 20%;
+    }
+    @media all and (max-width:640px){
+        width: 26%;
+    }
     @media all and (max-width:480px){
         width: 32%;
     }
