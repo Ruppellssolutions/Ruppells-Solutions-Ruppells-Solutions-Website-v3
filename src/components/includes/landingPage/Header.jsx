@@ -112,7 +112,7 @@ const Hamburger = styled.div`
     }
 
     @media all and (max-width: 768px){
-        display: flex;
+        // display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;

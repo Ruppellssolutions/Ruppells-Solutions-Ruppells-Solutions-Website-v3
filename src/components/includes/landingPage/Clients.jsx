@@ -117,6 +117,10 @@ const Container = styled.div`
 `
 const Wrapper = styled.div`
     padding: 70px 0;
+    @media all and (max-width:480px){
+        padding: 70px 0 0 0;
+
+    }
 `
 const Head = styled.div`
     margin-bottom: 68px;
@@ -129,6 +133,10 @@ const Head = styled.div`
         color: #9E9E9E;
         font-size: 18px;
         max-width: 60%;
+        @media all and (max-width:480px){
+            max-width: fit-content;
+
+        }
     }
 `
 const ClientsList = styled.ul`
@@ -140,7 +148,10 @@ const ClientsList = styled.ul`
 `
 const ClientItem = styled.li`
     width: 15%;
+    @media all and (max-width:480px){
+        width: 32%;
 
+    }
     img{
         width: 80%;
         margin: 0 auto;
@@ -152,7 +163,7 @@ const ButtonContainer = styled.div`
     justify-content: center;
 `
 const Button = styled.button`
-    display: flex;
+    display: none;
     align-items: center;
     gap: 20px;
     padding: 8px 0;

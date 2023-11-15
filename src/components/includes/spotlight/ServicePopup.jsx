@@ -1,9 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import ServicePopupItem from './ServicePopupItem'
-import { motion } from 'framer-motion'
-import services from '../../utils/services'
-
+import React from "react";
+import styled from "styled-components";
+import ServicePopupItem from "./ServicePopupItem";
+import { motion } from "framer-motion";
+import services from "../../utils/services";
 
 const ServicePopup = ({ isActive = false, style = {} }) => {
     // const servicesLeft = [
@@ -55,14 +54,14 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
 
     return (
         <Container
-            className={isActive ? "active" : ""}
+            className={isActive ? "active test" : " test"}
             style={{
-                ...style
+                ...style,
             }}
         >
             <LeftContainer>
                 {services
-                    .filter(service => service.category === "IT_SERVICES")
+                    .filter((service) => service.category === "IT_SERVICES")
                     .map((service, i) => (
                         <ServicePopupItem
                             isActive={isActive}
@@ -73,27 +72,27 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
             </LeftContainer>
             <RightContainer>
                 {services
-                    .filter(service => service.category === "DIGITAL_MARKETING")
+                    .filter((service) => service.category === "DIGITAL_MARKETING")
                     .map((service, i) => (
                         <ServicePopupItem
                             isActive={isActive}
-                            type='RIGHT'
+                            type="RIGHT"
                             key={service.slug}
                             {...service}
                         />
                     ))}
             </RightContainer>
         </Container>
-    )
-}
+    );
+};
 
-export default ServicePopup
+export default ServicePopup;
 
 const Container = styled(motion.div)`
     position: fixed !important;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(.3);
+    transform: translate(-50%, -50%) scale(0.3);
     z-index: 2;
     width: 30%;
     height: auto;
@@ -102,40 +101,43 @@ const Container = styled(motion.div)`
     align-items: center;
     justify-content: space-between;
     transition: all 0.3s ease-in-out;
-    opacity: .2;
+    opacity: 0.2;
 
-    @media all and (max-width: 950px){
+    @media all and (max-width: 950px) {
         bottom: -100vh;
         top: unset;
         left: 2.5%;
         transform: unset;
         width: 95%;
     }
-    
-    &.active{
+
+    &.active {
         width: 83%;
         opacity: 1;
         bottom: 10px;
-        transform: translate(-50%,-50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
 
-        @media all and (max-width: 1440px){
+        @media all and (max-width: 1440px) {
             width: 90%;
         }
-        @media all and (max-width: 1180px){
+        @media all and (max-width: 1180px) {
             width: 95%;
         }
-        @media all and (max-width: 1080px){
+        @media all and (max-width: 1080px) {
             width: 100%;
         }
-        @media all and (max-width: 980px){
+        @media all and (max-width: 980px) {
             width: 95%;
         }
-        @media all and (max-width: 950px){
+        @media all and (max-width: 950px) {
             transform: unset;
             flex-direction: column;
         }
+        @media all and (max-width: 640px) {
+            top: 50%;
+        }
     }
-`
+`;
 
 const LeftContainer = styled.div`
     width: 330px;
@@ -147,13 +149,13 @@ const LeftContainer = styled.div`
     align-items: flex-end;
     gap: 20px;
 
-    @media all and (max-width: 1080px){
+    @media all and (max-width: 1080px) {
         width: 280px;
     }
-    @media all and (max-width: 980px){
+    @media all and (max-width: 980px) {
         align-items: start;
     }
-    @media all and (max-width: 950px){
+    @media all and (max-width: 950px) {
         width: 100%;
         height: max-content;
         flex-direction: row;
@@ -162,11 +164,16 @@ const LeftContainer = styled.div`
         gap: 8px;
         align-items: stretch;
     }
-`
+    @media all and (max-width: 640px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+`;
 const RightContainer = styled(LeftContainer)`
     align-items: flex-start;
 
-    @media all and (max-width: 980px){
+    @media all and (max-width: 980px) {
         align-items: stretch;
     }
-`
+`;

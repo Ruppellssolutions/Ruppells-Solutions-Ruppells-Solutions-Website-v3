@@ -189,7 +189,7 @@ const Head = styled(motion.div)`
     padding: 160px 0;
 
     @media all and (max-width: 460px){
-        padding: 70px 0;
+        padding: 70px 0 40px 0;
     }
 
     h4{
@@ -205,7 +205,7 @@ const Head = styled(motion.div)`
             font-size: 26px;
             margin-bottom: 20px;
         }
-
+    
         span{
             font: inherit;
             background: linear-gradient(106deg, #CE4FE3 0%, #36B2EA 101.89%);
@@ -214,7 +214,10 @@ const Head = styled(motion.div)`
             -webkit-text-fill-color: transparent;
         }
     }
-
+    div.details{
+        display:flex;
+        flex-direction: column;
+    }
     span.container {
         color: #F9F9F9;
         font-size: 32px;
@@ -347,7 +350,11 @@ const ProjectsCountContainer = styled(motion.div)`
 const ProjectItemContainer = styled.div`
     width: 80vw;
     height: 100vh;
-    /* position: absolute;
+    @media all and (max-width:480px){
+        width: 91vw;
+
+    } 
+       /* position: absolute;
     left: 160%;
     top:0; */
     /* transition: all 1s ease-in-out; */

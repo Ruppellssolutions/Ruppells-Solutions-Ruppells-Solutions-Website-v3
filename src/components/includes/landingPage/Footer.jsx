@@ -7,23 +7,23 @@ const Footer = () => {
     const socialIcons = [
         {
             icon: "/icons/social/instagram.svg",
-            link: "",
+            link: "https://instagram.com/ruppells__solutions?igshid=NzZlODBkYWE4Ng==",
         },
         {
             icon: "/icons/social/facebook.svg",
-            link: "",
+            link: "https://www.facebook.com/profile.php?id=100092528386984",
         },
         {
             icon: "/icons/social/threads.svg",
-            link: "",
+            link: "https://www.threads.net/@ruppells__solutions",
         },
         {
             icon: "/icons/social/linkedin.svg",
-            link: "",
+            link: "https://www.linkedin.com/company/ruppells-solutions/",
         },
         {
             icon: "/icons/social/youtube.svg",
-            link: "",
+            link: "https://youtube.com/@RuppellsSolutions",
         },
     ]
 
@@ -36,7 +36,7 @@ const Footer = () => {
                     <Socials>
                         {socialIcons.map((social, i) => (
                             <SocialIcon key={i}>
-                                <a href="#" target='_blank'>
+                                <a href={social.link} target='_blank'>
                                     <img src={social.icon} alt={social.link} />
                                 </a>
                             </SocialIcon>
@@ -52,7 +52,7 @@ const Footer = () => {
                             <img src="/icons/logo/solutions-dark.svg" alt="Ruppells Solutions" />
                         </Link>
                         <span>Powered By</span>
-                        <a href="https://ruppellsgroup.com" target="_blank">
+                        <a href="https://maps.app.goo.gl/cervkKhr8t2o2Q5e9" target="_blank">
                             <img src="/icons/logo/ruppells-group-dark.svg" alt="Ruppells Group " />
                         </a>
                     </MiddleBottom>
@@ -77,6 +77,11 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 42px 0;
+    @media all and (max-width:480px){
+        padding:0 0;
+        flex-direction: column;
+
+    }
 `
 const Left = styled.div`
 
@@ -89,6 +94,9 @@ const Middle = styled.div`
     gap: 32px;
 `
 const Right = styled.div`
+@media all and (max-width:480px){
+    margin-top: 20px;
+}
     p{
         font-size: 14px;
         color: #747474;

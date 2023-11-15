@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Location = () => {
     const redirectHandler = () => {
         const a = document.createElement("a")
-        a.href = "https://google.com"
+        a.href = "https://maps.app.goo.gl/cervkKhr8t2o2Q5e9"
         a.target = "_blank"
         a.click()
     }
@@ -51,15 +51,19 @@ export default Location
 const Container = styled.section`
     padding: 28px 0;
     position: relative;
+    @media all and(max-width:480){
+        padding: 0px 0;
+
+    }
 `
 const Wrapper = styled.div`
     max-width: 90%;
-
     .content{
         position: relative;
     }
 `
 const Pin = styled.div`
+cursor: pointer;
     rotate: 10deg;
     position: absolute;
     left: 50%;
@@ -89,4 +93,8 @@ const BottomContainer = styled.div`
     border: 1px solid  #8E8E8E3D;
     border-left-width: .5px;
     border-bottom: none;
+    @media all and (max-width:480px){
+        margin-top: 0px;
+
+    }
 `
