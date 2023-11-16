@@ -115,7 +115,7 @@ const services = [
                 title: "SMO (Social Media Optimisation)",
             },
             {
-                title: "BSEO (Search Engine Optimisation)",
+                title: "SEO (Search Engine Optimisation)",
             },
             {
                 title: "SMM (Social Media Marketing)",

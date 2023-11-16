@@ -28,7 +28,7 @@ const Clients = () => {
             <Wrapper className='wrapper'>
                 <Head>
                     <SectionHead
-                        colorTitle='OUR'
+                        // colorTitle='OUR'
                         title='CLIENTS.'
                     />
                     <p>Meet the esteemed partners who've entrusted their success with us. Our diverse clientele is a testament to the trusted relationships we've built. Join our community of satisfied clients and embark on a journey of digital brilliance.</p>

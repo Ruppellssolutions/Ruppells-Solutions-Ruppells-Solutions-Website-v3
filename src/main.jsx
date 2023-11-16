@@ -4,6 +4,11 @@ import App from './App.jsx'
 import "./assets/css/style.css"
 import "./assets/css/satoshi.css"
 
+import { BrowserRouter } from "react-router-dom"
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <App />
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 )

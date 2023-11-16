@@ -13,7 +13,7 @@ const NavigateFuture = () => {
                     </Left>
                     <Right>
                         <h6>
-                            <span>Navigate</span> the <span>Future</span> With us
+                            <span>Navigate</span> the <span>Future</span> <br /> With us
                         </h6>
                     </Right>
                 </div>
@@ -48,10 +48,11 @@ const Container = styled.div`
 `
 const Left = styled.div`
     width: 50%;
+    /* overflow: hidden; */
 
     img{
-        width: 80%;
-        margin: 0 0 0 auto; 
+        width: 110%;
+        /* margin: 0 0 0 auto;  */
 
         @media all and (max-width: 640px){
             margin: 0 auto ;
@@ -67,17 +68,17 @@ const Right = styled.div`
     }
 
     h6{
-        max-width: 80%;
-        font-size: 68px;
+        /* max-width: 80%; */
+        font-size: 62px;
 
         @media all and (max-width: 1180px){
-            font-size: 58px;
+            font-size: 54px;
         }
         @media all and (max-width: 980px){
-            font-size: 46px;
+            font-size: 42px;
         }
         @media all and (max-width: 768px){
-            font-size: 36px;
+            font-size: 34px;
         }
         @media all and (max-width: 640px){
             text-align: center;
@@ -85,7 +86,7 @@ const Right = styled.div`
             /* max-width: 100%; */
         }
         @media all and (max-width: 460px){
-            font-size: 26px;
+            font-size: 24px;
         }
 
         span{

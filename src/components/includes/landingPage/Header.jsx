@@ -1,22 +1,24 @@
 import React from 'react'
 import { Link } from 'react-scroll'
+import { Link as BrowserLink } from "react-router-dom"
 import styled from 'styled-components'
 
 
-const Header = () => {
+const Header = ({ theme = "LIGHT" }) => {
+    const logo = theme === "LIGHT" ? "/icons/logo/infinity.svg" : "/icons/logo/infinity-dark.svg"
 
     return (
         <Container>
-            <Wrapper className='wrapper'>
+            <Wrapper className='wrapper' theme={theme}>
                 <h1>
-                    <Link spy smooth duration={6000} to='home'>
-                        <img src="/icons/logo/infinity.svg" alt="infinity" />
-                    </Link>
+                    <BrowserLink to="/">
+                        <img src={logo} alt="infinity" />
+                    </BrowserLink>
                 </h1>
                 <nav>
                     <ul>
                         <li>
-                            <Link spy smooth duration={3000} to='home' activeClass='active'>Home</Link>
+                            <Link spy smooth duration={3000} to='home' activeClass='active' className='active'>Home</Link>
                         </li>
                         <li>
                             <Link spy smooth duration={3000} to='service' activeClass='active'>Services</Link>
@@ -78,7 +80,7 @@ const Wrapper = styled.div`
 
         li{
             a{
-                color: #f3f3f3;
+                color: ${({ theme }) => theme === "LIGHT" ? "#f3f3f3" : "#292929"};
                 cursor: pointer;
                 font-size: 14px;
                 position: relative;
@@ -89,7 +91,7 @@ const Wrapper = styled.div`
                     bottom: -6px;
                     content: "";
                     width: 0%;
-                    background-color: #fff;
+                    background-color: ${({ theme }) => theme === "LIGHT" ? "#f3f3f3" : "#292929"};
                     height: 2px;
                     border-radius: .5px;
                     transition: width 0.3s ease-in-out;

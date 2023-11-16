@@ -44,6 +44,7 @@ const LandingPage = () => {
 
     const { width } = useDimension()
 
+    console.log(sm);
 
     return (
         <Container>
@@ -57,10 +58,10 @@ const LandingPage = () => {
                     <ProContainer ref={proContainerRef}>
                         <ProWrapper ref={containerRef}>
                             <ProScrollWrapper>
-                                <ProductWrapper style={{ x: !sm && productX }}>
+                                <ProductWrapper style={{ x: width > 680 && productX }}>
                                     <Product />
                                 </ProductWrapper>
-                                <ProjectWrapper style={{ x: !sm && productX }}>
+                                <ProjectWrapper style={{ x: width > 680 && productX }}>
                                     <Projects scrollYProgress={projectScrollY} />
                                 </ProjectWrapper>
                             </ProScrollWrapper>

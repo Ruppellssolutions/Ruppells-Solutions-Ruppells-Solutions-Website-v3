@@ -51,9 +51,9 @@ export default Location
 const Container = styled.section`
     padding: 32px 0;
     position: relative;
+
     @media all and(max-width:480){
         padding: 12px 0;
-
     }
 `
 const Wrapper = styled.div`

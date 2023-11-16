@@ -1,9 +1,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
 const ProjectReferal = () => {
+    const navigate = useNavigate()
+
     return (
         <Container>
             <Wrapper className="wrapper">
@@ -11,7 +14,9 @@ const ProjectReferal = () => {
                     <h5>
                         HAVE A <span>PROJECT</span> IN MIND?
                     </h5>
-                    <Button>
+                    <Button
+                        onClick={e => navigate("/contact-us")}
+                    >
                         <span>Let's talk</span>
                     </Button>
                 </Main>

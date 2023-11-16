@@ -145,7 +145,6 @@ const Spotlight = () => {
 
                 if (res?.resolution > width) {
                     props = res.props
-                    console.log(res, type);
                     break
                 }
             }

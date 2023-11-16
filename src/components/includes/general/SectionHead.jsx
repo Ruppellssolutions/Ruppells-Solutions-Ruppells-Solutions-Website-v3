@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SectionHead = ({ colorTitle = "", title = "" }) => {
+const SectionHead = ({ colorTitle = false, title = "" }) => {
     return (
         <Container>
-            <h4><span>{colorTitle}</span> {title}</h4>
+            <h4>
+                {colorTitle && <span>{colorTitle}&nbsp;</span>}
+                {title}
+            </h4>
         </Container>
     )
 }
