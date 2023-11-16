@@ -3,8 +3,10 @@ const LandingPage = lazy(() => import("./components/screens/LandingPage"))
 import ScreenLoader from './components/includes/loaders/ScreenLoader'
 import Lenis from '@studio-freight/lenis'
 // import Scene from './components/screens/Scene'
-import { Route,  Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Contact from './components/screens/Contact'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
@@ -20,6 +22,18 @@ const App = () => {
 
 	return (
 		<>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={2000}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable
+				containerId="toast-container"
+				theme="dark"
+			/>
 			<Suspense fallback={<ScreenLoader />}>
 				<Routes>
 					<Route path='' element={<LandingPage />} />

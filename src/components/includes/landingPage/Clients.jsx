@@ -7,19 +7,27 @@ const Clients = () => {
     const clients = [
         {
             id: 1,
-            icon: "reverse-gear.svg",
-        },
-        {
-            id: 2,
             icon: "ruppells-overseas.svg",
         },
         {
-            id: 3,
+            id: 2,
             icon: "arab-dreams.svg",
         },
         {
-            id: 4,
-            icon: "middlesex-uni.svg",
+            id: 3,
+            icon: "hermanos.png",
+        },
+        // {
+        //     id: 4,
+        //     icon: "middlesex-uni.svg",
+        // },
+        {
+            id: 5,
+            icon: "trinity-funds.svg",
+        },
+        {
+            id: 6,
+            icon: "reverse-gear.svg",
         },
     ]
 
@@ -48,7 +56,7 @@ const Clients = () => {
                         <img src="/icons/main/right-arrow.svg" alt="right arrow" />
                     </Button>
                 </ButtonContainer>
-                <BottomContainer />
+                {/* <BottomContainer /> */}
             </Wrapper>
         </Container>
     )

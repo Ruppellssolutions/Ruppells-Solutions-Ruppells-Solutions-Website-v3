@@ -80,22 +80,18 @@ const Projects = ({ scrollYProgress }) => {
             tags: [
                 {
                     id: 1,
-                    title: "Web Development",
-                },
-                {
-                    id: 2,
                     title: "Digital Marketing",
                 },
                 {
-                    id: 3,
+                    id: 2,
                     title: "Branding",
                 },
                 {
-                    id: 4,
+                    id: 3,
                     title: "Social Media Marketing",
                 },
                 {
-                    id: 5,
+                    id: 4,
                     title: "Content Marketing",
                 },
             ],

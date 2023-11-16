@@ -5,6 +5,7 @@ const services = [
         title: "Web & App Development",
         category: "IT_SERVICES",
         image: "/images/services/website-development.png",
+        icon:"/icons/services/web-app-dev.svg",
         services: [
             {
                 title: "Static Websites",
@@ -26,6 +27,7 @@ const services = [
         title: "Web Hosting",
         category: "IT_SERVICES",
         image: "/images/services/web-app-dev.png",
+        icon:"/icons/services/website-dev.svg",
         services: [
             {
                 title: "Dedicated Hosting",
@@ -44,6 +46,7 @@ const services = [
         title: "UI/UX Design",
         category: "IT_SERVICES",
         image: "/images/services/mobile-app-dev.png",
+        icon:"/icons/services/mobile-app-dev.svg",
         services: [
             {
                 title: "Web Design",
@@ -65,6 +68,7 @@ const services = [
         title: "Enterprise Solutions",
         category: "IT_SERVICES",
         image: "/images/services/e-commerce.png",
+        icon:"/icons/services/website-dev.svg",
         services: [
             {
                 title: "CRM",
@@ -83,6 +87,7 @@ const services = [
         title: "Branding",
         category: "DIGITAL_MARKETING",
         image: "/images/services/branding.png",
+        icon:"/icons/services/branding.svg",
         services: [
             {
                 title: "Brand Consultation",
@@ -110,6 +115,7 @@ const services = [
         title: "Digital Marketing",
         category: "DIGITAL_MARKETING",
         image: "/images/services/social-media-marketing.png",
+        icon:"/icons/services/social-media-marketing.svg",
         services: [
             {
                 title: "SMO (Social Media Optimisation)",
@@ -140,6 +146,7 @@ const services = [
         title: "Media & Advertisements",
         category: "DIGITAL_MARKETING",
         image: "/images/services/content-marketing.png",
+        icon:"/icons/services/content-marketing.svg",
         services: [
             {
                 title: "Video Production",

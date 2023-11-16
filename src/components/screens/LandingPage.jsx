@@ -16,7 +16,7 @@ import Footer from "../includes/landingPage/Footer";
 import useDimension from "../hooks/useDimension";
 
 const LandingPage = () => {
-    const { sm } = useResponsive();
+    const { width } = useDimension()
 
     // product to project transition container
     const proContainerRef = useRef();
@@ -42,14 +42,10 @@ const LandingPage = () => {
     const scale460 = useTransform(bottomYProgress, [0.2, 0.4], [0, 10])
     const opacity = useTransform(bottomYProgress, [0.5, 0.55], [1, 0]);
 
-    const { width } = useDimension()
-
-    console.log(sm);
-
     return (
         <Container>
             <Wrapper>
-                <Header />
+                <Header type="SECTIONS" />
                 <Element name="home">
                     <Spotlight />
                 </Element>

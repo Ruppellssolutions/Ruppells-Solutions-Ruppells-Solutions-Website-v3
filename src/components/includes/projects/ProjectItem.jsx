@@ -25,9 +25,9 @@ const ProjectItem = ({ project = {} }) => {
                 </BottomHead>
                 <BottomContent>
                     <p className="description">{project.description}</p>
-                    <span className="icon">
+                    {/* <span className="icon">
                         <img src="/icons/main/right-arrow.svg" alt="right arrow" />
-                    </span>
+                    </span> */}
                 </BottomContent>
             </Bottom>
         </Container>
@@ -163,13 +163,13 @@ const BottomContent = styled.div`
     }
 
     p{
-        max-width: 70%;
+        /* max-width: 70%; */
         color: #fff;
         font-size: 15px;
         letter-spacing: 0.8px;
 
         @media all and (max-width:560px){
-            max-width: 100%;
+            /* max-width: 100%; */
         }
     }
     span.icon{

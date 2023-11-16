@@ -17,7 +17,8 @@ const ServicePopupItem = ({ title = "", icon = "", type = "LEFT" }) => {
     return (
         <Container className={type} onClick={onClick}>
             <Left className="center-align">
-                <img src="/icons/services/web-app-dev.svg" alt="icon" />
+                <img src={icon} alt="icon" />
+                {/* <img src="/icons/services/web-app-dev.svg" alt="icon" /> */}
             </Left>
             <Right>
                 <span className="head">{title}</span>
@@ -34,8 +35,9 @@ const Container = styled(motion.div)`
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(3px);
-    width: max-content;
+    /* width: max-content; */
     display: flex;
+    width: 90%;
     align-items: center;
     gap: 20px;
     padding: 10px 20px;

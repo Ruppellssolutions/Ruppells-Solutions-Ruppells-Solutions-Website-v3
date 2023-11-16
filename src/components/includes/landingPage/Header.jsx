@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-scroll'
-import { Link as BrowserLink } from "react-router-dom"
+import { Link as BrowserLink, NavLink } from "react-router-dom"
 import styled from 'styled-components'
+import ResNavMenu from '../header/ResNavMenu'
+import Nav from '../header/Nav'
 
 
-const Header = ({ theme = "LIGHT" }) => {
+const Header = ({ theme = "LIGHT", type = "ROUTES" }) => {   // ROUTES || SECTIONS
     const logo = theme === "LIGHT" ? "/icons/logo/infinity.svg" : "/icons/logo/infinity-dark.svg"
+    const hamburger = theme === "LIGHT" ? "/icons/main/hamburger.svg" : "/icons/main/hamburger-dark.svg"
+
+    const [isActive, setActive] = useState(false)
 
     return (
         <Container>
+            <ResNavMenu
+                type={type}
+                active={isActive}
+                setActive={setActive}
+            />
             <Wrapper className='wrapper' theme={theme}>
                 <h1>
                     <BrowserLink to="/">
@@ -17,18 +27,10 @@ const Header = ({ theme = "LIGHT" }) => {
                 </h1>
                 <nav>
                     <ul>
-                        <li>
-                            <Link spy smooth duration={3000} to='home' activeClass='active' className='active'>Home</Link>
-                        </li>
-                        <li>
-                            <Link spy smooth duration={3000} to='service' activeClass='active'>Services</Link>
-                        </li>
-                        <li>
-                            <Link spy smooth duration={3000} to='clients' activeClass='active'>Our Clients</Link>
-                        </li>
+                        <Nav type={type} />
                     </ul>
-                    <Hamburger>
-                        <img src="/icons/main/hamburger.svg" alt="hamburger" />
+                    <Hamburger onClick={e => setActive(true)}>
+                        <img src={hamburger} alt="hamburger" />
                     </Hamburger>
                 </nav>
             </Wrapper>
@@ -61,6 +63,7 @@ const Wrapper = styled.div`
 
             img{
                 width: 80px;
+                filter: drop-shadow(5px 5px 10px #000000);
 
                 @media all and (max-width: 768px){
                     width: 56px;
@@ -84,6 +87,7 @@ const Wrapper = styled.div`
                 cursor: pointer;
                 font-size: 14px;
                 position: relative;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
 
                 &::before{
                     position: absolute;
@@ -111,10 +115,11 @@ const Hamburger = styled.div`
     
     img{
         width: 32px;
+        filter: drop-shadow(5px 5px 10px #000000);
     }
 
     @media all and (max-width: 768px){
-        // display: flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;

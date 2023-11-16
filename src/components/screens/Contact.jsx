@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Header from '../includes/landingPage/Header'
 import Footer from '../includes/general/Footer'
@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import * as Yup from "yup"
 import ruppellsConfig from '../../apis/ruppellsConfig'
 import ButtonLoader from '../includes/loaders/ButtonLoader'
+import { toast } from 'react-toastify'
 
 
 const Contact = () => {
@@ -36,37 +37,42 @@ const Contact = () => {
     });
 
     function sendEnquiryHandler() {
-        const { message, email, name, phone } = formik.values;
-        const params = {
-            name,
-            phone,
-            email,
-            message,
-        };
 
         if (formik.isValid) {
             setLoading(true);
 
             ruppellsConfig
-                .post("/enquiries/contact-enquiry/", params)
-                .then(({ data }) => {
-                    const { statusCode } = data;
+                .post("/enquiries/contact-enquiry/", { ...formik.values })
+                .then((res) => {
+                    const { statusCode,data } = res.data;
 
                     if (statusCode === 6000) {
                         formik.resetForm();
+                        toast.success("Enquiry submitted successfully")
+                    }else{
+                        toast.error(data.message)
                     }
                     setLoading(false);
                 })
                 .catch((error) => {
+                    toast.error(error.message)
                     setLoading(false);
                 });
         }
     }
 
+    const containerRef = useRef()
+
+    useEffect(() => {
+        containerRef.current.scrollIntoView({
+            behavior:"smooth"
+        })
+    }, [])
+
     return (
         <>
             <Header theme='DARK' />
-            <Wrapper className='wrapper'>
+            <Wrapper className='wrapper' ref={containerRef} >
                 <Container>
                     <Left>
                         <h3>
@@ -182,7 +188,7 @@ const Container = styled.div`
     display: flex;
     /* align-items: center; */
     gap: 20px;
-    padding: 220px 0 68px;
+    padding: 170px 0 68px;
 
     @media all and (max-width: 860px){
         flex-direction: column;
