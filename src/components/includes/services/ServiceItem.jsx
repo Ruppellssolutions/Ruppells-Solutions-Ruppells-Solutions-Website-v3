@@ -7,16 +7,27 @@ const ServiceItem = ({
     isActive = false,
     activeIndex = [],
     serviceItem = {},
+    setActiveService = () => { },
+    prevItem = {},
     top,
     scrollY
 }) => {
-    const y = useTransform(scrollY, [serviceItem.startingPoint, serviceItem.startingPoint + 0.1], ["0", "-100%"])
+    // const y = useTransform(scrollY, [serviceItem.startingPoint, serviceItem.startingPoint + 0.1], ["0", "-100%"])
+
+    // top.on("change", e => {
+    //     if (e === "-100%") {
+    //         setActiveService(serviceItem)
+    //     }
+    //     if (e === "0%") {
+    //         setActiveService(prevItem)
+    //     }
+    // })
 
     return (
         <ServiceItemContainer
             // className={`${isActive && 'active'} ${Math.max(...activeIndex) > id && "small"}`}
             style={{
-                y:top,
+                y: top,
             }}
         >
             <ServiceItemLeft bg={serviceItem.image} />
@@ -73,6 +84,7 @@ const ServiceItemLeft = styled.div`
     /* max-width: auto; */
     height: 100%;
     background: url(${({ bg }) => bg}) center center no-repeat;
+    background-size: cover;
     border-radius: 18px;
     
     img{
@@ -104,6 +116,7 @@ const ServiceItemRight = styled.div`
         }
 
         li{
+            width: 100%;
             display: flex;
             align-items: start;
             gap: 14px;
@@ -136,7 +149,7 @@ const ServiceItemRight = styled.div`
             }
 
             @media all and (max-width: 520px){
-                width: calc(50% - 10px);
+                /* width: calc(50% - 10px); */
                 margin: 0;
             }
         }

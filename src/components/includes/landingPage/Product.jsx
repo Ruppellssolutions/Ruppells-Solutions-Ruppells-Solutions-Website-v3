@@ -17,7 +17,7 @@ const Product = () => {
                     </Head>
                     <ILMContainer>
                         <ILMLeft>
-                            <img src="/GIF/Ilm Phone.gif" alt="ilm mobile" />
+                            <img src="https://d2chzhwk8f0zsl.cloudfront.net/ruppells-group-videos/Ilm+Phone.gif" alt="ilm mobile" />
                         </ILMLeft>
                         <ILMRight>
                             <LogoContainer>
@@ -45,7 +45,7 @@ export default Product
 const Container = styled.section`
     width: 100%;
     /* min-height: 100vh; */
-    padding: 74px 0 32px;
+    padding: 100px 0 32px;
     z-index: 10;
     position: relative;
 
@@ -115,7 +115,7 @@ const ILMContainer = styled.div`
 `
 const ILMLeft = styled.div`
     width: 35%;
-    min-width: 250px;
+    /* min-width: 250px; */
     aspect-ratio: 1;
     /* height: 400px; */
     /* background-color: red; */
@@ -128,7 +128,7 @@ const ILMLeft = styled.div`
         width: 350%;
         /* max-width: 350%; */
         /* height: auto; */
-        object-fit: fill;
+        object-fit: contain;
     }
 
     @media all and (max-width: 680px){
@@ -187,13 +187,14 @@ const DownloadsContainer = styled.div`
 const DownloadIcon = styled.div`
     border: 1px solid #BFBFBF;
     width: 40px;
-    aspect-ratio: 1;
+    height: 40px;
     padding: 7px;
     border-radius: 5px;
     cursor: pointer;
 
     @media all and (max-width: 720px){
         width: 32px;
+        height: 32px;
     }
 
     img{

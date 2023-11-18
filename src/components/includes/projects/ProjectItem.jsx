@@ -53,10 +53,10 @@ const Container = styled.div`
     }
 
     @media all and (max-width:560px){
-        padding: 28px;
+        padding: 48px 28px;
     }
     @media all and (max-width:480px){
-        padding: 20px;
+        padding: 38px 20px;
         justify-content: center;
     }
 `

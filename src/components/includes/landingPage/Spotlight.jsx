@@ -3,10 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import ServicePopup from '../spotlight/ServicePopup'
 
-// import infinityAnimation from "../../../assets/GIF/infinity-animation.gif"
-import infinityAnimation from "../../../assets/videos/infinity.mp4"
-import AnimatedSectionTitle from '../general/AnimatedSectionTitle'
 import useDimension from '../../hooks/useDimension'
+import AnimatedSectionTitle from '../general/AnimatedSectionTitle'
 
 
 const Spotlight = () => {
@@ -49,6 +47,10 @@ const Spotlight = () => {
                 setActive(false)
             }
         })
+
+        document
+            .querySelector("video")
+            .play()
 
         return () => unSubscribe()
     }, [])
@@ -167,9 +169,8 @@ const Spotlight = () => {
                 style={{ ...lapframeStyles("parent"), opacity }}
             >
                 <LapScreen>
-                    <video autoPlay loop muted>
-                        <source src={infinityAnimation} type="video/mp4" />
-                        Your browser does not support the video tag.
+                    <video autoPlay controls={false} loop muted playsInline>
+                        <source src="https://d2chzhwk8f0zsl.cloudfront.net/ruppells-group-videos/Infinity+vieo_Spotlight.mp4" type="video/mp4" />
                     </video>
                 </LapScreen>
             </LapFrame>
@@ -207,6 +208,7 @@ export default Spotlight
 const Container = styled.section`
     height: 150vh;
     width: 100%;
+    overflow-x: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,8 +227,6 @@ const LapFrame = styled(motion.div)`
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    /* scale: 1; */
-    /* background: url('/images/Laptop.png') -15px 22px no-repeat; */
     background: url(/images/Laptop-02.png) 54% center no-repeat;
     background-size: 85%;
     /* background-size: cover; */
@@ -339,9 +339,6 @@ const LapScreen = styled.div`
     /* top: 18vh; */
     z-index: 10;
     pointer-events: all;
-    /* background: url("../../../assets/videos/infinity.mp4") center center no-repeat; */
-    /* background: url(${infinityAnimation}) center center no-repeat; */
-    background-size: cover;
     background-color: #000;
     /* width: 454px;
     height: 288px; */
@@ -356,5 +353,19 @@ const LapScreen = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        position: relative;
+        z-index: 1;
+
+        &::after{
+            content: "";
+            z-index: 10;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(/images/spotlight/top-left.png) 0 0 no-repeat;
+            background-size: cover;
+        }
     }
 `

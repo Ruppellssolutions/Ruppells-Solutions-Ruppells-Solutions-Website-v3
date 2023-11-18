@@ -84,17 +84,17 @@ const Footer = () => {
 export default Footer
 
 const Container = styled.footer`
-    
+    background-color: #fff;
 `
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 42px 0;
+    padding: 22px 0;
 
     @media all and (max-width: 1080px){
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 15px;
     }
 
     @media all and (max-width:480px){
@@ -142,6 +142,7 @@ const Right = styled.div`
         margin-top: 20px;
     }
     p{
+        height: auto;
         text-align: right;
         font-size: 14px;
         color: #747474;
@@ -159,6 +160,7 @@ const Socials = styled.ul`
 
     @media all and (max-width: 640px){
         justify-content: center;
+        padding: 15px 0;
     }
 `
 const SocialIcon = styled.li`

@@ -68,7 +68,7 @@ const Container = styled.div`
     
 `
 const Wrapper = styled.div`
-    padding: 70px 0;
+    padding: 100px 0;
     @media all and (max-width:480px){
         padding: 70px 0 0 0;
 
@@ -100,21 +100,25 @@ const ClientsList = styled.ul`
     align-items: center;
     /* justify-content: center; */
     flex-wrap: wrap;
-    /* gap: calc(20px / 6px); */
+    gap: calc(25% / 6);
     margin-bottom: 38px;
-`
-const ClientItem = styled.li`
-    width: 12%;
 
     @media all and (max-width:860px){
-        width: 20%;
+        gap: calc(10% / 3);
     }
-    @media all and (max-width:640px){
+`
+const ClientItem = styled.li`
+    width: 16%;
+
+    @media all and (max-width:860px){
+        width: 30%;
+    }
+    /* @media all and (max-width:640px){
         width: 26%;
     }
     @media all and (max-width:480px){
         width: 32%;
-    }
+    } */
     img{
         width: 80%;
         margin: 0 auto;

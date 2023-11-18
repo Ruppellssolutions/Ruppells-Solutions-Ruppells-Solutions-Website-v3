@@ -25,7 +25,7 @@ const NavigateFuture = () => {
 export default NavigateFuture
 
 const StickyContainer = styled.section`
-    height: 150vh;
+    /* height: 150vh; */
 `
 
 const Container = styled.div`
@@ -49,6 +49,13 @@ const Container = styled.div`
 const Left = styled.div`
     width: 50%;
     /* overflow: hidden; */
+
+    @media all and (max-width: 640px){
+        width: 70%;
+    }
+    @media all and (max-width: 460px){
+        width: 90%;
+    }
 
     img{
         width: 110%;

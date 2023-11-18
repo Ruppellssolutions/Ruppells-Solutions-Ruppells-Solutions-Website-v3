@@ -22,9 +22,9 @@ const Services = () => {
         }
     }, [activeIndexes, activeIndex]);
 
-    const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
-        1.8
-        }%`;
+    // const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
+    //     1.8
+    //     }%`;
 
     const containerRef = useRef(null);
 
@@ -49,7 +49,7 @@ const Services = () => {
             const scrollY = +e.toFixed(2);
 
             services.forEach((item, i) => {
-                if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.1) {
+                if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.2) {
                     addItem(item.slug);
                 }
             });
@@ -77,7 +77,7 @@ const Services = () => {
         7: top7,
     }
 
-    const height = useTransform(scrollYProgress,[0,1],["10%","100%"])
+    const height = useTransform(scrollYProgress, [0, 1], ["10%", "100%"])
 
     return (
         <Container id="services" ref={containerRef}>
@@ -141,7 +141,9 @@ const Services = () => {
                                         key={i}
                                         top={tops[ite.slug]}
                                         serviceItem={ite}
+                                        setActiveService={setActiveService}
                                         scrollY={scrollYProgress}
+                                        prevItem={services[i - 0]}
                                     // activeIndex={activeIndexes}
                                     // isActive={activeIndexes.includes(i + 1)}
                                     />
@@ -172,9 +174,9 @@ const Wrapper = styled.div`
 `;
 const Content = styled(motion.div)`
     background-color: #fbfbfc;
-    height: 90vh;
+    height: 95vh;
     border: 1px solid #808080cc;
-    border-radius: 20px;
+    border-radius: 80px 80px 52px 52px;
     padding: 32px;
     width: 90%;
     margin: 0 5%;
@@ -183,15 +185,18 @@ const Content = styled(motion.div)`
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     @media all and (max-width: 980px) {
         width: 100%;
         margin: 0;
+        border-radius: 48px 48px 28px 28px;
         padding: 32px 12px;
     }
     @media all and (max-width: 720px) {
         padding: 12px 6px;
+        gap: 42px;
+        border-radius: 38px 38px 20px 20px;
     }
     @media all and (max-width: 640px) {
         top: 12vh;
@@ -280,7 +285,7 @@ const ServiceContent = styled.div`
     @media all and (max-width: 720px) {
         flex-direction: column;
         padding: 26px;
-        max-height: 70vh;
+        max-height: 70%;
     }
     @media all and (max-width: 460px) {
         padding: 16px;
@@ -288,9 +293,13 @@ const ServiceContent = styled.div`
 
     .left,
     .right {
-        height: 320px;
+        height: 400px;
         width: calc(50% - 20px - 14px);
         /* background-color: #666; */
+
+        @media all and (max-width: 768px) {
+            height: 360px;
+        }
     }
 
     .right {
@@ -313,7 +322,7 @@ const ServiceContent = styled.div`
     .left {
         display: flex;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
 
         @media all and (max-width: 1180px) {
             width: 38%;

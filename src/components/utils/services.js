@@ -1,11 +1,11 @@
 const services = [
     {
         slug: 1,
-        startingPoint:0.15,
+        startingPoint: 0,
         title: "Web & App Development",
         category: "IT_SERVICES",
-        image: "/images/services/website-development.png",
-        icon:"/icons/services/web-app-dev.svg",
+        image: "/images/services/web-and-app-dev.png",
+        icon: "/icons/services/web-app-dev.svg",
         services: [
             {
                 title: "Static Websites",
@@ -23,11 +23,11 @@ const services = [
     },
     {
         slug: 2,
-        startingPoint:0.30,
+        startingPoint: 0.15,
         title: "Web Hosting",
         category: "IT_SERVICES",
-        image: "/images/services/web-app-dev.png",
-        icon:"/icons/services/website-dev.svg",
+        image: "/images/services/web-hosting.png",
+        icon: "/icons/services/website-dev.svg",
         services: [
             {
                 title: "Dedicated Hosting",
@@ -42,11 +42,11 @@ const services = [
     },
     {
         slug: 3,
-        startingPoint:0.45,
+        startingPoint: 0.30,
         title: "UI/UX Design",
         category: "IT_SERVICES",
-        image: "/images/services/mobile-app-dev.png",
-        icon:"/icons/services/mobile-app-dev.svg",
+        image: "/images/services/ui-ux.png",
+        icon: "/icons/services/mobile-app-dev.svg",
         services: [
             {
                 title: "Web Design",
@@ -64,11 +64,11 @@ const services = [
     },
     {
         slug: 4,
-        startingPoint:0.60,
+        startingPoint: 0.45,
         title: "Enterprise Solutions",
         category: "IT_SERVICES",
-        image: "/images/services/e-commerce.png",
-        icon:"/icons/services/website-dev.svg",
+        image: "/images/services/enterprise.png",
+        icon: "/icons/services/website-dev.svg",
         services: [
             {
                 title: "CRM",
@@ -83,11 +83,11 @@ const services = [
     },
     {
         slug: 5,
-        startingPoint:0.75,
+        startingPoint: 0.60,
         title: "Branding",
         category: "DIGITAL_MARKETING",
         image: "/images/services/branding.png",
-        icon:"/icons/services/branding.svg",
+        icon: "/icons/services/branding.svg",
         services: [
             {
                 title: "Brand Consultation",
@@ -111,11 +111,11 @@ const services = [
     },
     {
         slug: 6,
-        startingPoint:0.90,
+        startingPoint: 0.75,
         title: "Digital Marketing",
         category: "DIGITAL_MARKETING",
-        image: "/images/services/social-media-marketing.png",
-        icon:"/icons/services/social-media-marketing.svg",
+        image: "/images/services/digital-marketing.png",
+        icon: "/icons/services/social-media-marketing.svg",
         services: [
             {
                 title: "SMO (Social Media Optimisation)",
@@ -142,11 +142,11 @@ const services = [
     },
     {
         slug: 7,
-        startingPoint:1.00,
+        startingPoint: 0.90,
         title: "Media & Advertisements",
         category: "DIGITAL_MARKETING",
-        image: "/images/services/content-marketing.png",
-        icon:"/icons/services/content-marketing.svg",
+        image: "/images/services/media-and-ad.png",
+        icon: "/icons/services/content-marketing.svg",
         services: [
             {
                 title: "Video Production",

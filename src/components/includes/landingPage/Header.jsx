@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-scroll'
-import { Link as BrowserLink, NavLink } from "react-router-dom"
-import styled from 'styled-components'
+import { Link as BrowserLink } from "react-router-dom"
+import styled, { css } from 'styled-components'
 import ResNavMenu from '../header/ResNavMenu'
 import Nav from '../header/Nav'
 
@@ -63,7 +62,9 @@ const Wrapper = styled.div`
 
             img{
                 width: 80px;
-                filter: drop-shadow(5px 5px 10px #000000);
+                ${({ theme }) => theme === "LIGHT" && css`
+                    filter: drop-shadow(5px 5px 10px #000000);   
+                `}
 
                 @media all and (max-width: 768px){
                     width: 56px;
@@ -87,7 +88,9 @@ const Wrapper = styled.div`
                 cursor: pointer;
                 font-size: 14px;
                 position: relative;
-                text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+                ${({ theme }) => theme === "LIGHT" && css`
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+                `}
 
                 &::before{
                     position: absolute;

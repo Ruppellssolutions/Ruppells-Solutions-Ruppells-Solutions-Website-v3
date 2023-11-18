@@ -13,7 +13,7 @@ const Location = () => {
 
     return (
         <Container>
-            <Wrapper className="wrapper">
+            <Wrapper>
                 <div className="content">
                     <img src="/images/location-map.png" alt="map" />
                     <Pin>
@@ -49,17 +49,34 @@ const Location = () => {
 export default Location
 
 const Container = styled.section`
-    padding: 32px 0;
+    background-color: #fff;
+    padding: 32px 0 0 0;
     position: relative;
 
     @media all and(max-width:480){
-        padding: 12px 0;
+        padding: 12px 0 0 0 ;
     }
 `
 const Wrapper = styled.div`
-    max-width: 90%;
+    overflow-x: hidden;
+    /* max-width: 90%; */
     .content{
         position: relative;
+        margin: auto; /* Centers the container horizontally */
+        text-align: center; /* Centers inline elements like images */
+
+        &>img{
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            
+            @media all and (max-width: 640px){
+                object-fit: cover;
+                object-position: center;
+                width: 100%;
+                height: 300px;
+            }
+        }
     }
 `
 const Pin = styled.div`

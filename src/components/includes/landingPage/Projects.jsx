@@ -11,13 +11,30 @@ const Projects = ({ scrollYProgress }) => {
     const headY = useTransform(scrollYProgress, [0.3, 0.4], ["0", "-100vh"])
     const enlargeX = useTransform(scrollYProgress, [0.3, 0.4], ["7.5vw", "0vw"])
     const enlargeY = useTransform(scrollYProgress, [0.3, 0.4], [370, 0])
+    const borderRedius = useTransform(scrollYProgress, [0.3,0.4],[80,0])
     const sliderX = useTransform(scrollYProgress, [0.4, 1], ["0vw", "-160vw"])
     const y = useTransform(scrollYProgress, [0.3, 0.4], [100, 0])
+
+    const { width } = useDimension()
+
+    const { scrollYProgress: innerScrollY } = useScroll({
+        target: containerRef
+    })
+
+    const y1 = useTransform(innerScrollY, [0, .1], ["-100vh", "-100vh"])
+    const y2 = useTransform(innerScrollY, [.3, .55], ["0", "-100vh"])
+    const y3 = useTransform(innerScrollY, [.6, .9], ["0", "-100vh"])
+
+    const x1 = useTransform(scrollYProgress, [0.4, .58], ["0vw", "0vw"])
+    const x2 = useTransform(scrollYProgress, [0.6, .78], ["-80vw", '0vw'])
+    const x3 = useTransform(scrollYProgress, [0.6, 1], ["-160vw", "0vw"])
 
     const projects = [
         {
             id: 1,
             title: "Arab Dreams",
+            x: x1,
+            y: y1,
             bg: "/images/projects/project-01.png",
             description: "Elevating digital dreams with Arab Dreams, where their CRM software seamlessly aligns with our commitment to service excellence. Together, we navigate the digital landscape, shaping a future where innovation meets unparalleled customer satisfaction.",
             logo: "/icons/logo/arab-dreams.svg",
@@ -42,6 +59,8 @@ const Projects = ({ scrollYProgress }) => {
         {
             id: 2,
             title: "Ruppells Overseas",
+            x: x2,
+            y: y2,
             bg: "/images/projects/project-02.png",
             description: "Proudly partnered with Ruppells Overseas, a beacon of excellence in study abroad consultancy based in Kochi, Kerala. Our digital strategies amplify success stories, guiding clients to academic triumphs in this tech-driven era.",
             logo: "/icons/logo/ruppells-overseas.svg",
@@ -74,6 +93,8 @@ const Projects = ({ scrollYProgress }) => {
         {
             id: 3,
             title: "Reverse Gear",
+            x: x3,
+            y: y3,
             bg: "/images/projects/project-03.png",
             description: "At Reverse Gear's Kollam car station, delighted clients reflect the unwavering commitment to service excellence and customer satisfaction, ensuring their journeys thrive with seamless digital experiences.",
             logo: "/icons/logo/reverse-gear.svg",
@@ -101,8 +122,6 @@ const Projects = ({ scrollYProgress }) => {
         },
     ]
 
-    const { width } = useDimension()
-
     return (
         <Container
             ref={containerRef}
@@ -124,24 +143,31 @@ const Projects = ({ scrollYProgress }) => {
                         style={{
                             x: width > 860 && enlargeX,
                             y: width > 860 && enlargeY,
+                            borderTopLeftRadius: width > 60 && borderRedius
                         }}
                     >
-                        <motion.div
-                            className="project-container"
-                            style={{
-                                x: width > 860 && sliderX
-                            }}
-                        >
-                            {projects.map((pro, i) => (
-                                <ProjectItemContainer
-                                    key={pro.id}
-                                >
-                                    <ProjectItem
-                                        project={pro}
-                                    />
-                                </ProjectItemContainer>
-                            ))}
-                        </motion.div>
+                        <div className='child'>
+                            <motion.div
+                                className="project-container"
+                                style={{
+                                    x: width > 860 && sliderX
+                                }}
+                            >
+                                {projects.map((pro, i) => (
+                                    <ProjectItemContainer
+                                        key={pro.id}
+                                        style={{
+                                            y: width < 860 && pro.y,
+                                            // x: width > 860 && pro.x,
+                                        }}
+                                    >
+                                        <ProjectItem
+                                            project={pro}
+                                        />
+                                    </ProjectItemContainer>
+                                ))}
+                            </motion.div>
+                        </div>
                     </ProjectsContainer>
                     <ProjectsCountContainer
                         style={{ y: width > 860 && y }}
@@ -167,27 +193,30 @@ const Container = styled.section`
     overflow-y: scroll;
 
     @media all and (max-width: 860px) {
-        max-height: calc(300vh + 320px);
-        height: calc(300vh + 320px);
+        max-height: max-content;
+        overflow: unset;
+        /* max-height: calc(300vh + 320px);
+        height: calc(300vh + 320px); */
     }
-
+/* 
     @media all and (max-width: 460px){
         max-height: calc(300vh + 280px);
         height: calc(300vh + 280px);
-    }
+    } */
 `
 const Wrapper = styled.div`
     /* height: 400vh; */
     position: relative;
 `
 const Content = styled.div`
-    position: sticky;
-    top: 0;
+    /* position: sticky;
+    top: 0; */
     height: 100vh;
     /* height: max-content; */
 
     @media all and (max-width: 860px) {
-        /* height: max-content; */
+        height: max-content;
+        overflow: unset;
         /* overflow: scroll; */
     }
 `
@@ -256,87 +285,58 @@ const Head = styled(motion.div)`
         }
     }
 `
-const ScrollWrapper = styled.div`
-    overflow-y: scroll;
-    max-height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-`
-const ScrollContainer = styled.div`
-    width: 100%;
-    height: 140vh;
-    z-index: 100;
-    transform: translateX(0);
-    transition: transform 3s ease-in-out;
-
-    &.product{
-        transform: translateX(300%);
-    }
-    &{
-        user-select: none;
-        /* pointer-events: auto; */
-    }
-`
-const IntersectionItem = styled.div`
-    height: 20px;
-    background-color: red;
-    margin-bottom: 120px;
-`
-
 const ProjectsContainer = styled(motion.div)`
     position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
+    width: 100vw;
     z-index: 1;
-    border-top-left-radius: 20px;
+    border-top-left-radius: 60px;
     overflow: hidden;
     transform: translate(7.5%,370px);
+    
 
     @media all and (max-width: 860px){
-        height: 300vh;
         transform: translate(0,0) !important;
         border-radius: 0;
-        position: relative;
+        min-height: 300vh;
+        height: 300vh;
+        position: static;
+        top: unset;
+        left: unset;
         z-index: 100;
+        overflow: unset;
+        /* background-color: red; */
     }
-    /* transition: all 1s ease-in-out; */
 
-    /* @media all and (max-width: 860px){
-        height: max-content;
-        overflow: scroll;
-        position: relative;
-    } */
-
-    &.enlarged{
-        transform: translate(0,0);
-        border-radius: 0;
+    &>div.child{
+        @media all and (max-width: 860px){
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 600;
+        }
     }
 
     .project-container{
+        width: 100%;
+        height: 100%;
         display: flex;
         flex-wrap: wrap;
         width: max-content;
+        position: relative;
 
         @media all and (max-width: 860px){
             width: 100vw;
-            height: max-content;
+            height: 100vh;
+            overflow: hidden;
+            /* position: sticky;
+            top: 10vh;
+            left: 0;*/
         }
     }
 `
-// const ProjectItem = styled.div`
-//     width: 80%;
-//     height: 100%;
-//     background-color: #3178b5;
-//     padding: 100px;
-//     position: absolute;
-//     left: 160%;
-//     top:0;
-//     transition: all 1s ease-in-out;
-// `
 const ProjectsCountContainer = styled(motion.div)`
     position: absolute;
     left: 0;
@@ -395,17 +395,25 @@ const ProjectsCountContainer = styled(motion.div)`
         }
     }
 `
-const ProjectItemContainer = styled.div`
+const ProjectItemContainer = styled(motion.div)`
     width: 80vw;
     height: 100vh;
+
+    /* position: absolute;
+    top: 0; */
+    /* left: 0; */
+
     @media all and (max-width:480px){
         width: 91vw;
     } 
 
     @media all and (max-width: 860px) {
         width: 100vw;
-        max-height: max-content;
-        min-height: 100vh;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        bottom: -100vh;
+        /* min-height: 100vh; */
     }
        /* position: absolute;
     left: 160%;

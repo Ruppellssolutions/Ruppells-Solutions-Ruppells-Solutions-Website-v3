@@ -30,7 +30,7 @@ export default ProjectReferal;
 
 const Container = styled.section`
     position: relative;
-    height: 180vh;
+    height: 200vh;
 `;
 const Wrapper = styled.div`
     padding: 60px 0;

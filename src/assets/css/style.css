@@ -11,7 +11,9 @@
     /* overflow-x: hidden !important; */
     font-family: "Satoshi-Regular";
 }
-
+html, body {
+    touch-action: manipulation;
+}
 body {
     overflow-x: hidden !important;
     font-family: "Satoshi-Regular";
