@@ -11,7 +11,7 @@ const Projects = ({ scrollYProgress }) => {
     const headY = useTransform(scrollYProgress, [0.3, 0.4], ["0", "-100vh"])
     const enlargeX = useTransform(scrollYProgress, [0.3, 0.4], ["7.5vw", "0vw"])
     const enlargeY = useTransform(scrollYProgress, [0.3, 0.4], [370, 0])
-    const borderRedius = useTransform(scrollYProgress, [0.3,0.4],[80,0])
+    const borderRedius = useTransform(scrollYProgress, [0.3,0.4],[55,0])
     const sliderX = useTransform(scrollYProgress, [0.4, 1], ["0vw", "-160vw"])
     const y = useTransform(scrollYProgress, [0.3, 0.4], [100, 0])
 
@@ -292,7 +292,7 @@ const ProjectsContainer = styled(motion.div)`
     height: 100vh;
     width: 100vw;
     z-index: 1;
-    border-top-left-radius: 60px;
+    border-top-left-radius: 40px;
     overflow: hidden;
     transform: translate(7.5%,370px);
     

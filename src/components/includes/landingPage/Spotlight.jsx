@@ -35,7 +35,7 @@ const Spotlight = () => {
     const scrollMoreOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
     const opacity = useTransform(globalScrollY, [.28, .3], [1, 0])
 
-    const serviceWidth = useTransform(scrollYProgress, [0, 1], ["30%", "95%"])
+    const serviceWidth = useTransform(scrollYProgress, [0, 1], ["30vw", "95vw"])
     const serviceScale = useTransform(scrollYProgress, [0, 1], [0.3, 1])
 
     useEffect(() => {
@@ -157,14 +157,6 @@ const Spotlight = () => {
 
     return (
         <Container ref={targetRef} className='Spotlight'>
-            <ServicePopup
-                isActive={width < 950 && isActive}
-                style={{
-                    opacity,
-                    width: width > 950 && serviceWidth,
-                    scale: width > 950 && serviceScale,
-                }}
-            />
             <LapFrame
                 style={{ ...lapframeStyles("parent"), opacity }}
             >
@@ -199,6 +191,14 @@ const Spotlight = () => {
                     </span>
                 </motion.p>
             </LapScreenContent>
+            <ServicePopup
+                isActive={width < 950 && isActive}
+                style={{
+                    opacity,
+                    width: width > 950 && serviceWidth,
+                    scale: width > 950 && serviceScale,
+                }}
+            />
         </Container>
     )
 }
@@ -207,7 +207,7 @@ export default Spotlight
 
 const Container = styled.section`
     height: 150vh;
-    width: 100%;
+    width: 100vw;
     overflow-x: hidden;
     display: flex;
     align-items: center;

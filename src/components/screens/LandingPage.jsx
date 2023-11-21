@@ -45,10 +45,10 @@ const LandingPage = () => {
         setHeight(bottomContentHeight.clientHeight )
     }, [])
 
-    const scale = useTransform(bottomYProgress, [0.2, 0.4], [0, 4])
-    const scale460 = useTransform(bottomYProgress, [0.2, 0.4], [0, 20])
+    const scale = useTransform(bottomYProgress, [0.1, 1], [0, 4])
+    const scale460 = useTransform(bottomYProgress, [0.1, 1], [0, 8])
     // const opacity = useTransform(bottomYProgress, [0.22, 0.23], [1, 0]);
-    const y = useTransform(bottomYProgress, [0.4, 1], ["0px", `-${bottomContentHeight}px`])
+    const y = useTransform(bottomYProgress, [0.7, 1], ["0px", `-${bottomContentHeight}px`])
 
     useEffect(() => {
         const preventZoom = (e) => {
@@ -128,6 +128,9 @@ const LandingPage = () => {
                             <PopupContainer
                                 style={{
                                     scale: width <= 460 ? scale460 : scale,
+                                }}
+                                transition={{
+                                    stiffness: 500
                                 }}
                             >
                                 <div className="first-child">
@@ -270,6 +273,7 @@ const PopupContainer = styled(motion.div)`
     /* z-index: 200; */
     /* width: 100vw;
     aspect-ratio: 1; */
+    transform: all 0.5s ease-in-out;
     border: 400px solid #e7c6ff;
     border-radius: 50%;
     user-select: none;

@@ -178,10 +178,10 @@ const Content = styled(motion.div)`
     border: 1px solid #808080cc;
     border-radius: 80px 80px 52px 52px;
     padding: 32px;
-    width: 90%;
+    width: 88%;
     margin: 0 5%;
     position: sticky;
-    top: 15vh;
+    top: 12vh;
 
     display: flex;
     flex-direction: column;
@@ -277,24 +277,28 @@ const Head = styled.div`
 const ServiceContent = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     max-height: 480px;
     width: 100%;
     padding: 32px;
+    padding-top: 26px;
 
     @media all and (max-width: 720px) {
         flex-direction: column;
         padding: 26px;
+        padding-top: 22px;
         max-height: 70%;
     }
     @media all and (max-width: 460px) {
         padding: 16px;
+        padding-top: 10px;
     }
 
     .left,
     .right {
         height: 400px;
-        width: calc(50% - 20px - 14px);
+        width: calc(48% - 20px - 14px);
         /* background-color: #666; */
 
         @media all and (max-width: 768px) {
@@ -338,6 +342,8 @@ const ServiceContent = styled.div`
         h5,
         span {
             /* max-width: 70%; */
+            display: block;
+            max-width: 60%;
             color: #202020;
             font-size: 38px;
             font-family: Satoshi-Medium;

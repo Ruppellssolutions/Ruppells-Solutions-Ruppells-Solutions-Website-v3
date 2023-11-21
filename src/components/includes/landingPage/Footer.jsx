@@ -7,11 +7,11 @@ const Footer = () => {
     const socialIcons = [
         {
             icon: "/icons/social/instagram.svg",
-            link: "https://instagram.com/ruppells__solutions?igshid=NzZlODBkYWE4Ng==",
+            link: "https://instagram.com/ruppells__solutions",
         },
         {
             icon: "/icons/social/facebook.svg",
-            link: "https://www.facebook.com/profile.php?id=100092528386984",
+            link: "https://www.facebook.com/Ruppellssolution",
         },
         {
             icon: "/icons/social/threads.svg",

@@ -45,7 +45,7 @@ export default Product
 const Container = styled.section`
     width: 100%;
     /* min-height: 100vh; */
-    padding: 100px 0 32px;
+    padding: 132px 0 32px;
     z-index: 10;
     position: relative;
 

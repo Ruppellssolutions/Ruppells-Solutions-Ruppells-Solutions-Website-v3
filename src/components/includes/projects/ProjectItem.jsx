@@ -17,13 +17,19 @@ const ProjectItem = ({ project = {} }) => {
                     <h5 className="title">
                         {project.title.split(" ")[0]} <span className="bold">{project.title.split(" ")[1]}</span>
                     </h5>
+                    <BottomContent className='middle'>
+                        <p className="description">{project.description}</p>
+                        {/* <span className="icon">
+                        <img src="/icons/main/right-arrow.svg" alt="right arrow" />
+                    </span> */}
+                    </BottomContent>
                     <ul className="tags">
                         {project.tags.map((tag, i) => (
                             <li key={tag.id}>{tag.title}</li>
                         ))}
                     </ul>
                 </BottomHead>
-                <BottomContent>
+                <BottomContent className='end'>
                     <p className="description">{project.description}</p>
                     {/* <span className="icon">
                         <img src="/icons/main/right-arrow.svg" alt="right arrow" />
@@ -40,7 +46,7 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     /* background-color: #3178b5; */
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) -18.02%, rgba(0, 0, 0, 0.60) 87.68%),url(${({bg}) => bg}) center center no-repeat;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) -18.02%, rgba(0, 0, 0, 0.60) 87.68%),url(${({ bg }) => bg}) center center no-repeat;
     background-size: cover;
     padding: 100px;
     display: flex;
@@ -100,10 +106,11 @@ const BottomHead = styled.div`
     display: flex;
     align-items: end;
     justify-content: space-between;
-    gap: 58px;
+    /* gap: 58px; */
     flex-wrap: wrap;
-    @media all and (max-width:480px){
+    @media all and (max-width:1280px){
         gap: 26px;
+        margin: 0;
     }
 
     h5{
@@ -125,14 +132,19 @@ const BottomHead = styled.div`
         }
     }
     ul.tags{
-        /* max-width: 60%; */
-        width: 100%;
+        max-width: 60%;
+        /* width: 100%; */
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-direction: row-reverse;
         gap: 18px;
         flex-wrap: wrap;
+
+        @media all and (max-width:1280px){
+            max-width: 100%;
+        }
+
         @media all and (max-width:480px){
             justify-content: flex-end;
             gap: 10px;
@@ -155,6 +167,19 @@ const BottomContent = styled.div`
     align-items: center;
     justify-content: space-between;
     /* display:none; */
+
+    &.middle{
+        display: none;
+
+        @media all and (max-width: 1280px){
+            display: flex;
+        }
+    }
+    &.end{
+        @media all and (max-width: 1280px){
+            display: none;
+        }
+    }
 
     @media all and (max-width:560px){
         flex-direction: column;

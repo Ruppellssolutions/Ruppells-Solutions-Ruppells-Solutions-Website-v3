@@ -49,41 +49,42 @@ const Container = styled(motion.div)`
     translate: -50% -50%;
     transform: translate(-50%, -50%) scale(0.3);
     z-index: 2;
-    width: 30%;
+    width: 30vw;
     height: auto;
     display: flex;
     gap: 8px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     opacity: 0.2;
     
     @media all and (max-width: 950px) {
-        transition: all 0.3s ease-in-out;
         bottom: -100vh;
         top: unset;
         left: 2.5%;
-        transform: unset;
-        width: 95%;
+        transform: scale(1);
+        width: 95vw;
         translate: unset;
+        transition: all .3s ease-in-out;
     }
 
     &.active {
-        width: 83%;
+        width: 83vw;
         opacity: 1;
         bottom: 10px;
         transform: translate(-50%, -50%) scale(1);
 
         @media all and (max-width: 1440px) {
-            width: 90%;
+            width: 90vw !important;
         }
         @media all and (max-width: 1180px) {
-            width: 95%;
+            width: 95vw !important;
         }
         @media all and (max-width: 1080px) {
-            width: 100%;
+            width: 100vw !important;
         }
         @media all and (max-width: 980px) {
-            width: 95%;
+            width: 95vw !important;
         }
         @media all and (max-width: 950px) {
             transform: unset;
