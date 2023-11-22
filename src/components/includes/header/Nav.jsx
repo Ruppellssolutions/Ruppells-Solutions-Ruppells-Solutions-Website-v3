@@ -21,8 +21,19 @@ const Nav = ({ type = "ROUTES", onClose = () => { } }) => { // type = "ROUTES" |
             type: "SECTIONS",
         },
         {
+            title: "About Us",
+            link: "/about-us",
+            type: "SECTIONS",
+            isLink: true,
+        },
+        {
             title: "Home",
             link: "/",
+            type: "ROUTES",
+        },
+        {
+            title: "About Us",
+            link: "/about-us",
             type: "ROUTES",
         },
         {
@@ -37,7 +48,7 @@ const Nav = ({ type = "ROUTES", onClose = () => { } }) => { // type = "ROUTES" |
             .filter(nav => nav.type === type)
             .map((nav, i) => (
                 <li key={i}>
-                    {nav.type === "SECTIONS" ? (
+                    {nav.type === "SECTIONS" && !nav?.isLink ? (
                         <Link
                             spy
                             smooth

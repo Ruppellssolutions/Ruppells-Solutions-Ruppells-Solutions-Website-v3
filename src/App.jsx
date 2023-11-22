@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom'
 import Contact from './components/screens/Contact'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import AboutUs from './components/screens/AboutUs'
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
 			<Suspense fallback={<ScreenLoader />}>
 				<Routes>
 					<Route path='' element={<LandingPage />} />
+					<Route path='/about-us' element={<AboutUs />} />
 					<Route path='/contact-us' element={<Contact />} />
 				</Routes>
 			</Suspense>
