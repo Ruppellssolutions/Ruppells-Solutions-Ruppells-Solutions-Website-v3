@@ -68,11 +68,11 @@ const Wrapper = styled.div`
         &>img{
             display: inline-block;
             width: 100%;
-            height: auto;
+            height: 500px;
+            object-fit: cover;
+            object-position: center;
             
             @media all and (max-width: 640px){
-                object-fit: cover;
-                object-position: center;
                 width: 100%;
                 height: 300px;
             }

@@ -10,7 +10,7 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
         <Container
             className={isActive ? "active" : ""}
             style={{
-                ...style,
+                ...style, 
             }}
         >
             <LeftContainer>

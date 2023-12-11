@@ -33,12 +33,12 @@ const AnimatedSectionTitle = ({
 }) => {
     const [index, setIndex] = useState(activeIndex)
 
-    const titlesComps = titles
-        .map((title, i) =>
-            <TitleComp
-                title={title}
-                key={i}
-            />)
+    const titlesComps = titles.map((title, i) =>
+        <TitleComp
+            title={title}
+            key={i}
+        />
+    )
 
     useEffect(() => {
         let id;

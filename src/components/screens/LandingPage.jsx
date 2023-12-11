@@ -42,7 +42,7 @@ const LandingPage = () => {
 
     useEffect(() => {
         const bottomContentHeight = document.getElementById("bottom-content")
-        setHeight(bottomContentHeight.clientHeight )
+        setHeight(bottomContentHeight.clientHeight)
     }, [])
 
     const scale = useTransform(bottomYProgress, [0.1, 1], [0, 4])
