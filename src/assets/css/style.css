@@ -11,7 +11,8 @@
     /* overflow-x: hidden !important; */
     font-family: "Satoshi-Regular";
 }
-html, body {
+html,
+body {
     touch-action: manipulation;
 }
 body {
@@ -144,54 +145,65 @@ input {
 }
 
 @keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
 
 /* icon slider */
 
 @keyframes swipe {
-  0% {
-    transform: translate(0);
-  }
+    0% {
+        transform: translate(0);
+    }
 
-  100% {
-    transform: translate(-100%);
-  }
+    100% {
+        transform: translate(-100%);
+    }
 }
 
 .inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  height: 4rem;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 4rem;
 }
 @media all and (max-width: 480px) {
-  .inner {
-    height: 3rem;
-  }
+    .inner {
+        height: 3rem;
+    }
 }
 
 .iconWrapper {
-  position: absolute;
-  display: flex;
+    position: absolute;
+    display: flex;
 }
 
-.flex{
+.flex {
     display: flex;
 }
-.align-center{
+.align-center {
     align-items: center;
 }
-.justity-center{
+.justity-center {
     justify-content: center;
 }
-.center-align{
+.center-align {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@keyframes moveBanner {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-30%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
