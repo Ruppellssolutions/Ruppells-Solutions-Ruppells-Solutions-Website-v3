@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AboutUs from "./components/screens/AboutUs";
 import AboutUsNew from "./components/screens/AboutUsNew";
+import Portfolio from "./components/screens/Portfolio";
 
 const App = () => {
     useEffect(() => {
@@ -41,6 +42,7 @@ const App = () => {
                     <Route path="/about-us" element={<AboutUsNew />} />
                     {/* <Route path='/about-us' element={<AboutUs />} /> */}
                     <Route path="/contact-us" element={<Contact />} />
+                    <Route path="/portfolio" element={<Portfolio />} />
                 </Routes>
             </Suspense>
         </>

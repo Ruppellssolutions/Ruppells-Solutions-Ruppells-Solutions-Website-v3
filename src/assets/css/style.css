@@ -207,3 +207,19 @@ input {
         transform: translateX(0);
     }
 }
+@keyframes bgshotsright {
+    0% {
+        transform: translate(0%, 0px);
+    }
+    100% {
+        transform: translate(100%, 0px);
+    }
+}
+@keyframes bgshots {
+    0% {
+        transform: translate(0%, 0px);
+    }
+    100% {
+        transform: translate(-100%, 0px);
+    }
+}
