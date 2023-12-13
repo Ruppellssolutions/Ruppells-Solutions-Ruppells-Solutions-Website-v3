@@ -59,11 +59,9 @@ const Container = styled.section`
 `
 const Wrapper = styled.div`
     overflow-x: hidden;
-    /* max-width: 90%; */
+    
     .content{
         position: relative;
-        margin: auto; /* Centers the container horizontally */
-        text-align: center; /* Centers inline elements like images */
 
         &>img{
             display: inline-block;

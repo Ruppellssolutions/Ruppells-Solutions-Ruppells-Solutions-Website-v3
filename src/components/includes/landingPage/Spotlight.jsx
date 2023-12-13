@@ -35,7 +35,7 @@ const Spotlight = () => {
     const scrollMoreOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
     const opacity = useTransform(globalScrollY, [.28, .3], [1, 0])
 
-    const serviceWidth = useTransform(scrollYProgress, [0, 1], ["30vw", "95vw"])
+    const serviceWidth = useTransform(scrollYProgress, [0, 1], ["30vw", "82vw"])
     const serviceScale = useTransform(scrollYProgress, [0, 1], [0.3, 1])
 
     useEffect(() => {

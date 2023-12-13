@@ -26,8 +26,8 @@ const Projects = ({ scrollYProgress }) => {
     const y3 = useTransform(innerScrollY, [.6, .9], ["0", "-100vh"])
 
     const x1 = useTransform(scrollYProgress, [0.4, .58], ["0vw", "0vw"])
-    const x2 = useTransform(scrollYProgress, [0.6, .78], ["-80vw", '0vw'])
-    const x3 = useTransform(scrollYProgress, [0.6, 1], ["-160vw", "0vw"])
+    const x2 = useTransform(scrollYProgress, [0.4, .78], ["80vw", '0vw'])
+    const x3 = useTransform(scrollYProgress, [0.5, 1], ["160vw", "0vw"])
 
     const projects = [
         {
@@ -150,7 +150,7 @@ const Projects = ({ scrollYProgress }) => {
                             <motion.div
                                 className="project-container"
                                 style={{
-                                    x: width > 860 && sliderX
+                                    // x: width > 860 && sliderX
                                 }}
                             >
                                 {projects.map((pro, i) => (
@@ -158,7 +158,7 @@ const Projects = ({ scrollYProgress }) => {
                                         key={pro.id}
                                         style={{
                                             y: width < 860 && pro.y,
-                                            // x: width > 860 && pro.x,
+                                            left: width > 860 && pro.x,
                                         }}
                                     >
                                         <ProjectItem
@@ -399,8 +399,8 @@ const ProjectItemContainer = styled(motion.div)`
     width: 80vw;
     height: 100vh;
 
-    /* position: absolute;
-    top: 0; */
+    position: absolute;
+    top: 0; 
     /* left: 0; */
 
     @media all and (max-width:480px){
@@ -413,6 +413,7 @@ const ProjectItemContainer = styled(motion.div)`
         position: absolute;
         left: 0;
         bottom: -100vh;
+        top: unset;
         /* min-height: 100vh; */
     }
        /* position: absolute;

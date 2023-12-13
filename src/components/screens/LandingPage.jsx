@@ -46,7 +46,7 @@ const LandingPage = () => {
     }, [])
 
     const scale = useTransform(bottomYProgress, [0.1, 1], [0, 4])
-    const scale460 = useTransform(bottomYProgress, [0.1, 1], [0, 8])
+    const scale460 = useTransform(bottomYProgress, [0.1, .8], [0, 10])
     // const opacity = useTransform(bottomYProgress, [0.22, 0.23], [1, 0]);
     const y = useTransform(bottomYProgress, [0.7, 1], ["0px", `-${bottomContentHeight}px`])
 

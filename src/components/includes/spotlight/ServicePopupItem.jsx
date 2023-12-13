@@ -1,28 +1,58 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const ServicePopupItem = ({ title = "", icon = "", type = "LEFT" }) => {
-    // const springConfig = { stiffness: 100, damping: 100, mass: 1 };
+const ServicePopupItem = ({ title = "", icon = "", type = "LEFT", uid = "" }) => {
+    const [isHovering, setHovering] = useState(false)
+
+    const containerRef = useRef()
 
     const onClick = () => {
         const serviceContainer = document.querySelector("#services");
-        // const serviceChild = document.querySelector("#services-child")
 
         serviceContainer.scrollIntoView({
             behavior: "smooth",
         });
     };
 
+    useEffect(() => {
+        if (isHovering) {
+            const currentEl = document.getElementById(uid)
+
+            containerRef.current.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: currentEl.clientHeight,
+            })
+        } else {
+            containerRef.current.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: 0,
+            })
+        }
+    }, [isHovering])
+
     return (
-        <Container className={type} onClick={onClick}>
+        <Container
+            className={type}
+            onClick={onClick}
+            onMouseEnter={e => setHovering(true)}
+            onMouseLeave={e => setHovering(false)}
+        >
             <Left className="center-align">
                 <img src={icon} alt="icon" />
-                {/* <img src="/icons/services/web-app-dev.svg" alt="icon" /> */}
             </Left>
             <Right>
-                <span className="head">{title}</span>
-                <span className="explore">Explore</span>
+                <TitleContainer ref={containerRef}>
+                    <span id={uid} className="head">{title}</span>
+                    <span className="head">{title}</span>
+                </TitleContainer>
+                <span
+                    className={`explore ${isHovering ? "active" : ""}`}
+                >
+                    Explore
+                </span>
             </Right>
         </Container>
     );
@@ -35,7 +65,8 @@ const Container = styled(motion.div)`
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(3px);
-    /* width: max-content; */
+    width: max-content;
+    
     display: flex;
     width: 90%;
     align-items: center;
@@ -60,7 +91,6 @@ const Container = styled(motion.div)`
             }
         }
     } 
-
     &:nth-child(2) {
         margin-right: 24px;
 
@@ -73,6 +103,10 @@ const Container = styled(motion.div)`
         &.LEFT {
             margin-right: 24px;
         }
+    }
+    
+    .upper{
+        
     }
 `;
 const Left = styled.div`
@@ -97,7 +131,6 @@ const Right = styled.div`
         &.head {
             color: #f2f2f2;
             font-size: 14px;
-            margin-bottom: 6px;
 
             @media all and (max-width: 1080px) {
                 font-size: 12px;
@@ -107,6 +140,25 @@ const Right = styled.div`
             cursor: pointer;
             color: #ababab;
             font-size: 12px;
+            position: relative;
+            width: max-content;
+
+            &::after{
+                content: "";
+                width: 0;
+                height: 1px;
+                border-radius: 0.5px;
+                position: absolute;
+                right: -105%;
+                top: 50%;
+                transition: all 0.5s ease-in-out;
+            }
+            &.active{
+                &::after{
+                    width: 30px;
+                    background-color: #fff;
+                }
+            }
 
             @media all and (max-width: 1080px) {
                 font-size: 10px;
@@ -117,3 +169,13 @@ const Right = styled.div`
         display: block;
     }
 `;
+
+const TitleContainer = styled.div`
+    height: 20px;
+    overflow: hidden;
+    margin-bottom: 6px;
+
+    @media all and (max-width: 1080px) {
+        height: 17px;
+    }
+`

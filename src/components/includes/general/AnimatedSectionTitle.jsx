@@ -1,26 +1,17 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 
-const TitleComp = ({ title = { title: "Title One" } }) => {
+const TitleComp = ({ title = { title: "Title One" }, id = "01", className = "" }) => {
     return (
-        <motion.span
-            initial={{
-                y: -1
-            }}
-            animate={{
-                y: 0
-            }}
-            exit={{
-                y: 1
-            }}
-            transition={{
-                type: "spring",
-            }}
+        <span
+            id={id}
+            data-scroll-height-multiple={'wh'}
+            className={className}
         >
             {title.title}
-        </motion.span>
+        </span>
     )
 }
 
@@ -33,12 +24,9 @@ const AnimatedSectionTitle = ({
 }) => {
     const [index, setIndex] = useState(activeIndex)
 
-    const titlesComps = titles.map((title, i) =>
-        <TitleComp
-            title={title}
-            key={i}
-        />
-    )
+    const tempTitles = titles.map((title, i) => ({ ...title, id: i + 1 }))
+
+    const containerRef = useRef()
 
     useEffect(() => {
         let id;
@@ -46,7 +34,7 @@ const AnimatedSectionTitle = ({
         if (infinity) {
             id = setInterval(() => {
                 setIndex((prevIndex) => {
-                    return prevIndex + 1 === titles.length ? 0 : prevIndex + 1
+                    return prevIndex === titles.length ? 0 : prevIndex + 1
                 })
             }, 2000)
         }
@@ -56,13 +44,43 @@ const AnimatedSectionTitle = ({
         }
     }, [])
 
-    const tempIndex = infinity ? index : activeIndex
+    useEffect(() => {
+        if (infinity) {
+            const currentEl = document.getElementById(`0${index}`)
+
+            containerRef?.current.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: index * currentEl?.clientHeight,
+            })
+        }
+    }, [index])
+
+    useEffect(() => {
+        if (!infinity) {
+            const currentEl = document.getElementById(`00${activeIndex + 1}`)
+
+            containerRef.current.scrollTo({
+                behavior: "smooth",
+                left: 0,
+                top: activeIndex * currentEl.clientHeight,
+            })
+        }
+    }, [activeIndex])
 
     return (
-        <Container>
-            <AnimatePresence mode='wait'>
-                {titlesComps[tempIndex]}
-            </AnimatePresence>
+        <Container
+            className={`titles-container ${infinity ? "infinity" : ""}`}
+            ref={containerRef}
+        >
+            {tempTitles.map((title, i) => (
+                <TitleComp
+                    id={infinity ? `0${title.id}` : `00${title.id}`}
+                    className={title?.className}
+                    title={title}
+                    key={i}
+                />
+            ))}
         </Container>
     )
 }
@@ -70,8 +88,42 @@ const AnimatedSectionTitle = ({
 export default AnimatedSectionTitle
 
 const Container = styled.div`
-    display: inline-flex;
-    align-items: center;
-    /* height: max-content; */
     overflow: hidden;
+    height: 78px;
+    
+    &.infinity{
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    @media all and (max-width: 980px){
+        height: 56px;
+    }
+    @media all and (max-width: 768px){
+        height: 45px;
+    }
+    @media all and (max-width: 460px){
+        height: 35px;
+    }
+
+    span{
+        display: block;
+        /* height: 78px; */
+        font: inherit;
+        /* font-family: Satoshi-Medium;
+        background:linear-gradient(106deg, #CE4FE3 0%, #36B2EA 101.89%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; */
+
+        @media all and (max-width: 980px){
+            height: 56px;
+        }
+        @media all and (max-width: 768px){
+            height: 45px;
+        }
+        @media all and (max-width: 460px){
+            height: 35px;
+        }
+    }
 `

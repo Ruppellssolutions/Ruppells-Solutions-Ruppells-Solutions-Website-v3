@@ -172,12 +172,17 @@ const SocialIcon = styled.li`
 
         img{
             height: 24px;
+            width: 24px;
+            object-fit: contain;
+            object-position: center;
         }
     }
 `
 const MiddleTop = styled.div`
     img{
         width: 100px;
+        height: 45px;
+        object-fit: contain;
 
         @media all and (max-width: 768px){
             width: 70px;
@@ -198,6 +203,8 @@ const MiddleBottom = styled.div`
 
     img{
         width: 100px;
+        height: 28px;
+        object-fit: contain;
         cursor: pointer;
 
         @media all and (max-width: 768px){

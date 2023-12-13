@@ -20,6 +20,7 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
                         <ServicePopupItem
                             isActive={isActive}
                             key={service.slug}
+                            uid={service.slug}
                             {...service}
                         />
                     ))}
@@ -32,6 +33,7 @@ const ServicePopup = ({ isActive = false, style = {} }) => {
                             isActive={isActive}
                             type="RIGHT"
                             key={service.slug}
+                            uid={service.slug}
                             {...service}
                         />
                     ))}

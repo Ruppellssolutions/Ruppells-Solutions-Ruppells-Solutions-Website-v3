@@ -1,9 +1,11 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import ServiceItem from "../services/ServiceItem";
 import { Element } from "react-scroll";
 import services from "../../utils/services";
+import AnimatedSectionTitle from "../general/AnimatedSectionTitle";
+import useDimension from "../../hooks/useDimension";
 // import AnimatedSectionTitle from '../general/AnimatedSectionTitle';
 
 
@@ -20,7 +22,7 @@ const Services = () => {
             setActiveService(services[lastIndex - 1]);
             setIndex(lastIndex - 1);
         }
-    }, [activeIndexes, activeIndex]);
+    }, [activeIndexes]);
 
     // const currentScrollbarHeight = `${(((services.length * middleScrollbarHeight) / 100) * Math.max(...activeIndexes)) /
     //     1.8
@@ -32,21 +34,26 @@ const Services = () => {
         target: containerRef,
     });
 
-    const addItem = (item) => {
-        const temp = [...new Set([...activeIndexes, item])];
-        setIndexes(temp);
-        removeItem(item);
-    };
-    const removeItem = (item) => {
-        if (activeIndexes.includes(item + 1)) {
-            const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
-            setIndexes(filteredIndexes);
+    const addItem = useMemo(() => (
+        (item) => {
+            const temp = [...new Set([...activeIndexes, item])];
+            setIndexes(temp);
+            removeItem(item);
         }
-    };
+    ), [])
+    const removeItem = useMemo(() => (
+        (item) => {
+            if (activeIndexes.includes(item + 1)) {
+                const filteredIndexes = activeIndexes.filter((itm) => itm !== item + 1);
+                setIndexes(filteredIndexes);
+            }
+        }
+    ), [activeIndexes])
 
     useEffect(() => {
         scrollYProgress.on("change", (e) => {
             const scrollY = +e.toFixed(2);
+            console.log(scrollY,"scrollY");
 
             services.forEach((item, i) => {
                 if (scrollY > item.startingPoint && scrollY < item.startingPoint + 0.2) {
@@ -56,16 +63,15 @@ const Services = () => {
         });
     }, [activeIndexes]);
 
-    // .15, .28, .38, .49, .65, .76, .9
-
-    const top1 = useTransform(scrollYProgress, [0.00, 0.15], ["-100%", "-100%"])
+    const top1 = useTransform(scrollYProgress, [0, 0.15], ["-100%", "-100%"])
     const top2 = useTransform(scrollYProgress, [0.15, 0.30], ["0", "-100%"])
     const top3 = useTransform(scrollYProgress, [0.30, 0.45], ["0", "-100%"])
     const top4 = useTransform(scrollYProgress, [0.45, 0.60], ["0", "-100%"])
     const top5 = useTransform(scrollYProgress, [0.60, 0.75], ["0", "-100%"])
     const top6 = useTransform(scrollYProgress, [0.75, 0.90], ["0", "-100%"])
     const top7 = useTransform(scrollYProgress, [0.90, 1.00], ["0", "-100%"])
-    // const top7 = useTransform(scrollYProgress, [0.90, 1.00], ["0", "-100%"])
+
+    const titleScale = useTransform(scrollYProgress, [0, 0.15], [1.5, 1])
 
     const tops = {
         1: top1,
@@ -77,6 +83,8 @@ const Services = () => {
         7: top7,
     }
 
+    const { width } = useDimension()
+
     const height = useTransform(scrollYProgress, [0, 1], ["10%", "100%"])
 
     return (
@@ -85,9 +93,13 @@ const Services = () => {
                 <Wrapper id="services-child">
                     <Content>
                         <Head>
-                            <h4>
+                            <motion.h4
+                                style={{
+                                    scale: width > 640 && titleScale
+                                }}
+                            >
                                 WHAT <span>WE DO</span> <br /> FOR YOU
-                            </h4>
+                            </motion.h4>
                             <div className="right">
                                 <p
                                     className={
@@ -112,11 +124,11 @@ const Services = () => {
                         <ServiceContent>
                             <div className="left">
                                 <h5>
-                                    {activeService.title}
-                                    {/* <AnimatedSectionTitle
+                                    {/* {activeService.title} */}
+                                    <AnimatedSectionTitle
                                         titles={services}
                                         activeIndex={activeIndex}
-                                    /> */}
+                                    />
                                 </h5>
                             </div>
                             <MiddleScrollBar
@@ -171,6 +183,7 @@ const Wrapper = styled.div`
     width: 100%;
     min-height: 550vh;
     margin-top: 100vh;
+    /* padding-top: 100vh; */
 `;
 const Content = styled(motion.div)`
     background-color: #fbfbfc;
@@ -219,6 +232,7 @@ const Head = styled.div`
     }
 
     h4 {
+        transform-origin: left top;
         color: #111;
         font-size: 26px;
         font-family: Satoshi-Medium;
@@ -326,7 +340,6 @@ const ServiceContent = styled.div`
     .left {
         display: flex;
         align-items: center;
-        /* justify-content: center; */
 
         @media all and (max-width: 1180px) {
             width: 38%;
@@ -341,21 +354,39 @@ const ServiceContent = styled.div`
 
         h5,
         span {
-            /* max-width: 70%; */
+            max-width: 70%;
             display: block;
-            max-width: 60%;
             color: #202020;
             font-size: 38px;
             font-family: Satoshi-Medium;
 
+            @media all and (max-width: 1180px) {
+                max-width: 100%;
+            }
             @media all and (max-width: 1080px) {
                 font-size: 29px;
+
+                height: 80px !important;
             }
             @media all and (max-width: 920px) {
                 font-size: 24px;
             }
             @media all and (max-width: 720px) {
                 font-size: 19px;
+            }
+        }
+
+        h5,span,.titles-container{
+            height: 100px !important;
+
+            @media all and (max-width: 1080px) {
+                height: 80px !important;
+            }
+            @media all and (max-width: 920px) {
+                height: 65px !important;
+            }
+            @media all and (max-width: 720px) {
+                height: 37px !important;
             }
         }
     }
