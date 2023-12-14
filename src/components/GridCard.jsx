@@ -9,10 +9,13 @@ const GridCard = ({ url }) => {
                     <h6>Project name</h6>
                 </div>
                 <div>
-                    <span>#Website desighning</span>
+                    <span>#Website designing</span>
                 </div>
                 <div className="btn">
-                    <button>View work</button>
+                    <button>
+                        <img src="/icons/arrow.svg" alt="arrow" />
+                        View work
+                    </button>
                 </div>
             </div>
         </Wrapper>
@@ -45,7 +48,7 @@ const Wrapper = styled.div`
         left: 50%;
         transform: translateX(-50%);
         width: 95%;
-        background-color: #000;
+        background-color: #08090a;
         opacity: 0.8;
         border-radius: 15px;
         display: flex;
@@ -78,12 +81,18 @@ const Wrapper = styled.div`
             justify-content: flex-end;
             button {
                 background-color: #fff;
-                padding: 10px 25px;
+                padding: 15px 20px;
                 border-radius: 25px;
                 font-size: 16px;
                 font-family: Satoshi-Medium;
                 color: #000;
                 cursor: pointer;
+                display: flex;
+                gap: 5px;
+                align-items: center;
+                img {
+                    width: 18px;
+                }
                 @media all and (max-width: 980px) {
                     font-size: 14px;
                 }

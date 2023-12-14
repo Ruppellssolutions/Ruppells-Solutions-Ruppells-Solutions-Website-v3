@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 const ImageCard = ({ image }) => {
     const ref = useRef(null);
     const isInView = useInView(ref);
-    // console.log(isInView);
     return (
         <Wrapper isInView={isInView} ref={ref}>
             <img src={image} alt="Image" />
@@ -25,15 +24,15 @@ const ImageCard = ({ image }) => {
 export default ImageCard;
 
 const Wrapper = styled.div`
-    /* width: 19%; */
-    flex: 0 0 15.5%;
+    /* width: 15.5%; */
+    /* flex: 0 0 15.5%; */
     position: relative;
     border-radius: 10px;
     overflow: hidden;
     transform: ${({ isInView }) =>
         isInView ? "translateX(0)" : "translateX(100%)"};
     transition: all 01.5s ease 0.1s;
-    @media all and (max-width: 1280px) {
+    /* @media all and (max-width: 1280px) {
         flex: 0 0 19%;
     }
     @media all and (max-width: 980px) {
@@ -44,7 +43,7 @@ const Wrapper = styled.div`
     }
     @media all and (max-width: 480px) {
         flex: 0 0 48%;
-    }
+    } */
     &:hover {
         .content {
             opacity: 0.5;

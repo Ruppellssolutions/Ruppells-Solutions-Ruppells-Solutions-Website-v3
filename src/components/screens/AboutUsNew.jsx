@@ -10,23 +10,61 @@ const AboutUsNew = () => {
         target: containerRef,
         offset: ["start start", "end end"],
     });
-    const contentY = useTransform(scrollYProgress, [0.1, 0.8], ["0", "-128px"]);
-    const heroImgY = useTransform(scrollYProgress, [0.1, 0.8], ["0", "-400px"]);
-    const heroImgY1480 = useTransform(
+    const imgRef = useRef(null);
+    const [height, setHeight] = useState(0);
+
+    const contentRef = useRef(null);
+    const [contentHeight, setContentHeight] = useState(0);
+
+    useEffect(() => {
+        const observeHeightChanges = () => {
+            const observer = new ResizeObserver((entries) => {
+                for (let entry of entries) {
+                    if (entry.contentRect) {
+                        setHeight(entry.contentRect.height);
+                    }
+                }
+            });
+            const contentObserver = new ResizeObserver((entries) => {
+                for (let entry of entries) {
+                    if (entry.contentRect) {
+                        setContentHeight(entry.contentRect.height);
+                    }
+                }
+            });
+
+            if (imgRef.current) {
+                observer.observe(imgRef.current);
+            }
+            if (contentRef.current) {
+                contentObserver.observe(contentRef.current);
+            }
+
+            return () => {
+                if (imgRef.current) {
+                    observer.unobserve(imgRef.current);
+                }
+                if (contentRef.current) {
+                    contentObserver.unobserve(contentRef.current);
+                }
+            };
+        };
+
+        observeHeightChanges();
+    }, []);
+
+    const newHeight = height + 20;
+    const contentY = useTransform(
         scrollYProgress,
         [0.1, 0.8],
-        ["0", "-355px"]
+        ["0", `-${contentHeight}px`]
     );
-    const heroImgY1280 = useTransform(
+    const heroImgY = useTransform(
         scrollYProgress,
         [0.1, 0.8],
-        ["0", "-315px"]
+        ["0", `-${newHeight}px`]
     );
-    const heroImgY1080 = useTransform(
-        scrollYProgress,
-        [0.1, 0.8],
-        ["0", "-298px"]
-    );
+
     const nameY = useTransform(scrollYProgress, [0.1, 0.8], ["0", "-65px"]);
 
     const team = [
@@ -36,74 +74,25 @@ const AboutUsNew = () => {
         "/images/EmployeeOne.png",
         "/images/employeeTwo.png",
         "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
+        "/images/EmployeeOne.png",
+        "/images/employeeTwo.png",
+        "/images/EmployeeThree.png",
     ];
-    const [isBelow1480, setIsBelow1480] = useState(false);
-    const [isBelow1280, setIsBelow1280] = useState(false);
-    const [isBelow1080, setIsBelow1080] = useState(false);
-    const [isBelow980, setIsBelow980] = useState(false);
-    const [isBelow768, setIsBelow768] = useState(false);
-    const [isBelow640, setIsBelow640] = useState(false);
-    const [isBelow480, setIsBelow480] = useState(false);
-    const [isBelow420, setIsBelow420] = useState(false);
-
-    const checkScreenSize = () => {
-        const screenWidth = window.innerWidth;
-        if (screenWidth > 1280 && screenWidth <= 1480) {
-            setIsBelow1480(true);
-        } else {
-            setIsBelow1480(false);
-        }
-        if (screenWidth > 1080 && screenWidth <= 1280) {
-            setIsBelow1280(true);
-        } else {
-            setIsBelow1280(false);
-        }
-        if (screenWidth > 980 && screenWidth <= 1080) {
-            setIsBelow1080(true);
-        } else {
-            setIsBelow1080(false);
-        }
-        if (screenWidth > 768 && screenWidth <= 980) {
-            setIsBelow980(true);
-        } else {
-            setIsBelow980(false);
-        }
-        if (screenWidth > 640 && screenWidth <= 768) {
-            setIsBelow768(true);
-        } else {
-            setIsBelow768(false);
-        }
-        if (screenWidth > 480 && screenWidth <= 640) {
-            setIsBelow640(true);
-        } else {
-            setIsBelow640(false);
-        }
-        if (screenWidth > 420 && screenWidth <= 480) {
-            setIsBelow480(true);
-        } else {
-            setIsBelow480(false);
-        }
-        if (screenWidth <= 420) {
-            setIsBelow420(true);
-        } else {
-            setIsBelow420(false);
-        }
-    };
-
-    useEffect(() => {
-        checkScreenSize(); // Initial check
-
-        const handleResize = () => {
-            checkScreenSize(); // Check on window resize
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    console.log(isBelow1480);
 
     return (
         <Wrapper>
@@ -137,7 +126,10 @@ const AboutUsNew = () => {
                                 </p>
                             </div>
                             <div className="left">
-                                <div className="content-wrapper">
+                                <div
+                                    className="content-wrapper"
+                                    ref={contentRef}
+                                >
                                     <motion.h4 style={{ y: contentY }}>
                                         THE
                                         <span>&nbsp; FOUNDERS</span>
@@ -158,29 +150,17 @@ const AboutUsNew = () => {
                             </div>
                             <div className="right">
                                 <div className="main-img-container">
-                                    <div className="img-container">
+                                    <div className="img-container" ref={imgRef}>
                                         <motion.img
                                             style={{
-                                                y: isBelow1480
-                                                    ? heroImgY1480
-                                                    : isBelow1280
-                                                    ? heroImgY1280
-                                                    : isBelow1080
-                                                    ? heroImgY1080
-                                                    : heroImgY,
+                                                y: heroImgY,
                                             }}
                                             src="/images/siddiq.png"
                                             alt="CEO"
                                         />
                                         <motion.img
                                             style={{
-                                                y: isBelow1480
-                                                    ? heroImgY1480
-                                                    : isBelow1280
-                                                    ? heroImgY1280
-                                                    : isBelow1080
-                                                    ? heroImgY1080
-                                                    : heroImgY,
+                                                y: heroImgY,
                                             }}
                                             src="/images/siddiq.png"
                                             alt="CEO"
@@ -231,26 +211,14 @@ const AboutUsNew = () => {
                                     <div className="img-container">
                                         <motion.img
                                             style={{
-                                                y: isBelow1480
-                                                    ? heroImgY1480
-                                                    : isBelow1280
-                                                    ? heroImgY1280
-                                                    : isBelow1080
-                                                    ? heroImgY1080
-                                                    : heroImgY,
+                                                y: heroImgY,
                                             }}
                                             src="/images/shajahan.png"
                                             alt="CEO"
                                         />
                                         <motion.img
                                             style={{
-                                                y: isBelow1480
-                                                    ? heroImgY1480
-                                                    : isBelow1280
-                                                    ? heroImgY1280
-                                                    : isBelow1080
-                                                    ? heroImgY1080
-                                                    : heroImgY,
+                                                y: heroImgY,
                                             }}
                                             src="/images/shajahan.png"
                                             alt="CEO"
@@ -302,21 +270,6 @@ const AboutUsNew = () => {
                     </div>
                 </div>
                 <div className="team-container wrapper">
-                    <motion.div className="moving-img-container">
-                        {team.map((image, i) => (
-                            <ImageCard image={image} key={i} />
-                        ))}
-                    </motion.div>
-                    <motion.div className="moving-img-container">
-                        {team.map((image, i) => (
-                            <ImageCard image={image} key={i} />
-                        ))}
-                    </motion.div>
-                    <motion.div className="moving-img-container">
-                        {team.map((image, i) => (
-                            <ImageCard image={image} key={i} />
-                        ))}
-                    </motion.div>
                     <motion.div className="moving-img-container">
                         {team.map((image, i) => (
                             <ImageCard image={image} key={i} />
@@ -446,7 +399,7 @@ const Wrapper = styled.div`
                         justify-content: center;
                         /* gap: 15px; */
                         @media all and (max-width: 1280px) {
-                            padding-left: 50px;
+                            padding-left: unset;
                         }
                         .content-wrapper {
                             height: 128px;
@@ -458,6 +411,13 @@ const Wrapper = styled.div`
                                 font-family: Satoshi-Medium;
                                 font-size: 36px;
                                 margin-bottom: 15px;
+                                @media all and (max-width: 1280px) {
+                                    font-size: 34px;
+                                }
+                                @media all and (max-width: 1080px) {
+                                    font-size: 28px;
+                                    margin-bottom: 5px;
+                                }
                             }
                             span {
                                 background: linear-gradient(
@@ -471,6 +431,17 @@ const Wrapper = styled.div`
                                 font-family: inherit;
                                 font-size: inherit;
                             }
+                            p {
+                                color: #9e9e9e;
+                                font-size: 20px;
+                                letter-spacing: 0.22px;
+                                @media all and (max-width: 1280px) {
+                                    font-size: 18px;
+                                }
+                                @media all and (max-width: 1080px) {
+                                    font-size: 16px;
+                                }
+                            }
                         }
                     }
                     .right {
@@ -482,18 +453,9 @@ const Wrapper = styled.div`
                             .img-container {
                                 width: 100%;
                                 margin-bottom: 20px;
-                                height: 386px;
+                                aspect-ratio: 1/1.1;
                                 overflow: hidden;
                                 border-radius: 13px;
-                                @media all and (max-width: 1448px) {
-                                    height: 341px;
-                                }
-                                @media all and (max-width: 1280px) {
-                                    height: 300px;
-                                }
-                                @media all and (max-width: 1080px) {
-                                    height: 281px;
-                                }
                                 img {
                                     margin-bottom: 20px;
                                     &:last-child {
@@ -554,11 +516,21 @@ const Wrapper = styled.div`
         }
         .team-container {
             .moving-img-container {
-                display: flex;
-                flex-wrap: nowrap;
-                margin-bottom: 15px;
-                /* overflow: hidden; */
-                gap: 13px;
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 15px;
+                @media all and (max-width: 1380px) {
+                    grid-template-columns: repeat(5, 1fr);
+                }
+                @media all and (max-width: 1280px) {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+                @media all and (max-width: 768px) {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+                @media all and (max-width: 480px) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
             }
         }
     }
